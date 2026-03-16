@@ -20,26 +20,23 @@
             overflow-x: hidden;
         }
         
-        /* Sticky Left Navigation - SEKARANG DI ATAS */
+        /* Sticky Left Navigation - TETAP DI KIRI */
         .sticky-left-nav {
-            position: sticky;
-            top: 20px;
+            position: fixed;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
             z-index: 10000;
             display: flex;
-            flex-direction: row;
-            justify-content: center;
+            flex-direction: column;
             gap: 15px;
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            padding: 12px 20px;
-            border-radius: 60px;
+            padding: 15px 10px;
+            border-radius: 50px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(230, 126, 34, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            width: fit-content;
-            margin: 20px auto 0;
-            max-width: 95%;
-            flex-wrap: wrap;
         }
         
         .left-nav-item {
@@ -83,13 +80,11 @@
             color: white;
         }
         
-        /* Tooltip on hover - untuk navigasi horizontal */
+        /* Tooltip on hover */
         .left-nav-item::after {
             content: attr(data-tooltip);
             position: absolute;
-            top: 60px;
-            left: 50%;
-            transform: translateX(-50%);
+            left: 60px;
             background: #2c3e50;
             color: white;
             padding: 5px 12px;
@@ -107,14 +102,14 @@
         .left-nav-item:hover::after {
             opacity: 1;
             visibility: visible;
-            top: 70px;
+            left: 70px;
         }
         
-        /* Main Content Wrapper */
+        /* Main Content Wrapper - konten di tengah */
         .main-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 20px 0 120px; /* Padding kiri untuk navigasi */
             width: 100%;
         }
         
@@ -129,7 +124,7 @@
             padding: 150px 20px;
             position: relative;
             width: 100vw;
-            margin-left: calc(-50vw + 50%);
+            margin-left: calc(-50vw + 50% + 60px); /* Koreksi untuk navigasi kiri */
             margin-right: calc(-50vw + 50%);
             margin-top: 0;
             margin-bottom: 40px;
@@ -142,6 +137,10 @@
             font-weight: 300;
             letter-spacing: 2px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 60px; /* Kompensasi navigasi */
         }
         
         .header p {
@@ -150,6 +149,7 @@
             margin: 0 auto;
             font-weight: 300;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            padding-left: 60px; /* Kompensasi navigasi */
         }
         
         /* Countdown Timer */
@@ -161,6 +161,11 @@
             display: inline-block;
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255,255,255,0.15);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: calc(25px + 60px); /* Kompensasi navigasi */
+            padding-right: 25px;
         }
         
         .countdown h2 {
@@ -200,7 +205,7 @@
             background: white;
             border-radius: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            scroll-margin-top: 100px;
+            scroll-margin-top: 30px;
             max-width: 1200px;
         }
         
@@ -381,7 +386,7 @@
             background: white;
             border-radius: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            scroll-margin-top: 100px;
+            scroll-margin-top: 30px;
             max-width: 1200px;
         }
         
@@ -509,7 +514,7 @@
             padding: 80px 30px;
             margin: 40px auto;
             border-radius: 30px;
-            scroll-margin-top: 100px;
+            scroll-margin-top: 30px;
             max-width: 1200px;
         }
         
@@ -688,12 +693,30 @@
         
         /* Responsive */
         @media (max-width: 992px) {
+            .sticky-left-nav {
+                left: 15px;
+            }
+            
+            .main-content {
+                padding-left: 90px;
+            }
+            
+            .header {
+                margin-left: calc(-50vw + 50% + 30px);
+            }
+            
             .header h1 {
                 font-size: 3rem;
+                padding-left: 30px;
             }
             
             .header p {
                 font-size: 1.4rem;
+                padding-left: 30px;
+            }
+            
+            .countdown {
+                padding-left: calc(25px + 30px);
             }
             
             .section-title {
@@ -703,8 +726,9 @@
         
         @media (max-width: 768px) {
             .sticky-left-nav {
-                gap: 8px;
-                padding: 10px 15px;
+                left: 10px;
+                padding: 10px 5px;
+                gap: 10px;
             }
             
             .left-nav-item {
@@ -717,25 +741,36 @@
             }
             
             .left-nav-item::after {
+                left: 50px;
                 font-size: 0.75rem;
                 padding: 4px 8px;
-                top: 50px;
             }
             
             .left-nav-item:hover::after {
-                top: 55px;
+                left: 55px;
+            }
+            
+            .main-content {
+                padding: 0 15px 0 70px;
             }
             
             .header {
                 padding: 100px 15px;
+                margin-left: calc(-50vw + 50% + 20px);
             }
             
             .header h1 {
                 font-size: 2.2rem;
+                padding-left: 20px;
             }
             
             .header p {
                 font-size: 1.1rem;
+                padding-left: 20px;
+            }
+            
+            .countdown {
+                padding-left: calc(25px + 20px);
             }
             
             .countdown h2 {
@@ -799,7 +834,7 @@
             
             .scroll-top {
                 bottom: 20px;
-                left: 20px;
+                left: 60px;
                 width: 48px;
                 height: 48px;
             }
@@ -809,7 +844,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
-    <!-- Sticky Left Navigation - SEKARANG DI ATAS (HORIZONTAL) -->
+    <!-- Sticky Left Navigation - TETAP DI KIRI -->
     <div class="sticky-left-nav">
         <button class="left-nav-item active" data-target="home" data-tooltip="Home">
             <i class="fas fa-home"></i>
@@ -850,7 +885,7 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Header FULL SCREEN (di luar main-content) -->
+    <!-- Header FULL SCREEN (dengan penyesuaian navigasi kiri) -->
     <header class="header" id="home">
         <h1>Undangan Khusus</h1>
         <p>Kami dengan hormat mengundang Anda untuk menghadiri acara spesial kami di Hotel Mulia Jakarta</p>
