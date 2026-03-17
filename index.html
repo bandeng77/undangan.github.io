@@ -540,8 +540,7 @@
         }
         
         .form-group input,
-        .form-group select,
-        .form-group textarea {
+        .form-group select {
             width: 100%;
             padding: 14px 18px;
             border: 2px solid #e2e8f0;
@@ -552,8 +551,7 @@
         }
         
         .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
+        .form-group select:focus {
             outline: none;
             border-color: #e67e22;
             box-shadow: 0 0 0 4px rgba(230, 126, 34, 0.15);
@@ -689,6 +687,23 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        /* Memastikan konten lebih center */
+        .main-content {
+            text-align: center;
+        }
+        .section, .map-section, .rsvp-section, .footer {
+            text-align: left; /* Mengembalikan teks ke kiri untuk keterbacaan konten */
+        }
+        .section-title, .about-text, .detail-card, .timeline-content, .rsvp-container, .footer p {
+            text-align: left; /* Mengatur perataan teks untuk elemen-elemen ini */
+        }
+        .section-title, .footer p {
+             text-align: center; /* Judul section dan footer tetap di tengah */
+        }
+        .detail-card {
+            text-align: center; /* Kartu detail tetap di tengah */
         }
         
         /* Responsive */
@@ -864,9 +879,7 @@
         <button class="left-nav-item" data-target="rsvp" data-tooltip="RSVP">
             <i class="fas fa-envelope"></i>
         </button>
-        <a href="admin.html" class="left-nav-item" data-tooltip="Admin">
-            <i class="fas fa-cog"></i>
-        </a>
+        <!-- Tombol Admin telah dihilangkan -->
     </div>
 
     <!-- Fixed Overlay - Lokasi Hotel -->
@@ -1068,8 +1081,8 @@
 
                 <form id="rsvpForm">
                     <div class="form-group">
-                        <label for="name">Nama Lengkap <span style="color: #e67e22;">*</span></label>
-                        <input type="text" id="name" name="name" required placeholder="Masukkan nama lengkap Anda">
+                        <label for="company">Nama Perusahaan <span style="color: #e67e22;">*</span></label>
+                        <input type="text" id="company" name="company" required placeholder="Masukkan nama perusahaan Anda">
                     </div>
 
                     <div class="form-group">
@@ -1108,10 +1121,7 @@
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <label for="message">Pesan / Pertanyaan (opsional)</label>
-                        <textarea id="message" name="message" rows="3" placeholder="Tulis pesan atau pertanyaan Anda di sini..."></textarea>
-                    </div>
+                    <!-- Field Pesan / Pertanyaan dihilangkan -->
 
                     <button type="submit" class="btn-submit">
                         <i class="fas fa-paper-plane"></i> Kirim Konfirmasi
@@ -1298,12 +1308,12 @@
             
             const formData = {
                 id: Date.now(),
-                name: document.getElementById('name').value,
+                company: document.getElementById('company').value,
                 email: document.getElementById('email').value,
                 phone: document.getElementById('phone').value,
                 attendance: document.querySelector('input[name="attendance"]:checked').value,
                 guestCount: document.getElementById('guestCount').value,
-                message: document.getElementById('message').value,
+                // Pesan / Pertanyaan dihilangkan
                 timestamp: new Date().toISOString()
             };
 
