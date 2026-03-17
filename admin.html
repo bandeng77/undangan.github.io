@@ -122,6 +122,17 @@
             background: #5a6268;
         }
 
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+
         .search-box {
             flex: 1;
             max-width: 400px;
@@ -189,7 +200,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 1000px;
+            min-width: 1200px;
         }
 
         th {
@@ -248,12 +259,12 @@
             font-size: 0.9rem;
         }
 
-        .btn-edit {
-            background: #007bff;
+        .btn-view {
+            background: #17a2b8;
         }
 
-        .btn-edit:hover {
-            background: #0056b3;
+        .btn-view:hover {
+            background: #138496;
         }
 
         .btn-delete {
@@ -328,6 +339,10 @@
             color: #999;
         }
 
+        .modal-close:hover {
+            color: #e67e22;
+        }
+
         .modal-body {
             padding: 20px;
         }
@@ -377,6 +392,7 @@
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
     <!-- Navbar -->
@@ -409,19 +425,19 @@
         <!-- Actions -->
         <div class="actions">
             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <button class="btn btn-primary" onclick="exportToCSV()">
-                    <i class="fas fa-download"></i> Export CSV
+                <button class="btn btn-success" onclick="exportToXLS()">
+                    <i class="fas fa-file-excel"></i> Export XLS
                 </button>
                 <button class="btn btn-danger" onclick="clearAllData()">
                     <i class="fas fa-trash"></i> Hapus Semua
                 </button>
-                <a href="undangan2.html" class="btn btn-secondary">
+                <a href="index.html" class="btn btn-secondary">
                     <i class="fas fa-arrow-left"></i> Kembali ke Undangan
                 </a>
             </div>
             <div class="search-box">
                 <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" placeholder="Cari nama, email, atau telepon..." onkeyup="filterData()">
+                <input type="text" id="searchInput" placeholder="Cari nama, email, perusahaan, atau telepon..." onkeyup="filterData()">
             </div>
         </div>
 
@@ -441,16 +457,18 @@
                         <th>No</th>
                         <th>Nama</th>
                         <th>Email</th>
+                        <th>Perusahaan</th>
                         <th>Telepon</th>
                         <th>Kehadiran</th>
                         <th>Jumlah Tamu</th>
+                        <th>Pesan</th>
                         <th>Waktu Daftar</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
                     <tr>
-                        <td colspan="8" class="empty-state">
+                        <td colspan="10" class="empty-state">
                             <i class="fas fa-inbox"></i>
                             <p>Belum ada data RSVP</p>
                         </td>
@@ -515,9 +533,10 @@
             if (currentSearch) {
                 const searchLower = currentSearch.toLowerCase();
                 filtered = filtered.filter(item => 
-                    item.name.toLowerCase().includes(searchLower) ||
-                    item.email.toLowerCase().includes(searchLower) ||
-                    item.phone.toLowerCase().includes(searchLower)
+                    (item.name && item.name.toLowerCase().includes(searchLower)) ||
+                    (item.email && item.email.toLowerCase().includes(searchLower)) ||
+                    (item.company && item.company.toLowerCase().includes(searchLower)) ||
+                    (item.phone && item.phone.toLowerCase().includes(searchLower))
                 );
             }
 
@@ -532,7 +551,7 @@
             if (data.length === 0) {
                 tbody.innerHTML = `
                     <tr>
-                        <td colspan="8" class="empty-state">
+                        <td colspan="10" class="empty-state">
                             <i class="fas fa-inbox"></i>
                             <p>Tidak ada data yang ditemukan</p>
                         </td>
@@ -553,22 +572,29 @@
                     timeStyle: 'short'
                 });
 
+                // Truncate message if too long
+                const message = item.message ? 
+                    (item.message.length > 30 ? item.message.substring(0, 30) + '...' : item.message) : 
+                    '-';
+
                 return `
                     <tr>
                         <td>${index + 1}</td>
-                        <td><strong>${escapeHtml(item.name)}</strong></td>
-                        <td>${escapeHtml(item.email)}</td>
-                        <td>${escapeHtml(item.phone)}</td>
+                        <td><strong>${escapeHtml(item.name) || '-'}</strong></td>
+                        <td>${escapeHtml(item.email) || '-'}</td>
+                        <td>${escapeHtml(item.company) || '-'}</td>
+                        <td>${escapeHtml(item.phone) || '-'}</td>
                         <td>
                             <span class="attendance-badge ${attendanceClass}">
                                 ${escapeHtml(item.attendance)}
                             </span>
                         </td>
                         <td>${item.guestCount || 1} orang</td>
+                        <td>${escapeHtml(message)}</td>
                         <td>${date}</td>
                         <td>
                             <div class="action-buttons">
-                                <button class="btn-icon btn-edit" onclick="viewDetail('${item.id}')" title="Lihat Detail">
+                                <button class="btn-icon btn-view" onclick="viewDetail('${item.id}')" title="Lihat Detail">
                                     <i class="fas fa-eye"></i>
                                 </button>
                                 <button class="btn-icon btn-delete" onclick="deleteItem('${item.id}')" title="Hapus">
@@ -584,7 +610,7 @@
         // Escape HTML to prevent XSS
         function escapeHtml(unsafe) {
             if (!unsafe) return '';
-            return unsafe
+            return String(unsafe)
                 .replace(/&/g, "&amp;")
                 .replace(/</g, "&lt;")
                 .replace(/>/g, "&gt;")
@@ -636,15 +662,19 @@
             modalBody.innerHTML = `
                 <div class="detail-item">
                     <strong>Nama Lengkap</strong>
-                    <p>${escapeHtml(item.name)}</p>
+                    <p>${escapeHtml(item.name) || '-'}</p>
                 </div>
                 <div class="detail-item">
                     <strong>Email</strong>
-                    <p>${escapeHtml(item.email)}</p>
+                    <p>${escapeHtml(item.email) || '-'}</p>
+                </div>
+                <div class="detail-item">
+                    <strong>Perusahaan</strong>
+                    <p>${escapeHtml(item.company) || '-'}</p>
                 </div>
                 <div class="detail-item">
                     <strong>Nomor Telepon</strong>
-                    <p>${escapeHtml(item.phone)}</p>
+                    <p>${escapeHtml(item.phone) || '-'}</p>
                 </div>
                 <div class="detail-item">
                     <strong>Kehadiran</strong>
@@ -694,38 +724,40 @@
             }
         }
 
-        // Export to CSV
-        function exportToCSV() {
+        // Export to XLS using SheetJS
+        function exportToXLS() {
             if (currentData.length === 0) {
                 alert('Tidak ada data untuk diekspor');
                 return;
             }
 
-            const headers = ['Nama', 'Email', 'Telepon', 'Kehadiran', 'Jumlah Tamu', 'Pesan', 'Waktu Daftar'];
-            const csvData = currentData.map(item => [
-                item.name,
-                item.email,
-                item.phone,
-                item.attendance,
-                item.guestCount || 1,
-                item.message || '-',
-                new Date(item.timestamp).toLocaleString('id-ID')
-            ]);
+            // Prepare data for export
+            const exportData = currentData.map((item, index) => ({
+                'No': index + 1,
+                'Nama Lengkap': item.name || '-',
+                'Email': item.email || '-',
+                'Perusahaan': item.company || '-',
+                'Telepon': item.phone || '-',
+                'Kehadiran': item.attendance || '-',
+                'Jumlah Tamu': item.guestCount || 1,
+                'Pesan': item.message || '-',
+                'Waktu Daftar': item.timestamp || '-'
+            }));
 
-            const csv = [headers, ...csvData]
-                .map(row => row.map(cell => `"${cell}"`).join(','))
-                .join('\n');
+            // Create worksheet
+            const ws = XLSX.utils.json_to_sheet(exportData);
 
-            const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            const url = URL.createObjectURL(blob);
-            
-            link.setAttribute('href', url);
-            link.setAttribute('download', `rsvp_data_${new Date().toISOString().split('T')[0]}.csv`);
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
+            // Create workbook
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'Data RSVP');
+
+            // Generate filename with current date
+            const date = new Date();
+            const dateStr = date.toISOString().split('T')[0];
+            const filename = `rsvp_data_${dateStr}.xlsx`;
+
+            // Export to XLSX file
+            XLSX.writeFile(wb, filename);
         }
 
         // Close modal when clicking outside
