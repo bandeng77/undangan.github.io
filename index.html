@@ -20,7 +20,7 @@
             overflow-x: hidden;
         }
         
-        /* Sticky Left Navigation - TETAP DI KIRI */
+        /* Sticky Left Navigation - TETAP DI KIRI, DI ATAS KONTEN */
         .sticky-left-nav {
             position: fixed;
             left: 20px;
@@ -105,15 +105,17 @@
             left: 65px;
         }
         
-        /* MAIN CONTENT - CENTERED */
+        /* MAIN CONTENT - CENTERED DENGAN MARGIN LEFT 0 */
         .main-content {
             max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 30px 0 100px;
+            margin: 0 auto; /* Hanya margin auto kiri/kanan untuk center */
+            padding: 0 20px; /* Padding kiri/kanan 20px untuk responsive, TIDAK ADA padding left khusus */
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
         
         /* Header FULL SCREEN - tetap full width */
@@ -127,7 +129,7 @@
             padding: 120px 20px;
             position: relative;
             width: 100vw;
-            margin-left: calc(-50vw + 50% + 40px);
+            margin-left: calc(-50vw + 50%); /* Hanya untuk membuat full width, tanpa offset navigasi */
             margin-right: calc(-50vw + 50%);
             margin-top: 0;
             margin-bottom: 40px;
@@ -193,7 +195,7 @@
             width: 100%;
             max-width: 1100px;
             padding: 70px 40px;
-            margin: 30px auto;
+            margin: 30px auto; /* Auto untuk center */
             background: white;
             border-radius: 40px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
@@ -599,12 +601,8 @@
                 left: 10px;
             }
             
-            .main-content {
-                padding-left: 80px;
-            }
-            
             .header {
-                margin-left: calc(-50vw + 50% + 30px);
+                margin-left: calc(-50vw + 50%);
             }
             
             .header h1 {
@@ -635,13 +633,8 @@
                 font-size: 1.1rem;
             }
             
-            .main-content {
-                padding: 0 15px 0 70px;
-            }
-            
             .header {
                 padding: 80px 15px;
-                margin-left: calc(-50vw + 50% + 15px);
             }
             
             .header h1 {
@@ -762,7 +755,7 @@
         </div>
     </header>
 
-    <!-- Main Content Wrapper - SEMUA KONTEN CENTER -->
+    <!-- Main Content Wrapper - SEMUA KONTEN CENTER DENGAN MARGIN LEFT 0 -->
     <div class="main-content">
         <!-- Tentang Acara -->
         <section class="section" id="tentang">
