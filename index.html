@@ -23,25 +23,25 @@
         /* Sticky Left Navigation - TETAP DI KIRI */
         .sticky-left-nav {
             position: fixed;
-            left: 30px;
+            left: 20px;
             top: 50%;
             transform: translateY(-50%);
             z-index: 10000;
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            background: rgba(255, 255, 255, 0.9);
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            padding: 15px 10px;
-            border-radius: 50px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(230, 126, 34, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 15px 8px;
+            border-radius: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(230, 126, 34, 0.2);
         }
         
         .left-nav-item {
-            width: 50px;
-            height: 50px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -84,10 +84,10 @@
         .left-nav-item::after {
             content: attr(data-tooltip);
             position: absolute;
-            left: 60px;
+            left: 55px;
             background: #2c3e50;
             color: white;
-            padding: 5px 12px;
+            padding: 6px 12px;
             border-radius: 20px;
             font-size: 0.85rem;
             white-space: nowrap;
@@ -102,18 +102,21 @@
         .left-nav-item:hover::after {
             opacity: 1;
             visibility: visible;
-            left: 70px;
+            left: 65px;
         }
         
-        /* Main Content Wrapper - konten di tengah */
+        /* MAIN CONTENT - CENTERED */
         .main-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px 0 120px; /* Padding kiri untuk navigasi */
+            padding: 0 30px 0 100px;
             width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
-        /* Header FULL SCREEN */
+        /* Header FULL SCREEN - tetap full width */
         .header {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
                         url('https://i.imgur.com/M2h6hIf.png');
@@ -121,57 +124,42 @@
             background-position: center;
             color: white;
             text-align: center;
-            padding: 150px 20px;
+            padding: 120px 20px;
             position: relative;
             width: 100vw;
-            margin-left: calc(-50vw + 50% + 60px); /* Koreksi untuk navigasi kiri */
+            margin-left: calc(-50vw + 50% + 40px);
             margin-right: calc(-50vw + 50%);
             margin-top: 0;
             margin-bottom: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
         
         .header h1 {
-            font-size: 4rem;
+            font-size: 3.8rem;
             margin-bottom: 20px;
             font-weight: 300;
             letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            max-width: 1200px;
+            max-width: 1000px;
             margin-left: auto;
             margin-right: auto;
-            padding-left: 60px; /* Kompensasi navigasi */
         }
         
         .header p {
-            font-size: 1.8rem;
-            max-width: 900px;
+            font-size: 1.6rem;
+            max-width: 800px;
             margin: 0 auto;
             font-weight: 300;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-            padding-left: 60px; /* Kompensasi navigasi */
         }
         
-        /* Countdown Timer */
+        /* Countdown Timer - center */
         .countdown {
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 25px;
-            margin-top: 50px;
-            border-radius: 60px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            margin: 40px auto 0;
+            border-radius: 50px;
             display: inline-block;
             backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.15);
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            padding-left: calc(25px + 60px); /* Kompensasi navigasi */
-            padding-right: 25px;
-        }
-        
-        .countdown h2 {
-            margin-bottom: 15px;
-            font-weight: 400;
-            font-size: 1.8rem;
+            max-width: 700px;
+            width: 100%;
         }
         
         .timer {
@@ -183,57 +171,61 @@
         
         .timer div {
             text-align: center;
+            min-width: 80px;
         }
         
         .timer span {
             display: block;
-            font-size: 2.5rem;
-            font-weight: bold;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #e67e22;
         }
         
         .timer p {
             font-size: 1rem;
-            margin-top: 5px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            color: white;
         }
         
-        /* Section Styles - SEMUA DI TENGAH */
+        /* Section Styles - CENTERED */
         .section {
-            padding: 80px 30px;
-            margin: 40px auto;
+            width: 100%;
+            max-width: 1100px;
+            padding: 70px 40px;
+            margin: 30px auto;
             background: white;
-            border-radius: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border-radius: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
             scroll-margin-top: 30px;
-            max-width: 1200px;
+            text-align: center;
         }
         
         .section-title {
             text-align: center;
             margin-bottom: 50px;
-            font-size: 2.8rem;
+            font-size: 2.6rem;
             font-weight: 300;
             color: #2c3e50;
-            position: relative;
+            width: 100%;
         }
         
         .section-title:after {
             content: '';
             display: block;
-            width: 90px;
-            height: 4px;
+            width: 80px;
+            height: 3px;
             background-color: #e67e22;
-            margin: 18px auto 0;
-            border-radius: 4px;
+            margin: 15px auto 0;
         }
         
-        /* About Section */
+        /* About Section - tetap proporsional */
         .about-content {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             gap: 50px;
+            text-align: left;
         }
         
         .about-text {
@@ -241,67 +233,44 @@
             min-width: 300px;
         }
         
-        .about-text p {
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-        
         .about-image {
             flex: 1;
             min-width: 300px;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
         }
         
         .about-image img {
             width: 100%;
             height: auto;
             display: block;
-            transition: transform 0.5s;
         }
         
-        .about-image:hover img {
-            transform: scale(1.05);
-        }
-        
-        /* Details Section */
-        .details {
-            background-color: #f5f5f5;
-        }
-        
+        /* Details Grid */
         .details-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
         }
         
         .detail-card {
-            background: white;
-            padding: 40px 25px;
-            border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            background: #f8f9fa;
+            padding: 40px 20px;
+            border-radius: 25px;
             text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid #f0f0f0;
+            transition: transform 0.3s;
         }
         
         .detail-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 30px rgba(230,126,34,0.12);
-            border-color: #e67e2230;
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(230,126,34,0.1);
         }
         
         .detail-card i {
             font-size: 3rem;
             color: #e67e22;
             margin-bottom: 20px;
-        }
-        
-        .detail-card h3 {
-            margin-bottom: 15px;
-            font-weight: 500;
-            font-size: 1.5rem;
         }
         
         /* Agenda Section */
@@ -314,12 +283,8 @@
             color: white;
         }
         
-        .agenda .section-title:after {
-            background-color: #e67e22;
-        }
-        
         .timeline {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
             position: relative;
         }
@@ -330,14 +295,14 @@
             left: 50%;
             top: 0;
             bottom: 0;
-            width: 3px;
+            width: 2px;
             background-color: #e67e22;
             transform: translateX(-50%);
         }
         
         .timeline-item {
             display: flex;
-            margin-bottom: 45px;
+            margin-bottom: 40px;
             position: relative;
         }
         
@@ -350,9 +315,8 @@
             padding: 25px;
             border-radius: 20px;
             width: 45%;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: left;
             backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.1);
         }
         
         .timeline-item:nth-child(odd) .timeline-content {
@@ -360,43 +324,39 @@
         }
         
         .timeline-time {
-            font-weight: bold;
             color: #e67e22;
-            margin-bottom: 10px;
-            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
         }
         
         .timeline-dot {
             position: absolute;
             left: 50%;
             top: 25px;
-            width: 22px;
-            height: 22px;
+            width: 18px;
+            height: 18px;
             background-color: #e67e22;
             border-radius: 50%;
             transform: translateX(-50%);
             z-index: 1;
-            box-shadow: 0 0 0 5px rgba(230, 126, 34, 0.2);
         }
         
         /* Map Section */
         .map-section {
-            padding: 80px 30px;
-            margin: 40px auto;
+            width: 100%;
+            max-width: 1100px;
+            padding: 70px 40px;
+            margin: 30px auto;
             background: white;
-            border-radius: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            scroll-margin-top: 30px;
-            max-width: 1200px;
+            border-radius: 40px;
+            text-align: center;
         }
         
         .map-container {
-            height: 500px;
-            border-radius: 20px;
+            height: 450px;
+            border-radius: 25px;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
             margin-top: 30px;
-            position: relative;
         }
         
         #map {
@@ -404,131 +364,98 @@
             width: 100%;
         }
         
-        /* FIXED OVERLAY - Lokasi Hotel */
+        /* Fixed Map Overlay */
         .fixed-map-overlay {
             position: fixed;
             bottom: 30px;
             right: 30px;
             background: white;
-            padding: 20px 25px;
+            padding: 20px;
             border-radius: 16px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-            max-width: 340px;
-            border-left: 5px solid #e67e22;
+            max-width: 320px;
+            border-left: 4px solid #e67e22;
             z-index: 9999;
-            transition: all 0.3s ease;
-            animation: slideInRight 0.5s ease-out;
-        }
-        
-        @keyframes slideInRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
         }
         
         .fixed-map-overlay h3 {
             color: #2c3e50;
-            margin-bottom: 12px;
-            font-size: 1.3rem;
-            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
             display: flex;
             align-items: center;
             gap: 8px;
         }
         
-        .fixed-map-overlay h3 i {
-            color: #e67e22;
-        }
-        
         .fixed-map-overlay p {
-            color: #555;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-size: 0.95rem;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         
-        .fixed-map-overlay p i {
+        .fixed-map-overlay i {
             color: #e67e22;
             width: 20px;
-            text-align: center;
         }
         
-        .fixed-map-overlay .map-link {
+        .map-link {
             display: inline-flex;
             align-items: center;
-            margin-top: 15px;
-            padding: 12px 20px;
+            justify-content: center;
+            margin-top: 12px;
+            padding: 10px 16px;
             background-color: #e67e22;
             color: white;
             text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            border-radius: 40px;
-            transition: background-color 0.3s;
-            gap: 10px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            gap: 8px;
             width: 100%;
-            justify-content: center;
         }
         
-        .fixed-map-overlay .map-link:hover {
-            background-color: #c96b1c;
-        }
-        
-        .fixed-map-overlay .map-link i {
-            color: white;
-        }
-        
-        /* Tombol close untuk overlay */
         .close-overlay {
             position: absolute;
-            top: 10px;
-            right: 15px;
+            top: 8px;
+            right: 12px;
             background: none;
             border: none;
-            font-size: 24px;
+            font-size: 22px;
             color: #999;
             cursor: pointer;
-            transition: color 0.3s;
-            padding: 5px;
         }
         
         .close-overlay:hover {
             color: #e67e22;
         }
         
-        /* Overlay hidden state */
         .fixed-map-overlay.hidden {
             display: none;
         }
         
         /* RSVP Section */
         .rsvp-section {
+            width: 100%;
+            max-width: 1100px;
+            padding: 70px 40px;
+            margin: 30px auto;
             background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
-            padding: 80px 30px;
-            margin: 40px auto;
-            border-radius: 30px;
-            scroll-margin-top: 30px;
-            max-width: 1200px;
+            border-radius: 40px;
         }
         
         .rsvp-container {
-            max-width: 800px;
+            max-width: 700px;
             margin: 0 auto;
             background: white;
             border-radius: 30px;
             padding: 45px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
         }
         
         .form-group {
             margin-bottom: 25px;
+            text-align: left;
         }
         
         .form-group label {
@@ -536,7 +463,6 @@
             margin-bottom: 8px;
             font-weight: 500;
             color: #2c3e50;
-            font-size: 1rem;
         }
         
         .form-group input,
@@ -547,19 +473,18 @@
             border-radius: 14px;
             font-size: 1rem;
             transition: all 0.3s;
-            font-family: inherit;
         }
         
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
             border-color: #e67e22;
-            box-shadow: 0 0 0 4px rgba(230, 126, 34, 0.15);
+            box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.1);
         }
         
         .radio-group {
             display: flex;
-            gap: 30px;
+            gap: 25px;
             flex-wrap: wrap;
         }
         
@@ -580,24 +505,23 @@
             background: #e67e22;
             color: white;
             border: none;
-            padding: 16px 40px;
-            font-size: 1.2rem;
+            padding: 16px 30px;
+            font-size: 1.1rem;
             font-weight: 600;
-            border-radius: 60px;
+            border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s;
             width: 100%;
-            letter-spacing: 1px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
         }
         
         .btn-submit:hover {
             background: #c96b1c;
             transform: translateY(-3px);
-            box-shadow: 0 15px 25px rgba(230, 126, 34, 0.3);
+            box-shadow: 0 15px 25px rgba(230, 126, 34, 0.2);
         }
         
         .success-message {
@@ -616,50 +540,36 @@
         
         /* Footer */
         .footer {
+            width: 100%;
+            max-width: 1100px;
             background-color: #2c3e50;
             color: white;
             text-align: center;
             padding: 50px 30px;
-            margin: 60px auto 0;
-            border-radius: 30px 30px 0 0;
-            max-width: 1200px;
+            margin: 30px auto 0;
+            border-radius: 40px 40px 0 0;
         }
         
-        .footer p {
-            margin-bottom: 10px;
-            font-size: 1rem;
-        }
-        
-        .footer a {
-            color: #e67e22;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer a:hover {
-            color: #f39c12;
-        }
-        
-        /* Scroll to top button */
+        /* Scroll to top */
         .scroll-top {
             position: fixed;
             bottom: 30px;
             left: 30px;
             background: #e67e22;
             color: white;
-            width: 54px;
-            height: 54px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             border: none;
-            box-shadow: 0 8px 20px rgba(230, 126, 34, 0.4);
-            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
             z-index: 9998;
             opacity: 0;
             visibility: hidden;
+            transition: all 0.3s;
         }
         
         .scroll-top.show {
@@ -667,53 +577,30 @@
             visibility: visible;
         }
         
-        .scroll-top:hover {
-            background: #c96b1c;
-            transform: translateY(-5px);
-        }
-        
-        /* Animasi fade */
+        /* Animasi */
         .fade-in {
-            animation: fadeInUp 1s ease forwards;
-            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
         }
         
         @keyframes fadeInUp {
-            0% {
+            from {
                 opacity: 0;
                 transform: translateY(30px);
             }
-            100% {
+            to {
                 opacity: 1;
                 transform: translateY(0);
             }
-        }
-
-        /* Memastikan konten lebih center */
-        .main-content {
-            text-align: center;
-        }
-        .section, .map-section, .rsvp-section, .footer {
-            text-align: left; /* Mengembalikan teks ke kiri untuk keterbacaan konten */
-        }
-        .section-title, .about-text, .detail-card, .timeline-content, .rsvp-container, .footer p {
-            text-align: left; /* Mengatur perataan teks untuk elemen-elemen ini */
-        }
-        .section-title, .footer p {
-             text-align: center; /* Judul section dan footer tetap di tengah */
-        }
-        .detail-card {
-            text-align: center; /* Kartu detail tetap di tengah */
         }
         
         /* Responsive */
         @media (max-width: 992px) {
             .sticky-left-nav {
-                left: 15px;
+                left: 10px;
             }
             
             .main-content {
-                padding-left: 90px;
+                padding-left: 80px;
             }
             
             .header {
@@ -721,17 +608,11 @@
             }
             
             .header h1 {
-                font-size: 3rem;
-                padding-left: 30px;
+                font-size: 2.8rem;
             }
             
             .header p {
-                font-size: 1.4rem;
-                padding-left: 30px;
-            }
-            
-            .countdown {
-                padding-left: calc(25px + 30px);
+                font-size: 1.3rem;
             }
             
             .section-title {
@@ -741,9 +622,8 @@
         
         @media (max-width: 768px) {
             .sticky-left-nav {
-                left: 10px;
+                left: 5px;
                 padding: 10px 5px;
-                gap: 10px;
             }
             
             .left-nav-item {
@@ -755,57 +635,33 @@
                 font-size: 1.1rem;
             }
             
-            .left-nav-item::after {
-                left: 50px;
-                font-size: 0.75rem;
-                padding: 4px 8px;
-            }
-            
-            .left-nav-item:hover::after {
-                left: 55px;
-            }
-            
             .main-content {
                 padding: 0 15px 0 70px;
             }
             
             .header {
-                padding: 100px 15px;
-                margin-left: calc(-50vw + 50% + 20px);
+                padding: 80px 15px;
+                margin-left: calc(-50vw + 50% + 15px);
             }
             
             .header h1 {
-                font-size: 2.2rem;
-                padding-left: 20px;
+                font-size: 2rem;
             }
             
             .header p {
                 font-size: 1.1rem;
-                padding-left: 20px;
-            }
-            
-            .countdown {
-                padding-left: calc(25px + 20px);
-            }
-            
-            .countdown h2 {
-                font-size: 1.4rem;
             }
             
             .timer span {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
             
             .section {
-                padding: 50px 20px;
-            }
-            
-            .section-title {
-                font-size: 1.8rem;
+                padding: 40px 20px;
             }
             
             .timeline:before {
-                left: 25px;
+                left: 20px;
             }
             
             .timeline-item {
@@ -813,13 +669,13 @@
             }
             
             .timeline-content {
-                width: calc(100% - 70px);
-                margin-left: 70px;
+                width: calc(100% - 60px);
+                margin-left: 60px;
                 text-align: left !important;
             }
             
             .timeline-dot {
-                left: 25px;
+                left: 20px;
             }
             
             .fixed-map-overlay {
@@ -827,31 +683,10 @@
                 right: 15px;
                 bottom: 15px;
                 max-width: none;
-                padding: 15px;
-            }
-            
-            .fixed-map-overlay h3 {
-                font-size: 1.1rem;
-            }
-            
-            .fixed-map-overlay p {
-                font-size: 0.85rem;
             }
             
             .rsvp-container {
                 padding: 25px;
-            }
-            
-            .radio-group {
-                gap: 12px;
-                flex-direction: column;
-            }
-            
-            .scroll-top {
-                bottom: 20px;
-                left: 60px;
-                width: 48px;
-                height: 48px;
             }
         }
     </style>
@@ -879,12 +714,12 @@
         <button class="left-nav-item" data-target="rsvp" data-tooltip="RSVP">
             <i class="fas fa-envelope"></i>
         </button>
-        <!-- Tombol Admin telah dihilangkan -->
+        <!-- Tombol Admin dihapus -->
     </div>
 
     <!-- Fixed Overlay - Lokasi Hotel -->
     <div class="fixed-map-overlay" id="fixedOverlay">
-        <button class="close-overlay" id="closeOverlay" title="Tutup">×</button>
+        <button class="close-overlay" id="closeOverlay">×</button>
         <h3><i class="fas fa-hotel"></i> Hotel Mulia Jakarta</h3>
         <p><i class="fas fa-map-pin"></i> Jl. Asia Afrika No.10, Jakarta</p>
         <p><i class="fas fa-building"></i> Ballroom Lantai 3</p>
@@ -898,14 +733,14 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Header FULL SCREEN (dengan penyesuaian navigasi kiri) -->
+    <!-- Header FULL SCREEN -->
     <header class="header" id="home">
         <h1>Undangan Khusus</h1>
         <p>Kami dengan hormat mengundang Anda untuk menghadiri acara spesial kami di Hotel Mulia Jakarta</p>
         
         <!-- Countdown Timer -->
         <div class="countdown fade-in">
-            <h2>Acara Dimulai Dalam:</h2>
+            <h2 style="color: white; margin-bottom: 20px;">Acara Dimulai Dalam:</h2>
             <div class="timer">
                 <div>
                     <span id="days">00</span>
@@ -927,7 +762,7 @@
         </div>
     </header>
 
-    <!-- Main Content Wrapper (semua konten setelah header ada di tengah) -->
+    <!-- Main Content Wrapper - SEMUA KONTEN CENTER -->
     <div class="main-content">
         <!-- Tentang Acara -->
         <section class="section" id="tentang">
@@ -1064,7 +899,7 @@
         <!-- Lokasi Acara dengan Map -->
         <section class="map-section" id="lokasi">
             <h2 class="section-title">Lokasi Acara</h2>
-            <p style="text-align: center; margin-bottom: 20px; font-size: 1.1rem;">Acara akan diselenggarakan di Hotel Mulia Jakarta, lokasi strategis di pusat kota dengan fasilitas terbaik.</p>
+            <p style="text-align: center; margin-bottom: 20px;">Acara akan diselenggarakan di Hotel Mulia Jakarta, lokasi strategis di pusat kota dengan fasilitas terbaik.</p>
             <div class="map-container">
                 <div id="map"></div>
             </div>
@@ -1081,13 +916,13 @@
 
                 <form id="rsvpForm">
                     <div class="form-group">
-                        <label for="company">Nama Perusahaan <span style="color: #e67e22;">*</span></label>
-                        <input type="text" id="company" name="company" required placeholder="Masukkan nama perusahaan Anda">
+                        <label for="name">Nama Lengkap <span style="color: #e67e22;">*</span></label>
+                        <input type="text" id="name" name="name" required placeholder="Masukkan nama lengkap Anda">
                     </div>
 
                     <div class="form-group">
-                        <label for="email">Email <span style="color: #e67e22;">*</span></label>
-                        <input type="email" id="email" name="email" required placeholder="contoh@email.com">
+                        <label for="company">Nama Perusahaan <span style="color: #e67e22;">*</span></label>
+                        <input type="text" id="company" name="company" required placeholder="Masukkan nama perusahaan Anda">
                     </div>
 
                     <div class="form-group">
@@ -1121,8 +956,6 @@
                         </select>
                     </div>
 
-                    <!-- Field Pesan / Pertanyaan dihilangkan -->
-
                     <button type="submit" class="btn-submit">
                         <i class="fas fa-paper-plane"></i> Kirim Konfirmasi
                     </button>
@@ -1155,47 +988,29 @@
             document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
             document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
             document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-            
-            if (distance < 0) {
-                clearInterval(countdownInterval);
-                document.querySelector('.countdown').innerHTML = "<h2>Acara Telah Berlangsung!</h2>";
-            }
         }
         
-        const countdownInterval = setInterval(updateCountdown, 1000);
+        setInterval(updateCountdown, 1000);
         updateCountdown();
         
-        // Animasi Scroll
-        const fadeElements = document.querySelectorAll('.fade-in');
+        // Scroll handling
+        const scrollTop = document.getElementById('scrollTop');
+        const navItems = document.querySelectorAll('.left-nav-item');
+        const sections = document.querySelectorAll('section, header');
         
-        function checkScroll() {
-            fadeElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (elementTop < windowHeight - 100) {
-                    element.style.opacity = '1';
-                    element.style.transform = 'translateY(0)';
-                }
-            });
-            
-            // Show/hide scroll to top button
-            const scrollTop = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            // Show/hide scroll top button
             if (window.scrollY > 500) {
                 scrollTop.classList.add('show');
             } else {
                 scrollTop.classList.remove('show');
             }
             
-            // Update active nav item based on scroll position
-            const sections = document.querySelectorAll('section, header');
-            const navItems = document.querySelectorAll('.left-nav-item');
-            
+            // Update active nav
             let current = '';
             sections.forEach(section => {
                 const sectionTop = section.offsetTop - 150;
-                const sectionHeight = section.clientHeight;
-                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                if (window.scrollY >= sectionTop) {
                     current = section.getAttribute('id') || 'home';
                 }
             });
@@ -1206,128 +1021,78 @@
                     item.classList.add('active');
                 }
             });
-        }
-        
-        // Set initial state for fade elements
-        fadeElements.forEach(element => {
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(20px)';
-            element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
         });
         
-        window.addEventListener('scroll', checkScroll);
-        window.addEventListener('load', checkScroll);
-        
-        // Smooth scroll for navigation
-        document.querySelectorAll('.left-nav-item').forEach(link => {
-            link.addEventListener('click', function(e) {
+        // Smooth scroll
+        navItems.forEach(link => {
+            link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const targetId = this.getAttribute('data-target');
+                const targetId = link.getAttribute('data-target');
                 if (targetId) {
-                    const targetElement = document.getElementById(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
+                    document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
                 }
             });
         });
         
-        // Inisialisasi Peta
+        // Scroll to top
+        scrollTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Initialize map
         function initMap() {
-            const hotelMuliaCoords = [-6.2205, 106.8205];
-            const map = L.map('map').setView(hotelMuliaCoords, 16);
-            
+            const map = L.map('map').setView([-6.2205, 106.8205], 16);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                attribution: '© OpenStreetMap'
             }).addTo(map);
             
-            const hotelIcon = L.divIcon({
-                html: '<i class="fas fa-map-marker-alt" style="color: #e67e22; font-size: 36px;"></i>',
-                iconSize: [36, 36],
-                className: 'hotel-marker'
-            });
-            
-            L.marker(hotelMuliaCoords, {icon: hotelIcon}).addTo(map)
-                .bindPopup('<b>Hotel Mulia Jakarta</b><br>Lokasi Acara')
+            L.marker([-6.2205, 106.8205]).addTo(map)
+                .bindPopup('<b>Hotel Mulia Jakarta</b>')
                 .openPopup();
-            
-            L.circle(hotelMuliaCoords, {
-                color: '#e67e22',
-                fillColor: '#e67e22',
-                fillOpacity: 0.1,
-                radius: 100
-            }).addTo(map);
         }
         
-        // Fixed Overlay
-        function initFixedOverlay() {
-            const overlay = document.getElementById('fixedOverlay');
-            const closeBtn = document.getElementById('closeOverlay');
-            
-            const overlayClosed = localStorage.getItem('mapOverlayClosed');
-            
-            if (overlayClosed === 'true') {
-                overlay.classList.add('hidden');
-            }
-            
-            closeBtn.addEventListener('click', function() {
-                overlay.classList.add('hidden');
-                localStorage.setItem('mapOverlayClosed', 'true');
-            });
-            
-            let lastScrollTop = 0;
-            window.addEventListener('scroll', function() {
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                
-                if (scrollTop < lastScrollTop && overlay.classList.contains('hidden')) {
-                    if (localStorage.getItem('mapOverlayClosed') !== 'true') {
-                        overlay.classList.remove('hidden');
-                    }
-                }
-                
-                lastScrollTop = scrollTop;
-            });
-        }
+        // Fixed overlay
+        const overlay = document.getElementById('fixedOverlay');
+        const closeBtn = document.getElementById('closeOverlay');
         
-        // Inisialisasi semua setelah halaman selesai dimuat
-        window.addEventListener('load', function() {
-            initMap();
-            initFixedOverlay();
-            checkScroll();
+        closeBtn.addEventListener('click', () => {
+            overlay.classList.add('hidden');
+            localStorage.setItem('mapOverlayClosed', 'true');
         });
-
-        // RSVP Form Handling
+        
+        if (localStorage.getItem('mapOverlayClosed') === 'true') {
+            overlay.classList.add('hidden');
+        }
+        
+        // Form handling
         const rsvpForm = document.getElementById('rsvpForm');
         const successMessage = document.getElementById('successMessage');
-
-        rsvpForm.addEventListener('submit', function(e) {
+        
+        rsvpForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
             const formData = {
                 id: Date.now(),
+                name: document.getElementById('name').value,
                 company: document.getElementById('company').value,
-                email: document.getElementById('email').value,
                 phone: document.getElementById('phone').value,
                 attendance: document.querySelector('input[name="attendance"]:checked').value,
                 guestCount: document.getElementById('guestCount').value,
-                // Pesan / Pertanyaan dihilangkan
                 timestamp: new Date().toISOString()
             };
-
+            
             let rsvps = JSON.parse(localStorage.getItem('rsvps') || '[]');
             rsvps.push(formData);
             localStorage.setItem('rsvps', JSON.stringify(rsvps));
-
+            
             successMessage.classList.add('show');
             rsvpForm.reset();
-
-            setTimeout(() => {
-                successMessage.classList.remove('show');
-            }, 5000);
+            
+            setTimeout(() => successMessage.classList.remove('show'), 5000);
         });
+        
+        // Load map on window load
+        window.addEventListener('load', initMap);
     </script>
 </body>
 </html>
