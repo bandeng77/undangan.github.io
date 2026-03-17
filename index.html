@@ -1095,9 +1095,6 @@
         <button class="left-nav-item" data-target="rsvp" data-tooltip="RSVP">
             <i class="fas fa-envelope"></i>
         </button>
-        <button class="left-nav-item" data-target="admin" data-tooltip="Admin Panel">
-            <i class="fas fa-cog"></i>
-        </button>
     </div>
 
     <!-- Fixed Overlay - Lokasi Hotel -->
@@ -1368,61 +1365,6 @@
                     </button>
                 </form>
             </div>
-        </section>
-
-        <!-- Admin Panel Section -->
-        <section class="admin-section" id="admin">
-            <div class="admin-header">
-                <h2><i class="fas fa-cog"></i> Panel Admin - Data RSVP</h2>
-                <div class="admin-stats">
-                    <div class="stat-card">
-                        <div class="stat-label">Total Konfirmasi</div>
-                        <div class="stat-value" id="totalRsvp">0</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">Hadir</div>
-                        <div class="stat-value" id="totalHadir">0</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="admin-actions">
-                <button class="admin-btn primary" id="refreshData">
-                    <i class="fas fa-sync-alt"></i> Refresh Data
-                </button>
-                <button class="admin-btn danger" id="clearAllData">
-                    <i class="fas fa-trash-alt"></i> Hapus Semua Data
-                </button>
-                <button class="admin-btn secondary" id="exportData">
-                    <i class="fas fa-download"></i> Export CSV
-                </button>
-            </div>
-
-            <div class="table-container">
-                <table id="rsvpTable">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Perusahaan</th>
-                            <th>Telepon</th>
-                            <th>Kehadiran</th>
-                            <th>Jumlah Tamu</th>
-                            <th>Waktu</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rsvpTableBody">
-                        <tr>
-                            <td colspan="8" class="empty-data">
-                                <i class="fas fa-inbox"></i>
-                                Belum ada data RSVP
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
 
         <!-- Footer -->
         <footer class="footer">
