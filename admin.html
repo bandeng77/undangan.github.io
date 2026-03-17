@@ -200,7 +200,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 1200px;
+            min-width: 900px;
         }
 
         th {
@@ -437,7 +437,7 @@
             </div>
             <div class="search-box">
                 <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" placeholder="Cari nama, email, perusahaan, atau telepon..." onkeyup="filterData()">
+                <input type="text" id="searchInput" placeholder="Cari nama, perusahaan, atau telepon..." onkeyup="filterData()">
             </div>
         </div>
 
@@ -456,19 +456,16 @@
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
-                        <th>Email</th>
                         <th>Perusahaan</th>
                         <th>Telepon</th>
                         <th>Kehadiran</th>
                         <th>Jumlah Tamu</th>
-                        <th>Pesan</th>
-                        <th>Waktu Daftar</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
                     <tr>
-                        <td colspan="10" class="empty-state">
+                        <td colspan="7" class="empty-state">
                             <i class="fas fa-inbox"></i>
                             <p>Belum ada data RSVP</p>
                         </td>
@@ -534,7 +531,6 @@
                 const searchLower = currentSearch.toLowerCase();
                 filtered = filtered.filter(item => 
                     (item.name && item.name.toLowerCase().includes(searchLower)) ||
-                    (item.email && item.email.toLowerCase().includes(searchLower)) ||
                     (item.company && item.company.toLowerCase().includes(searchLower)) ||
                     (item.phone && item.phone.toLowerCase().includes(searchLower))
                 );
@@ -551,7 +547,7 @@
             if (data.length === 0) {
                 tbody.innerHTML = `
                     <tr>
-                        <td colspan="10" class="empty-state">
+                        <td colspan="7" class="empty-state">
                             <i class="fas fa-inbox"></i>
                             <p>Tidak ada data yang ditemukan</p>
                         </td>
@@ -567,21 +563,10 @@
                     'Ragu': 'badge-ragu'
                 }[item.attendance] || '';
 
-                const date = new Date(item.timestamp).toLocaleString('id-ID', {
-                    dateStyle: 'medium',
-                    timeStyle: 'short'
-                });
-
-                // Truncate message if too long
-                const message = item.message ? 
-                    (item.message.length > 30 ? item.message.substring(0, 30) + '...' : item.message) : 
-                    '-';
-
                 return `
                     <tr>
                         <td>${index + 1}</td>
                         <td><strong>${escapeHtml(item.name) || '-'}</strong></td>
-                        <td>${escapeHtml(item.email) || '-'}</td>
                         <td>${escapeHtml(item.company) || '-'}</td>
                         <td>${escapeHtml(item.phone) || '-'}</td>
                         <td>
@@ -590,8 +575,6 @@
                             </span>
                         </td>
                         <td>${item.guestCount || 1} orang</td>
-                        <td>${escapeHtml(message)}</td>
-                        <td>${date}</td>
                         <td>
                             <div class="action-buttons">
                                 <button class="btn-icon btn-view" onclick="viewDetail('${item.id}')" title="Lihat Detail">
@@ -665,10 +648,6 @@
                     <p>${escapeHtml(item.name) || '-'}</p>
                 </div>
                 <div class="detail-item">
-                    <strong>Email</strong>
-                    <p>${escapeHtml(item.email) || '-'}</p>
-                </div>
-                <div class="detail-item">
                     <strong>Perusahaan</strong>
                     <p>${escapeHtml(item.company) || '-'}</p>
                 </div>
@@ -735,7 +714,6 @@
             const exportData = currentData.map((item, index) => ({
                 'No': index + 1,
                 'Nama Lengkap': item.name || '-',
-                'Email': item.email || '-',
                 'Perusahaan': item.company || '-',
                 'Telepon': item.phone || '-',
                 'Kehadiran': item.attendance || '-',
