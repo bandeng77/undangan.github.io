@@ -2,8 +2,8 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Acara - Hotel Mulia Jakarta</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Undangan Acara - Hotel Mulia Jakarta | Event Launch Product</title>
     <style>
         /* Reset dan Base Styles */
         * {
@@ -15,28 +15,28 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background-color: #f9f9f9;
+            color: #1e2a3a;
+            background-color: #faf9f8;
             overflow-x: hidden;
         }
         
-        /* Sticky Left Navigation - TETAP DI KIRI */
+        /* Sticky Left Navigation - MODERN & SMOOTH */
         .sticky-left-nav {
             position: fixed;
-            left: 20px;
+            left: 24px;
             top: 50%;
             transform: translateY(-50%);
             z-index: 10000;
             display: flex;
             flex-direction: column;
             gap: 12px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 15px 8px;
-            border-radius: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            border: 1px solid rgba(230, 126, 34, 0.2);
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 16px 10px;
+            border-radius: 60px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+            border: 1px solid rgba(230, 126, 34, 0.25);
         }
         
         .left-nav-item {
@@ -49,7 +49,7 @@
             text-decoration: none;
             color: #2c3e50;
             font-weight: 500;
-            transition: all 0.3s ease;
+            transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             position: relative;
             background: transparent;
             border: none;
@@ -57,14 +57,14 @@
         }
         
         .left-nav-item i {
-            font-size: 1.3rem;
+            font-size: 1.35rem;
             color: #2c3e50;
-            transition: all 0.3s ease;
+            transition: all 0.2s;
         }
         
         .left-nav-item:hover {
-            background: rgba(230, 126, 34, 0.15);
-            transform: scale(1.1);
+            background: rgba(230, 126, 34, 0.12);
+            transform: scale(1.08);
         }
         
         .left-nav-item:hover i {
@@ -72,118 +72,110 @@
         }
         
         .left-nav-item.active {
-            background: #e67e22;
-            box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
+            background: linear-gradient(135deg, #e67e22, #f39c12);
+            box-shadow: 0 6px 14px rgba(230, 126, 34, 0.35);
         }
         
         .left-nav-item.active i {
             color: white;
         }
         
-        /* Tooltip on hover */
+        /* Tooltip modern */
         .left-nav-item::after {
             content: attr(data-tooltip);
             position: absolute;
-            left: 55px;
-            background: #2c3e50;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
+            left: 58px;
+            background: #1e2a36;
+            color: #f0f0f0;
+            padding: 6px 14px;
+            border-radius: 28px;
+            font-size: 0.8rem;
+            font-weight: 500;
             white-space: nowrap;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             pointer-events: none;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
             z-index: 10001;
+            letter-spacing: 0.3px;
         }
         
         .left-nav-item:hover::after {
             opacity: 1;
             visibility: visible;
-            left: 65px;
+            left: 68px;
         }
         
-        /* COMPANY HEADER - Diatas Header Utama */
+        /* COMPANY HEADER */
         .company-header {
-            background: linear-gradient(135deg, #2c3e50 0%, #1a2632 100%);
+            background: linear-gradient(115deg, #1e2a36 0%, #0f1a24 100%);
             color: white;
             padding: 20px 0;
-            position: relative;
             width: 100vw;
             margin-left: calc(-50vw + 50%);
-            margin-right: calc(-50vw + 50%);
             border-bottom: 3px solid #e67e22;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
         }
         
         .company-header .container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 28px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 20px;
         }
         
         .company-logo {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 18px;
         }
         
         .company-logo img {
-            height: 70px;
+            height: 68px;
             width: auto;
-            border-radius: 8px;
-            padding: 5px;
-            transition: transform 0.3s ease;
+            border-radius: 12px;
+            padding: 4px;
+            transition: transform 0.25s;
         }
         
         .company-logo img:hover {
-            transform: scale(1.05);
+            transform: scale(1.02);
         }
         
         .company-name {
-            font-size: 1.8rem;
+            font-size: 1.7rem;
             font-weight: 600;
             letter-spacing: 1px;
-            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+            background: linear-gradient(130deg, #ffffff, #ffe0b5);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
-        }
-        
-        .company-tagline {
-            font-size: 1rem;
-            color: #e67e22;
-            font-weight: 400;
-            letter-spacing: 3px;
-            text-transform: uppercase;
+            color: transparent;
         }
         
         .company-info {
             display: flex;
-            gap: 30px;
+            gap: 28px;
             flex-wrap: wrap;
         }
         
         .info-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 8px 18px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 40px;
-            border: 1px solid rgba(230, 126, 34, 0.3);
-            transition: all 0.3s;
+            gap: 12px;
+            padding: 8px 20px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 48px;
+            border: 1px solid rgba(230, 126, 34, 0.35);
+            transition: all 0.2s;
         }
         
         .info-item:hover {
-            background: rgba(230, 126, 34, 0.15);
+            background: rgba(230, 126, 34, 0.18);
             border-color: #e67e22;
             transform: translateY(-2px);
         }
@@ -193,190 +185,226 @@
             font-size: 1.2rem;
         }
         
-        .info-item span {
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-        
-        .info-item .small {
-            font-size: 0.8rem;
-            color: #ccc;
-            margin-left: 5px;
-        }
-        
-        /* MAIN CONTENT - CENTERED DENGAN MARGIN LEFT 0 */
+        /* MAIN CONTENT */
         .main-content {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative;
-            z-index: 1;
         }
         
-        /* Header FULL SCREEN */
+        /* Header Hero */
         .header {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+            background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), 
                         url('https://i.imgur.com/M2h6hIf.png');
             background-size: cover;
-            background-position: center;
+            background-position: center 30%;
             color: white;
             text-align: center;
             padding: 120px 20px;
-            position: relative;
             width: 100vw;
             margin-left: calc(-50vw + 50%);
-            margin-right: calc(-50vw + 50%);
-            margin-top: 0;
-            margin-bottom: 40px;
+            margin-bottom: 48px;
+            box-shadow: inset 0 -2px 0 rgba(255,255,255,0.1);
         }
         
         .header h1 {
             font-size: 3.8rem;
-            margin-bottom: 20px;
-            font-weight: 300;
-            letter-spacing: 2px;
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-bottom: 18px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.3);
         }
         
-        .header p {
-            font-size: 1.6rem;
-            max-width: 800px;
-            margin: 0 auto;
-            font-weight: 300;
-        }
-        
-        /* Countdown Timer */
         .countdown {
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.55);
+            padding: 28px 32px;
             margin: 40px auto 0;
-            border-radius: 50px;
-            display: inline-block;
-            backdrop-filter: blur(5px);
-            max-width: 700px;
-            width: 100%;
+            border-radius: 70px;
+            backdrop-filter: blur(8px);
+            max-width: 750px;
         }
         
         .timer {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 36px;
             flex-wrap: wrap;
-        }
-        
-        .timer div {
-            text-align: center;
-            min-width: 80px;
         }
         
         .timer span {
             display: block;
             font-size: 2.8rem;
-            font-weight: 700;
+            font-weight: 800;
             color: #e67e22;
+            background: rgba(0,0,0,0.4);
+            padding: 8px 12px;
+            border-radius: 20px;
+            min-width: 85px;
         }
         
-        .timer p {
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: white;
-        }
-        
-        /* Section Styles */
+        /* Section Global */
         .section {
             width: 100%;
-            max-width: 1100px;
-            padding: 70px 40px;
-            margin: 30px auto;
+            max-width: 1150px;
+            padding: 60px 48px;
+            margin: 28px auto;
             background: white;
-            border-radius: 40px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
-            scroll-margin-top: 30px;
-            text-align: center;
+            border-radius: 48px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08);
+            scroll-margin-top: 28px;
+            transition: all 0.2s;
         }
         
         .section-title {
             text-align: center;
-            margin-bottom: 50px;
-            font-size: 2.6rem;
-            font-weight: 300;
-            color: #2c3e50;
-            width: 100%;
+            margin-bottom: 48px;
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: #1e2a36;
         }
         
         .section-title:after {
             content: '';
             display: block;
-            width: 80px;
+            width: 90px;
             height: 3px;
-            background-color: #e67e22;
-            margin: 15px auto 0;
+            background: linear-gradient(90deg, #e67e22, #f7b05e);
+            margin: 16px auto 0;
+            border-radius: 4px;
         }
         
-        /* About Section */
-        .about-content {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 50px;
-            text-align: left;
-        }
-        
-        .about-text {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .about-image {
-            flex: 1;
-            min-width: 300px;
-            border-radius: 20px;
-            overflow: hidden;
-        }
-        
-        .about-image img {
+        /* BRAND LOGOS SECTION - AREA BARU ELEGAN */
+        .brand-showcase {
+            background: #ffffff;
+            border-radius: 48px;
+            padding: 48px 32px 40px;
+            margin: 20px auto 32px;
             width: 100%;
-            height: auto;
-            display: block;
+            max-width: 1150px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(230,126,34,0.12);
+            transition: all 0.25s;
         }
         
-        /* Details Grid */
+        .brand-header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+        
+        .brand-header h3 {
+            font-size: 1.9rem;
+            font-weight: 500;
+            color: #2c3e50;
+            letter-spacing: -0.2px;
+        }
+        
+        .brand-header p {
+            color: #5a6e7c;
+            margin-top: 8px;
+            font-size: 1rem;
+        }
+        
+        .brand-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 48px;
+            row-gap: 36px;
+        }
+        
+        .brand-card {
+            flex: 0 1 200px;
+            text-align: center;
+            transition: all 0.3s ease;
+            background: #fefaf5;
+            padding: 20px 12px;
+            border-radius: 42px;
+            backdrop-filter: blur(2px);
+            border: 1px solid #f0e5db;
+        }
+        
+        .brand-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -12px rgba(230,126,34,0.2);
+            border-color: #e67e2240;
+            background: white;
+        }
+        
+        .brand-logo-wrapper {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            border-radius: 60px;
+            padding: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+        }
+        
+        .brand-logo-wrapper img {
+            max-width: 95px;
+            max-height: 90px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.05));
+            transition: transform 0.2s;
+        }
+        
+        .brand-card:hover .brand-logo-wrapper img {
+            transform: scale(1.02);
+        }
+        
+        .brand-card h4 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-top: 8px;
+        }
+        
+        .brand-card p {
+            font-size: 0.8rem;
+            color: #e67e22;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Details & Grid */
         .details-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
+            gap: 28px;
         }
         
         .detail-card {
-            background: #f8f9fa;
-            padding: 40px 20px;
-            border-radius: 25px;
+            background: #fefaf6;
+            padding: 38px 20px;
+            border-radius: 32px;
             text-align: center;
-            transition: transform 0.3s;
+            transition: all 0.25s;
+            border: 1px solid #f3e9df;
         }
         
         .detail-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(230,126,34,0.1);
+            transform: translateY(-6px);
+            box-shadow: 0 15px 28px rgba(230,126,34,0.08);
         }
         
         .detail-card i {
-            font-size: 3rem;
+            font-size: 2.8rem;
             color: #e67e22;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
         
-        /* Agenda Section */
+        /* Agenda */
         .agenda {
-            background-color: #2c3e50;
+            background: linear-gradient(115deg, #1e2f3c, #14232e);
             color: white;
         }
         
@@ -385,7 +413,7 @@
         }
         
         .timeline {
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
             position: relative;
         }
@@ -397,13 +425,13 @@
             top: 0;
             bottom: 0;
             width: 2px;
-            background-color: #e67e22;
+            background: #e67e22;
             transform: translateX(-50%);
         }
         
         .timeline-item {
             display: flex;
-            margin-bottom: 40px;
+            margin-bottom: 38px;
             position: relative;
         }
         
@@ -413,451 +441,112 @@
         
         .timeline-content {
             background: rgba(255, 255, 255, 0.1);
-            padding: 25px;
-            border-radius: 20px;
-            width: 45%;
-            text-align: left;
             backdrop-filter: blur(5px);
-        }
-        
-        .timeline-item:nth-child(odd) .timeline-content {
-            text-align: right;
+            padding: 20px 24px;
+            border-radius: 28px;
+            width: 45%;
+            transition: 0.2s;
         }
         
         .timeline-time {
-            color: #e67e22;
-            font-weight: 600;
-            margin-bottom: 8px;
+            color: #f39c12;
+            font-weight: 700;
+            margin-bottom: 6px;
         }
         
         .timeline-dot {
             position: absolute;
             left: 50%;
-            top: 25px;
+            top: 28px;
             width: 18px;
             height: 18px;
-            background-color: #e67e22;
+            background: #e67e22;
             border-radius: 50%;
             transform: translateX(-50%);
-            z-index: 1;
+            box-shadow: 0 0 0 3px rgba(230,126,34,0.4);
         }
         
-        /* Map Section */
+        /* Map */
         .map-section {
             width: 100%;
-            max-width: 1100px;
-            padding: 70px 40px;
-            margin: 30px auto;
+            max-width: 1150px;
+            padding: 56px 40px;
             background: white;
-            border-radius: 40px;
-            text-align: center;
+            border-radius: 48px;
+            margin: 28px auto;
         }
         
         .map-container {
-            height: 450px;
-            border-radius: 25px;
+            height: 440px;
+            border-radius: 32px;
             overflow: hidden;
-            margin-top: 30px;
-            position: relative;
-            z-index: 1;
+            margin-top: 28px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
         }
         
         #map {
             height: 100%;
             width: 100%;
-            background-color: #e9ecef; /* Warna background saat map loading */
         }
         
-        /* Fixed Map Overlay */
+        /* Fixed overlay */
         .fixed-map-overlay {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: white;
+            bottom: 28px;
+            right: 28px;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(8px);
             padding: 20px;
-            border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            border-radius: 28px;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
             max-width: 320px;
-            border-left: 4px solid #e67e22;
+            border-left: 5px solid #e67e22;
             z-index: 9999;
         }
         
-        .fixed-map-overlay h3 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .fixed-map-overlay p {
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .fixed-map-overlay i {
-            color: #e67e22;
-            width: 20px;
-        }
-        
-        .map-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 12px;
-            padding: 10px 16px;
-            background-color: #e67e22;
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            gap: 8px;
-            width: 100%;
-        }
-        
-        .close-overlay {
-            position: absolute;
-            top: 8px;
-            right: 12px;
-            background: none;
-            border: none;
-            font-size: 22px;
-            color: #999;
-            cursor: pointer;
-        }
-        
-        .close-overlay:hover {
-            color: #e67e22;
-        }
-        
-        .fixed-map-overlay.hidden {
-            display: none;
-        }
-        
-        /* RSVP Section */
+        /* RSVP */
         .rsvp-section {
             width: 100%;
-            max-width: 1100px;
-            padding: 70px 40px;
-            margin: 30px auto;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
-            border-radius: 40px;
+            max-width: 1150px;
+            padding: 56px 40px;
+            background: linear-gradient(125deg, #f8f5f2, #fff6ed);
+            border-radius: 48px;
         }
         
         .rsvp-container {
             max-width: 700px;
             margin: 0 auto;
             background: white;
-            border-radius: 30px;
-            padding: 45px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-            text-align: left;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #2c3e50;
-        }
-        
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 14px 18px;
-            border: 2px solid #e2e8f0;
-            border-radius: 14px;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-        
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #e67e22;
-            box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.1);
-        }
-        
-        .radio-group {
-            display: flex;
-            gap: 25px;
-            flex-wrap: wrap;
-        }
-        
-        .radio-group label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: normal;
-            cursor: pointer;
-        }
-        
-        .radio-group input[type="radio"] {
-            width: auto;
-            accent-color: #e67e22;
+            border-radius: 40px;
+            padding: 48px;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.04);
         }
         
         .btn-submit {
             background: #e67e22;
             color: white;
             border: none;
-            padding: 16px 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            padding: 16px 28px;
+            font-weight: 700;
+            border-radius: 60px;
+            transition: 0.2s;
         }
         
-        .btn-submit:hover {
-            background: #c96b1c;
-            transform: translateY(-3px);
-            box-shadow: 0 15px 25px rgba(230, 126, 34, 0.2);
-        }
-        
-        .success-message {
-            background: #d4edda;
-            color: #155724;
-            padding: 16px;
-            border-radius: 14px;
-            margin-bottom: 25px;
-            text-align: center;
-            display: none;
-        }
-        
-        .success-message.show {
-            display: block;
-        }
-        
-        /* Admin Panel Styles */
-        .admin-section {
-            width: 100%;
-            max-width: 1100px;
-            padding: 70px 40px;
-            margin: 30px auto;
-            background: white;
-            border-radius: 40px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
-            scroll-margin-top: 30px;
-        }
-        
-        .admin-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        
-        .admin-header h2 {
-            font-size: 2rem;
-            font-weight: 300;
-            color: #2c3e50;
-        }
-        
-        .admin-header h2 i {
-            color: #e67e22;
-            margin-right: 10px;
-        }
-        
-        .admin-stats {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .stat-card {
-            background: #f8f9fa;
-            padding: 15px 25px;
-            border-radius: 30px;
-            border-left: 4px solid #e67e22;
-        }
-        
-        .stat-card .stat-label {
-            font-size: 0.9rem;
-            color: #666;
-        }
-        
-        .stat-card .stat-value {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #2c3e50;
-        }
-        
-        .admin-actions {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .admin-btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 40px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-        }
-        
-        .admin-btn.primary {
-            background: #e67e22;
-            color: white;
-        }
-        
-        .admin-btn.primary:hover {
-            background: #c96b1c;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(230, 126, 34, 0.2);
-        }
-        
-        .admin-btn.secondary {
-            background: #2c3e50;
-            color: white;
-        }
-        
-        .admin-btn.secondary:hover {
-            background: #1e2b37;
-            transform: translateY(-2px);
-        }
-        
-        .admin-btn.danger {
-            background: #dc3545;
-            color: white;
-        }
-        
-        .admin-btn.danger:hover {
-            background: #c82333;
-        }
-        
-        .table-container {
-            overflow-x: auto;
-            border-radius: 20px;
-            background: #f8f9fa;
-            padding: 20px;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.95rem;
-        }
-        
-        th {
-            text-align: left;
-            padding: 15px 10px;
-            background: #2c3e50;
-            color: white;
-            font-weight: 500;
-        }
-        
-        th:first-child {
-            border-radius: 10px 0 0 10px;
-        }
-        
-        th:last-child {
-            border-radius: 0 10px 10px 0;
-        }
-        
-        td {
-            padding: 12px 10px;
-            border-bottom: 1px solid #dee2e6;
-        }
-        
-        tr:hover td {
-            background: rgba(230, 126, 34, 0.05);
-        }
-        
-        .attendance-badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-        
-        .badge-hadir {
-            background: #d4edda;
-            color: #155724;
-        }
-        
-        .badge-tidak {
-            background: #f8d7da;
-            color: #721c24;
-        }
-        
-        .badge-ragu {
-            background: #fff3cd;
-            color: #856404;
-        }
-        
-        .delete-btn {
-            background: none;
-            border: none;
-            color: #dc3545;
-            cursor: pointer;
-            font-size: 1.1rem;
-            padding: 5px 10px;
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-        
-        .delete-btn:hover {
-            background: #dc3545;
-            color: white;
-        }
-        
-        .empty-data {
-            text-align: center;
-            padding: 40px;
-            color: #666;
-            font-size: 1.1rem;
-        }
-        
-        .empty-data i {
-            font-size: 3rem;
-            color: #ccc;
-            margin-bottom: 15px;
-            display: block;
-        }
-        
-        /* Footer */
+        /* Admin & footer */
         .footer {
+            background: #1e2a36;
+            border-radius: 48px 48px 0 0;
             width: 100%;
-            max-width: 1100px;
-            background-color: #2c3e50;
-            color: white;
+            padding: 48px 28px;
             text-align: center;
-            padding: 50px 30px;
-            margin: 30px auto 0;
-            border-radius: 40px 40px 0 0;
+            color: #ddd;
         }
         
-        /* Scroll to top */
         .scroll-top {
             position: fixed;
-            bottom: 30px;
-            left: 30px;
+            bottom: 28px;
+            left: 28px;
             background: #e67e22;
-            color: white;
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -865,12 +554,10 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            border: none;
-            box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.2);
             z-index: 9998;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s;
         }
         
         .scroll-top.show {
@@ -878,336 +565,132 @@
             visibility: visible;
         }
         
-        /* Animasi */
+        @media (max-width: 860px) {
+            .sticky-left-nav { left: 12px; padding: 10px 6px; }
+            .brand-grid { gap: 28px; }
+            .brand-card { flex-basis: 140px; }
+            .brand-logo-wrapper { width: 95px; height: 95px; }
+            .section, .brand-showcase { padding: 36px 24px; }
+            .timeline:before { left: 20px; }
+            .timeline-item { flex-direction: row !important; }
+            .timeline-content { width: calc(100% - 60px); margin-left: 60px; text-align: left !important; }
+            .timeline-dot { left: 20px; }
+            .header h1 { font-size: 2.5rem; }
+        }
+        
+        @media (max-width: 560px) {
+            .brand-grid { gap: 16px; }
+            .brand-card { flex-basis: 120px; }
+            .brand-logo-wrapper img { max-width: 70px; }
+        }
+        
         .fade-in {
-            animation: fadeInUp 0.8s ease forwards;
+            animation: fadeInUp 0.6s ease forwards;
         }
         
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 20000;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .modal.show {
-            display: flex;
-        }
-        
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 30px;
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-        }
-        
-        .modal-content h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
-        
-        .modal-content p {
-            margin-bottom: 25px;
-            color: #666;
-        }
-        
-        .modal-actions {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-        
-        .modal-btn {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 40px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .modal-btn.confirm {
-            background: #dc3545;
-            color: white;
-        }
-        
-        .modal-btn.confirm:hover {
-            background: #c82333;
-        }
-        
-        .modal-btn.cancel {
-            background: #6c757d;
-            color: white;
-        }
-        
-        .modal-btn.cancel:hover {
-            background: #5a6268;
-        }
-        
-        /* Loading indicator untuk map */
-        .map-loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(255,255,255,0.9);
-            padding: 15px 25px;
-            border-radius: 40px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .map-loading i {
-            color: #e67e22;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        /* Responsive */
-        @media (max-width: 992px) {
-            .sticky-left-nav {
-                left: 10px;
-            }
-            
-            .header {
-                margin-left: calc(-50vw + 50%);
-            }
-            
-            .header h1 {
-                font-size: 2.8rem;
-            }
-            
-            .header p {
-                font-size: 1.3rem;
-            }
-            
-            .section-title {
-                font-size: 2.2rem;
-            }
-            
-            .company-name {
-                font-size: 1.4rem;
-            }
-            
-            .company-info {
-                gap: 15px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .sticky-left-nav {
-                left: 5px;
-                padding: 10px 5px;
-            }
-            
-            .left-nav-item {
-                width: 40px;
-                height: 40px;
-            }
-            
-            .left-nav-item i {
-                font-size: 1.1rem;
-            }
-            
-            .header {
-                padding: 80px 15px;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .header p {
-                font-size: 1.1rem;
-            }
-            
-            .timer span {
-                font-size: 2rem;
-            }
-            
-            .section {
-                padding: 40px 20px;
-            }
-            
-            .timeline:before {
-                left: 20px;
-            }
-            
-            .timeline-item {
-                flex-direction: row !important;
-            }
-            
-            .timeline-content {
-                width: calc(100% - 60px);
-                margin-left: 60px;
-                text-align: left !important;
-            }
-            
-            .timeline-dot {
-                left: 20px;
-            }
-            
-            .fixed-map-overlay {
-                left: 15px;
-                right: 15px;
-                bottom: 15px;
-                max-width: none;
-            }
-            
-            .rsvp-container {
-                padding: 25px;
-            }
-            
-            .company-header .container {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .company-logo {
-                justify-content: center;
-            }
-            
-            .company-info {
-                justify-content: center;
-            }
+            from { opacity: 0; transform: translateY(20px);}
+            to { opacity: 1; transform: translateY(0);}
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
-    <!-- Sticky Left Navigation - TETAP DI KIRI -->
     <div class="sticky-left-nav">
-        <button class="left-nav-item active" data-target="home" data-tooltip="Home">
-            <i class="fas fa-home"></i>
-        </button>
-        <button class="left-nav-item" data-target="tentang" data-tooltip="Tentang Acara">
-            <i class="fas fa-info-circle"></i>
-        </button>
-        <button class="left-nav-item" data-target="detail" data-tooltip="Detail Acara">
-            <i class="fas fa-calendar-alt"></i>
-        </button>
-        <button class="left-nav-item" data-target="agenda" data-tooltip="Agenda">
-            <i class="fas fa-clock"></i>
-        </button>
-        <button class="left-nav-item" data-target="lokasi" data-tooltip="Lokasi">
-            <i class="fas fa-map-marker-alt"></i>
-        </button>
-        <button class="left-nav-item" data-target="rsvp" data-tooltip="RSVP">
-            <i class="fas fa-envelope"></i>
-        </button>
+        <button class="left-nav-item active" data-target="home" data-tooltip="Home"><i class="fas fa-home"></i></button>
+        <button class="left-nav-item" data-target="tentang" data-tooltip="Tentang Acara"><i class="fas fa-info-circle"></i></button>
+        <button class="left-nav-item" data-target="detail" data-tooltip="Detail Acara"><i class="fas fa-calendar-alt"></i></button>
+        <button class="left-nav-item" data-target="agenda" data-tooltip="Agenda"><i class="fas fa-clock"></i></button>
+        <button class="left-nav-item" data-target="lokasi" data-tooltip="Lokasi"><i class="fas fa-map-marker-alt"></i></button>
+        <button class="left-nav-item" data-target="rsvp" data-tooltip="RSVP"><i class="fas fa-envelope"></i></button>
     </div>
 
-    <!-- Fixed Overlay - Lokasi Hotel -->
     <div class="fixed-map-overlay" id="fixedOverlay">
-        <button class="close-overlay" id="closeOverlay">×</button>
+        <button class="close-overlay" id="closeOverlay" style="position:absolute; top:10px; right:14px; background:none; border:none; font-size:20px; cursor:pointer;">×</button>
         <h3><i class="fas fa-hotel"></i> Hotel Mulia Jakarta</h3>
         <p><i class="fas fa-map-pin"></i> Jl. Asia Afrika No.10, Jakarta</p>
         <p><i class="fas fa-building"></i> Ballroom Lantai 3</p>
-        <a href="https://maps.app.goo.gl/CHTgjiTKyjpTojFA8" target="_blank" class="map-link">
-            <i class="fas fa-external-link-alt"></i> Buka di Google Maps
-        </a>
+        <a href="https://maps.app.goo.gl/CHTgjiTKyjpTojFA8" target="_blank" class="map-link" style="display:flex; align-items:center; justify-content:center; gap:8px; background:#e67e22; color:white; padding:10px; border-radius:40px; margin-top:12px; text-decoration:none;">Buka di Google Maps <i class="fas fa-external-link-alt"></i></a>
     </div>
+    <button class="scroll-top" id="scrollTop"><i class="fas fa-arrow-up"></i></button>
 
-    <!-- Scroll to Top Button -->
-    <button class="scroll-top" id="scrollTop">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <!-- COMPANY HEADER - Diatas Header Utama -->
     <div class="company-header">
         <div class="container">
             <div class="company-logo">
-                <!-- Logo menggunakan gambar dari Imgur -->
                 <img src="https://i.imgur.com/XjT4AO0.png" alt="Company Logo">
+                <span class="company-name">PT Effrensindo Kencana</span>
             </div>
             <div class="company-info">
-                <div class="info-item">
-                    <i class="fas fa-calendar-alt"></i>
-                    <span>14 April 2026</span>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-clock"></i>
-                    <span>09:00 WIB</span>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>Hotel Mulia <span class="small">Jakarta</span></span>
-                </div>
+                <div class="info-item"><i class="fas fa-calendar-alt"></i><span>14 April 2026</span></div>
+                <div class="info-item"><i class="fas fa-clock"></i><span>09:00 WIB</span></div>
+                <div class="info-item"><i class="fas fa-map-marker-alt"></i><span>Hotel Mulia Jakarta</span></div>
             </div>
         </div>
     </div>
 
-    <!-- Header FULL SCREEN -->
     <header class="header" id="home">
         <h1>Undangan Khusus</h1>
-        <p>Kami dengan hormat mengundang Anda untuk menghadiri acara spesial kami di Hotel Mulia Jakarta</p>
-        
-        <!-- Countdown Timer -->
+        <p>Pengenalan Produk: Total New Concept of Small Voice Evac - 4017ES</p>
         <div class="countdown fade-in">
-            <h2 style="color: white; margin-bottom: 20px;">Acara Dimulai Dalam:</h2>
+            <h2 style="color:white; margin-bottom:16px;">Acara Dimulai Dalam:</h2>
             <div class="timer">
-                <div>
-                    <span id="days">00</span>
-                    <p>Hari</p>
-                </div>
-                <div>
-                    <span id="hours">00</span>
-                    <p>Jam</p>
-                </div>
-                <div>
-                    <span id="minutes">00</span>
-                    <p>Menit</p>
-                </div>
-                <div>
-                    <span id="seconds">00</span>
-                    <p>Detik</p>
-                </div>
+                <div><span id="days">00</span><p>Hari</p></div>
+                <div><span id="hours">00</span><p>Jam</p></div>
+                <div><span id="minutes">00</span><p>Menit</p></div>
+                <div><span id="seconds">00</span><p>Detik</p></div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Wrapper - SEMUA KONTEN CENTER -->
     <div class="main-content">
+        <!-- SECTION BRAND LOGOS - 3 LOGO DENGAN LAYOUT RAPIH DAN ELEGAN -->
+        <div class="brand-showaway" style="width:100%; max-width:1150px; margin:0 auto 24px;">
+            <div class="brand-showcase">
+                <div class="brand-header">
+                    <h3><i class="fas fa-certificate" style="color:#e67e22;"></i> Official Technology Partners</h3>
+                    <p>Didukung oleh brand terkemuka di industri keselamatan & inovasi</p>
+                </div>
+                <div class="brand-grid">
+                    <!-- Logo 1 : Brand A (Hochiki / Simbol Fire) -->
+                    <div class="brand-card">
+                        <div class="brand-logo-wrapper">
+                            <img src="https://i.imgur.com/r2Okp8C.png" alt="SIMPLEX" style="max-width:90px;">
+                        </div>
+                        <h4>SIMPLEX</h4>
+                    </div>
+                    <!-- Logo 2 : Brand B (Notifier / Honeywell style) -->
+                    <div class="brand-card">
+                        <div class="brand-logo-wrapper">
+                            <img src="https://i.imgur.com/V9wcOgx.png" alt="LPG">
+                        </div>
+                        <h4>LPG</h4>
+                    </div>
+                    <!-- Logo 3 : Brand C (Siemens / Technology) -->
+                    <div class="brand-card">
+                        <div class="brand-logo-wrapper">
+                            <img src="https://i.imgur.com/pREPbxc.png" alt="TYCO">
+                        </div>
+                        <h4>TYCO</h4>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 28px; font-size:0.85rem; color:#7f8c8d;">
+                    <i class="fas fa-handshake"></i> Kolaborasi teknologi mutakhir untuk keamanan bangunan
+                </div>
+            </div>
+        </div>
+
         <!-- Tentang Acara -->
         <section class="section" id="tentang">
             <h2 class="section-title">Tentang Acara</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Pada kesempatan ini akan diselenggarakan acara pengenalan produk Total New Concept of Small Voice Evac - 4017ES. Kegiatan ini menjadi momen untuk memperkenalkan produk terbaru kepada para undangan yang hadir, sekaligus menjadi sarana untuk menjalin silaturahmi serta memperkuat hubungan kerja sama dengan para mitra dan pelanggan.</p>
-                    <p>Acara akan diisi dengan berbagai kegiatan menarik, termasuk presentasi khusus, sesi networking, jamuan makan, dan hiburan. Kami berharap kehadiran Anda dapat melengkapi kebahagiaan dalam acara ini.</p>
-                    <p><strong><i class="fas fa-tshirt" style="color: #e67e22;"></i> Dress code:</strong> Formal / Business Attire</p>
+            <div class="about-content" style="display:flex; flex-wrap:wrap; gap:40px; align-items:center;">
+                <div class="about-text" style="flex:1; min-width:260px;">
+                    <p style="margin-bottom:16px;">Pada kesempatan ini akan diselenggarakan acara pengenalan produk <strong>Total New Concept of Small Voice Evac - 4017ES</strong>. Kegiatan ini menjadi momen strategis untuk memperkenalkan inovasi terbaru serta memperkuat sinergi dengan mitra dan pelanggan.</p>
+                    <p>Acara diisi presentasi khusus, demo langsung, sesi networking, dan jamuan eksklusif. Kehadiran Anda sangat berarti.</p>
+                    <p><strong><i class="fas fa-tshirt" style="color:#e67e22;"></i> Dress code:</strong> Formal / Business Attire</p>
                 </div>
-                <div class="about-image">
-                    <img src="https://i.imgur.com/EjcttpQ.png" alt="Interior Hotel Mulia Jakarta">
+                <div class="about-image" style="flex:1; min-width:260px;">
+                    <img src="https://i.imgur.com/EjcttpQ.png" alt="Interior Hotel Mulia Jakarta" style="width:100%; border-radius:32px; box-shadow:0 12px 24px rgba(0,0,0,0.1);">
                 </div>
             </div>
         </section>
@@ -1216,25 +699,9 @@
         <section class="section details" id="detail">
             <h2 class="section-title">Detail Acara</h2>
             <div class="details-grid">
-                <div class="detail-card fade-in">
-                    <i class="fas fa-calendar-alt"></i>
-                    <h3>Tanggal & Waktu</h3>
-                    <p>Selasa, 14 April 2026</p>
-                    <p>Pukul 09:00 - 17:00 WIB</p>
-                </div>
-                <div class="detail-card fade-in">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <h3>Lokasi</h3>
-                    <p>Hotel Mulia Jakarta</p>
-                    <p>Ballroom Lantai 3</p>
-                    <p>Jl. Asia Afrika No.10, Jakarta</p>
-                </div>
-                <div class="detail-card fade-in">
-                    <i class="fas fa-info-circle"></i>
-                    <h3>Informasi</h3>
-                    <p>Acara ini bersifat undangan terbatas</p>
-                    <p>Konfirmasi kehadiran sebelum 10 April 2026</p>
-                </div>
+                <div class="detail-card"><i class="fas fa-calendar-alt"></i><h3>Tanggal & Waktu</h3><p>Selasa, 14 April 2026<br>09:00 - 17:00 WIB</p></div>
+                <div class="detail-card"><i class="fas fa-map-marker-alt"></i><h3>Lokasi</h3><p>Hotel Mulia Jakarta<br>Ballroom Lantai 3<br>Jl. Asia Afrika No.10</p></div>
+                <div class="detail-card"><i class="fas fa-info-circle"></i><h3>Informasi</h3><p>Undangan terbatas<br>Konfirmasi sebelum 10 April 2026</p></div>
             </div>
         </section>
 
@@ -1242,596 +709,162 @@
         <section class="section agenda" id="agenda">
             <h2 class="section-title">Agenda Acara</h2>
             <div class="timeline">
-                <div class="timeline-item fade-in">
-                    <div class="timeline-content">
-                        <div class="timeline-time">09:00 - 09:20</div>
-                        <h3>Opening & Welcome</h3>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-                <div class="timeline-item fade-in">
-                    <div class="timeline-content">
-                        <div class="timeline-time">09:20 - 10:00</div>
-                        <h3>Total New Concept of Small Voice Evac - 4017ES</h3>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-                <div class="timeline-item fade-in">
-                    <div class="timeline-content">
-                        <div class="timeline-time">10:00 - 10:30</div>
-                        <h3>Coffee Break</h3>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-                <div class="timeline-item fade-in">
-                    <div class="timeline-content">
-                        <div class="timeline-time">10:30 - 11:00</div>
-                        <h3>Fire Annunciators without Barrier – Multi Color LED</h3>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-                <div class="timeline-item fade-in">
-                    <div class="timeline-content">
-                        <div class="timeline-time">11:00 - 11:15</div>
-                        <h3>Quiz-time – Only 3 Questions</h3>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-                <div class="timeline-item fade-in">
-                    <div class="timeline-content">
-                        <div class="timeline-time">11:15 - 12:00</div>
-                        <h3>Live Demo (Demo Langsung) – Innovative Pre-Commission Tools, Simplified System Maintainance and Remote Cloud Management.</h3>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-                <div class="timeline-item fade-in">
-                    <div class="timeline-content">
-                        <div class="timeline-time">12:00 - 13:30</div>
-                        <h3>Lunch</h3>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-                <div class="timeline-item fade-in">
-                    <div class="timeline-content">
-                        <div class="timeline-time">13:30 - 14:30</div>
-                        <h3>Breakout Session: Teknologi Terkini Fire Safety</h3>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-                <div class="timeline-item fade-in">
-                    <div class="timeline-content">
-                        <div class="timeline-time">14:30 - 15:00</div>
-                        <h3>Coffee Break</h3>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-                <div class="timeline-item fade-in">
-                    <div class="timeline-content">
-                        <div class="timeline-time">15:00 - 16:00</div>
-                        <h3>Practical UL/FM Listed ASD Solution (Solusi ASD Praktis UL/FM) for Datacentre, Special Models for Cold Storage and Harsh Environment</h3>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-                <div class="timeline-item fade-in">
-                    <div class="timeline-content">
-                        <div class="timeline-time">16:00 - 16:30</div>
-                        <h3>Questions & Answers & LUCKY DRAW</h3>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-                <div class="timeline-item fade-in">
-                    <div class="timeline-content">
-                        <div class="timeline-time">16:30 - 16:45</div>
-                        <h3>Closing</h3>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>				
+                <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">09:00 - 09:20</div><h3>Opening & Welcome</h3></div><div class="timeline-dot"></div></div>
+                <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">09:20 - 10:00</div><h3>Total New Concept of Small Voice Evac - 4017ES</h3></div><div class="timeline-dot"></div></div>
+                <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">10:00 - 10:30</div><h3>Coffee Break</h3></div><div class="timeline-dot"></div></div>
+                <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">10:30 - 11:00</div><h3>Fire Annunciators without Barrier – Multi Color LED</h3></div><div class="timeline-dot"></div></div>
+                <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">11:00 - 11:15</div><h3>Quiz-time – Only 3 Questions</h3></div><div class="timeline-dot"></div></div>
+                <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">11:15 - 12:00</div><h3>Live Demo – Innovative Pre-Commission Tools</h3></div><div class="timeline-dot"></div></div>
+                <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">12:00 - 13:30</div><h3>Lunch</h3></div><div class="timeline-dot"></div></div>
+                <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">13:30 - 14:30</div><h3>Breakout Session: Teknologi Terkini Fire Safety</h3></div><div class="timeline-dot"></div></div>
+                <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">14:30 - 15:00</div><h3>Coffee Break</h3></div><div class="timeline-dot"></div></div>
+                <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">15:00 - 16:00</div><h3>Practical UL/FM Listed ASD Solution</h3></div><div class="timeline-dot"></div></div>
+                <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">16:00 - 16:30</div><h3>Q&A & LUCKY DRAW</h3></div><div class="timeline-dot"></div></div>
+                <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">16:30 - 16:45</div><h3>Closing</h3></div><div class="timeline-dot"></div></div>
             </div>
         </section>
 
-        <!-- Lokasi Acara dengan Map - SUDAH DIPERBAIKI -->
+        <!-- Lokasi -->
         <section class="map-section" id="lokasi">
             <h2 class="section-title">Lokasi Acara</h2>
-            <p style="text-align: center; margin-bottom: 20px;">Acara akan diselenggarakan di Hotel Mulia Jakarta, lokasi strategis di pusat kota dengan fasilitas terbaik.</p>
-            <div class="map-container" id="mapContainer">
-                <div id="map"></div>
-            </div>
+            <p style="text-align:center; margin-bottom:20px;">Hotel Mulia Jakarta - Ballroom Lantai 3, pusat bisnis & kemewahan</p>
+            <div class="map-container"><div id="map"></div></div>
         </section>
 
         <!-- RSVP Section -->
         <section class="rsvp-section" id="rsvp">
             <div class="rsvp-container">
-                <h2 class="section-title" style="margin-bottom: 30px;">Konfirmasi Kehadiran</h2>
-                
-                <div class="success-message" id="successMessage">
-                    <i class="fas fa-check-circle"></i> Terima kasih! Konfirmasi kehadiran Anda telah diterima.
-                </div>
-
+                <h2 class="section-title" style="margin-bottom:30px;">Konfirmasi Kehadiran</h2>
+                <div class="success-message" id="successMessage" style="display:none; background:#d4edda; padding:12px; border-radius:30px; margin-bottom:20px; text-align:center; color:#155724;"><i class="fas fa-check-circle"></i> Terima kasih! Konfirmasi kehadiran Anda telah diterima.</div>
                 <form id="rsvpForm">
-                    <div class="form-group">
-                        <label for="name">Nama Lengkap <span style="color: #e67e22;">*</span></label>
-                        <input type="text" id="name" name="name" required placeholder="Masukkan nama lengkap Anda">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="company">Nama Perusahaan <span style="color: #e67e22;">*</span></label>
-                        <input type="text" id="company" name="company" required placeholder="Masukkan nama perusahaan Anda">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone">Nomor Telepon <span style="color: #e67e22;">*</span></label>
-                        <input type="tel" id="phone" name="phone" required placeholder="08xxxxxxxxxx">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Kehadiran <span style="color: #e67e22;">*</span></label>
-                        <div class="radio-group">
-                            <label>
-                                <input type="radio" name="attendance" value="Hadir" required> Hadir
-                            </label>
-                            <label>
-                                <input type="radio" name="attendance" value="Tidak Hadir" required> Tidak Hadir
-                            </label>
-                            <label>
-                                <input type="radio" name="attendance" value="Ragu" required> Ragu / Menyesuaikan
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="guestCount">Jumlah Tamu (termasuk Anda)</label>
-                        <select id="guestCount" name="guestCount">
-                            <option value="1">1 orang</option>
-                            <option value="2">2 orang</option>
-                            <option value="3">3 orang</option>
-                            <option value="4">4 orang</option>
-                            <option value="5">5 orang</option>
-                        </select>
-                    </div>
-
-                    <button type="submit" class="btn-submit">
-                        <i class="fas fa-paper-plane"></i> Kirim Konfirmasi
-                    </button>
+                    <div class="form-group"><label>Nama Lengkap *</label><input type="text" id="name" required placeholder="Nama lengkap Anda"></div>
+                    <div class="form-group"><label>Nama Perusahaan *</label><input type="text" id="company" required placeholder="Perusahaan / Instansi"></div>
+                    <div class="form-group"><label>Nomor Telepon *</label><input type="tel" id="phone" required placeholder="08xxxxxxxxxx"></div>
+                    <div class="form-group"><label>Kehadiran *</label><div class="radio-group"><label><input type="radio" name="attendance" value="Hadir" required> Hadir</label><label><input type="radio" name="attendance" value="Tidak Hadir"> Tidak Hadir</label><label><input type="radio" name="attendance" value="Ragu"> Ragu</label></div></div>
+                    <div class="form-group"><label>Jumlah Tamu</label><select id="guestCount"><option value="1">1 orang</option><option value="2">2 orang</option><option value="3">3 orang</option><option value="4">4 orang</option><option value="5">5 orang</option></select></div>
+                    <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Kirim Konfirmasi</button>
                 </form>
             </div>
         </section>
 
-        <!-- Admin Panel Section (Tersembunyi, bisa diakses dengan URL parameter) -->
-        <section class="admin-section" id="admin" style="display: none;">
-            <div class="admin-header">
-                <h2><i class="fas fa-users-cog"></i> Panel Admin RSVP</h2>
-                <div class="admin-stats">
-                    <div class="stat-card">
-                        <div class="stat-label">Total RSVP</div>
-                        <div class="stat-value" id="totalRsvp">0</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">Hadir</div>
-                        <div class="stat-value" id="totalHadir">0</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="admin-actions">
-                <button class="admin-btn primary" id="refreshData">
-                    <i class="fas fa-sync-alt"></i> Refresh
-                </button>
-                <button class="admin-btn secondary" id="exportData">
-                    <i class="fas fa-download"></i> Export CSV
-                </button>
-                <button class="admin-btn danger" id="clearAllData">
-                    <i class="fas fa-trash-alt"></i> Hapus Semua
-                </button>
-            </div>
-            
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Perusahaan</th>
-                            <th>Telepon</th>
-                            <th>Kehadiran</th>
-                            <th>Jumlah</th>
-                            <th>Waktu</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rsvpTableBody">
-                        <tr>
-                            <td colspan="8" class="empty-data">
-                                <i class="fas fa-inbox"></i>
-                                Belum ada data RSVP
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <!-- Admin Panel (hidden by default) -->
+        <section class="admin-section" id="admin" style="display:none; width:100%; max-width:1150px; background:white; border-radius:48px; padding:40px; margin:30px auto;">
+            <h2><i class="fas fa-users-cog"></i> Admin RSVP</h2>
+            <div class="admin-actions"><button class="admin-btn primary" id="refreshData">Refresh</button><button class="admin-btn secondary" id="exportData">Export CSV</button><button class="admin-btn danger" id="clearAllData">Hapus Semua</button></div>
+            <div class="table-container"><table><thead><tr><th>No</th><th>Nama</th><th>Perusahaan</th><th>Kehadiran</th><th>Jumlah</th><th>Aksi</th></tr></thead><tbody id="rsvpTableBody"></tbody></table></div>
         </section>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <p>Untuk informasi lebih lanjut, hubungi:</p>
-            <p>Email: bintang@genetek.co.id | Telepon: +62 896-2195-8846</p>
-            <p>&copy; 2026 PT Effrensindo Kencana. All Rights Reserved.</p>
-        </footer>
-    </div>
-
-    <!-- Modal Konfirmasi Hapus -->
-    <div class="modal" id="deleteModal">
-        <div class="modal-content">
-            <h3>Hapus Data</h3>
-            <p>Apakah Anda yakin ingin menghapus data ini?</p>
-            <div class="modal-actions">
-                <button class="modal-btn confirm" id="confirmDelete">Hapus</button>
-                <button class="modal-btn cancel" id="cancelDelete">Batal</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Konfirmasi Hapus Semua -->
-    <div class="modal" id="clearAllModal">
-        <div class="modal-content">
-            <h3>Hapus Semua Data</h3>
-            <p>Apakah Anda yakin ingin menghapus SEMUA data RSVP? Tindakan ini tidak dapat dibatalkan.</p>
-            <div class="modal-actions">
-                <button class="modal-btn confirm" id="confirmClearAll">Hapus Semua</button>
-                <button class="modal-btn cancel" id="cancelClearAll">Batal</button>
-            </div>
-        </div>
+        <footer class="footer"><p>Informasi: bintang@genetek.co.id | +62 896-2195-8846</p><p>&copy; 2026 PT Effrensindo Kencana. All Rights Reserved.</p></footer>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // Countdown Timer
+        // Countdown
         function updateCountdown() {
             const eventDate = new Date('April 14, 2026 09:00:00').getTime();
             const now = new Date().getTime();
-            const distance = eventDate - now;
-            
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            const d = eventDate - now;
+            if(d>0){
+                document.getElementById('days').textContent = Math.floor(d/(1000*60*60*24)).toString().padStart(2,'0');
+                document.getElementById('hours').textContent = Math.floor((d%(1000*60*60*24))/(1000*60*60)).toString().padStart(2,'0');
+                document.getElementById('minutes').textContent = Math.floor((d%(1000*60*60))/(1000*60)).toString().padStart(2,'0');
+                document.getElementById('seconds').textContent = Math.floor((d%(1000*60))/1000).toString().padStart(2,'0');
+            }
         }
-        
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-        
-        // Scroll handling
-        const scrollTop = document.getElementById('scrollTop');
-        const navItems = document.querySelectorAll('.left-nav-item');
+        setInterval(updateCountdown,1000); updateCountdown();
+
+        // NAVIGATION
+        const navBtns = document.querySelectorAll('.left-nav-item');
         const sections = document.querySelectorAll('section, header');
-        
-        window.addEventListener('scroll', () => {
-            // Show/hide scroll top button
-            if (window.scrollY > 500) {
-                scrollTop.classList.add('show');
-            } else {
-                scrollTop.classList.remove('show');
-            }
-            
-            // Update active nav
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 150;
-                const sectionBottom = sectionTop + section.offsetHeight;
-                
-                if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
-                    current = section.getAttribute('id') || 'home';
-                }
-            });
-            
-            navItems.forEach(item => {
-                item.classList.remove('active');
-                if (item.getAttribute('data-target') === current) {
-                    item.classList.add('active');
-                }
-            });
+        window.addEventListener('scroll',()=>{
+            let current='';
+            sections.forEach(sec=>{ const top = sec.offsetTop-140, bottom=top+sec.offsetHeight; if(window.scrollY>=top && window.scrollY<bottom) current=sec.getAttribute('id')||'home'; });
+            navBtns.forEach(btn=>{ btn.classList.remove('active'); if(btn.getAttribute('data-target')===current) btn.classList.add('active'); });
+            document.getElementById('scrollTop').classList.toggle('show', window.scrollY>500);
         });
-        
-        // Smooth scroll
-        navItems.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('data-target');
-                if (targetId) {
-                    document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-        
-        // Scroll to top
-        scrollTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-        
-        // Initialize map dengan koordinat yang lebih akurat untuk Hotel Mulia Jakarta
-        function initMap() {
-            // Pastikan container map sudah ada
-            const mapContainer = document.getElementById('map');
-            if (!mapContainer) return;
-            
-            // Koordinat Hotel Mulia Jakarta (lebih akurat)
-            const hotelMuliaLat = -6.2151049382316215;
-            const hotelMuliaLng = 106.79707712883562;
-            
-            // Inisialisasi map
-            const map = L.map('map').setView([hotelMuliaLat, hotelMuliaLng], 17);
-            
-            // Tambah tile layer dari OpenStreetMap
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                maxZoom: 19
-            }).addTo(map);
-            
-            // Buat custom icon untuk marker
-            const hotelIcon = L.divIcon({
-                className: 'custom-marker',
-                html: '<i class="fas fa-map-marker-alt" style="font-size: 2.5rem; color: #e67e22; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.3));"></i>',
-                iconSize: [30, 42],
-                iconAnchor: [15, 42],
-                popupAnchor: [0, -42]
-            });
-            
-            // Tambah marker
-            const marker = L.marker([hotelMuliaLat, hotelMuliaLng], { icon: hotelIcon }).addTo(map);
-            
-            // Popup dengan informasi lengkap
-            marker.bindPopup(`
-                <div style="text-align: center; padding: 5px;">
-                    <h3 style="margin: 5px 0; color: #2c3e50;">Hotel Mulia Jakarta</h3>
-                    <p style="margin: 5px 0;"><i class="fas fa-map-pin" style="color: #e67e22;"></i> Jl. Asia Afrika No.10, Jakarta</p>
-                    <p style="margin: 5px 0;"><i class="fas fa-building" style="color: #e67e22;"></i> Ballroom Lantai 3</p>
-                    <a href="https://maps.app.goo.gl/CHTgjiTKyjpTojFA8" target="_blank" style="display: inline-block; margin-top: 8px; padding: 5px 15px; background: #e67e22; color: white; text-decoration: none; border-radius: 20px; font-size: 0.9rem;">
-                        <i class="fas fa-directions"></i> Petunjuk Arah
-                    </a>
-                </div>
-            `).openPopup();
-            
-            // Tambah lingkaran untuk area sekitar hotel
-            L.circle([hotelMuliaLat, hotelMuliaLng], {
-                color: '#e67e22',
-                fillColor: '#e67e22',
-                fillOpacity: 0.1,
-                radius: 100
-            }).addTo(map);
-            
-            console.log('Map berhasil diinisialisasi');
+        navBtns.forEach(btn=>{ btn.addEventListener('click',()=>{ const target=btn.getAttribute('data-target'); if(target) document.getElementById(target)?.scrollIntoView({behavior:'smooth'}); }); });
+        document.getElementById('scrollTop').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+        // Map Init
+        function initMap(){
+            if(!document.getElementById('map')) return;
+            const hotel = [-6.2151049382316215, 106.79707712883562];
+            const map = L.map('map').setView(hotel, 17);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap'}).addTo(map);
+            const icon = L.divIcon({html:'<i class="fas fa-map-marker-alt" style="font-size:2.5rem; color:#e67e22; filter:drop-shadow(0 3px 6px black);"></i>', iconSize:[30,42], iconAnchor:[15,42]});
+            L.marker(hotel,{icon}).addTo(map).bindPopup('<b>Hotel Mulia Jakarta</b><br>Ballroom Lantai 3').openPopup();
         }
+        setTimeout(initMap,200);
         
-        // Fixed overlay
-        const overlay = document.getElementById('fixedOverlay');
-        const closeBtn = document.getElementById('closeOverlay');
-        
-        if (closeBtn) {
-            closeBtn.addEventListener('click', () => {
-                overlay.classList.add('hidden');
-                localStorage.setItem('mapOverlayClosed', 'true');
-            });
-        }
-        
-        if (localStorage.getItem('mapOverlayClosed') === 'true') {
-            overlay.classList.add('hidden');
-        }
-        
-        // Form handling
-        const rsvpForm = document.getElementById('rsvpForm');
-        const successMessage = document.getElementById('successMessage');
-        
-        if (rsvpForm) {
-            rsvpForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                
-                const formData = {
-                    id: Date.now(),
-                    name: document.getElementById('name').value,
-                    company: document.getElementById('company').value,
-                    phone: document.getElementById('phone').value,
-                    attendance: document.querySelector('input[name="attendance"]:checked').value,
-                    guestCount: document.getElementById('guestCount').value,
-                    timestamp: new Date().toLocaleString('id-ID')
-                };
-                
-                let rsvps = JSON.parse(localStorage.getItem('rsvps') || '[]');
-                rsvps.push(formData);
-                localStorage.setItem('rsvps', JSON.stringify(rsvps));
-                
-                successMessage.classList.add('show');
-                rsvpForm.reset();
-                
-                setTimeout(() => successMessage.classList.remove('show'), 5000);
-                
-                // Refresh admin table
-                loadRsvpData();
-            });
-        }
-        
-        // Admin Panel Functions
-        let currentDeleteId = null;
-        
-        function loadRsvpData() {
-            const rsvps = JSON.parse(localStorage.getItem('rsvps') || '[]');
-            const tbody = document.getElementById('rsvpTableBody');
-            const totalRsvp = document.getElementById('totalRsvp');
-            const totalHadir = document.getElementById('totalHadir');
-            
-            if (!tbody || !totalRsvp || !totalHadir) return;
-            
-            // Update stats
-            totalRsvp.textContent = rsvps.length;
-            totalHadir.textContent = rsvps.filter(r => r.attendance === 'Hadir').length;
-            
-            if (rsvps.length === 0) {
-                tbody.innerHTML = `
-                    <tr>
-                        <td colspan="8" class="empty-data">
-                            <i class="fas fa-inbox"></i>
-                            Belum ada data RSVP
-                        </td>
-                    </tr>
-                `;
-                return;
-            }
-            
-            // Sort by timestamp descending (newest first)
-            rsvps.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-            
-            let html = '';
-            rsvps.forEach((rsvp, index) => {
-                const attendanceClass = 
-                    rsvp.attendance === 'Hadir' ? 'badge-hadir' : 
-                    rsvp.attendance === 'Tidak Hadir' ? 'badge-tidak' : 'badge-ragu';
-                
-                html += `
-                    <tr>
-                        <td>${index + 1}</td>
-                        <td>${rsvp.name || '-'}</td>
-                        <td>${rsvp.company || '-'}</td>
-                        <td>${rsvp.phone || '-'}</td>
-                        <td><span class="attendance-badge ${attendanceClass}">${rsvp.attendance}</span></td>
-                        <td>${rsvp.guestCount || '1'} orang</td>
-                        <td>${rsvp.timestamp || '-'}</td>
-                        <td>
-                            <button class="delete-btn" onclick="showDeleteModal(${rsvp.id})">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            });
-            
-            tbody.innerHTML = html;
-        }
-        
-        // Show delete confirmation modal
-        window.showDeleteModal = function(id) {
-            currentDeleteId = id;
-            document.getElementById('deleteModal').classList.add('show');
-        };
-        
-        // Delete single record
-        const confirmDelete = document.getElementById('confirmDelete');
-        if (confirmDelete) {
-            confirmDelete.addEventListener('click', () => {
-                if (currentDeleteId) {
-                    let rsvps = JSON.parse(localStorage.getItem('rsvps') || '[]');
-                    rsvps = rsvps.filter(r => r.id !== currentDeleteId);
-                    localStorage.setItem('rsvps', JSON.stringify(rsvps));
-                    loadRsvpData();
-                    document.getElementById('deleteModal').classList.remove('show');
-                    currentDeleteId = null;
-                }
-            });
-        }
-        
-        // Cancel delete
-        const cancelDelete = document.getElementById('cancelDelete');
-        if (cancelDelete) {
-            cancelDelete.addEventListener('click', () => {
-                document.getElementById('deleteModal').classList.remove('show');
-                currentDeleteId = null;
-            });
-        }
-        
-        // Clear all data
-        const clearAllData = document.getElementById('clearAllData');
-        if (clearAllData) {
-            clearAllData.addEventListener('click', () => {
-                document.getElementById('clearAllModal').classList.add('show');
-            });
-        }
-        
-        const confirmClearAll = document.getElementById('confirmClearAll');
-        if (confirmClearAll) {
-            confirmClearAll.addEventListener('click', () => {
-                localStorage.removeItem('rsvps');
-                loadRsvpData();
-                document.getElementById('clearAllModal').classList.remove('show');
-            });
-        }
-        
-        const cancelClearAll = document.getElementById('cancelClearAll');
-        if (cancelClearAll) {
-            cancelClearAll.addEventListener('click', () => {
-                document.getElementById('clearAllModal').classList.remove('show');
-            });
-        }
-        
-        // Refresh data
-        const refreshData = document.getElementById('refreshData');
-        if (refreshData) {
-            refreshData.addEventListener('click', loadRsvpData);
-        }
-        
-        // Export to CSV
-        const exportData = document.getElementById('exportData');
-        if (exportData) {
-            exportData.addEventListener('click', () => {
-                const rsvps = JSON.parse(localStorage.getItem('rsvps') || '[]');
-                
-                if (rsvps.length === 0) {
-                    alert('Tidak ada data untuk diekspor');
-                    return;
-                }
-                
-                // Create CSV content
-                const headers = ['Nama', 'Perusahaan', 'Telepon', 'Kehadiran', 'Jumlah Tamu', 'Waktu'];
-                const csvRows = [];
-                
-                csvRows.push(headers.join(','));
-                
-                rsvps.forEach(rsvp => {
-                    const row = [
-                        `"${rsvp.name || ''}"`,
-                        `"${rsvp.company || ''}"`,
-                        `"${rsvp.phone || ''}"`,
-                        `"${rsvp.attendance || ''}"`,
-                        `"${rsvp.guestCount || '1'} orang"`,
-                        `"${rsvp.timestamp || ''}"`
-                    ];
-                    csvRows.push(row.join(','));
-                });
-                
-                const csvContent = csvRows.join('\n');
-                const blob = new Blob([csvContent], { type: 'text/csv' });
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `rsvp-data-${new Date().toISOString().split('T')[0]}.csv`;
-                a.click();
-                window.URL.revokeObjectURL(url);
-            });
-        }
-        
-        // Tampilkan admin panel jika ada parameter ?admin=true di URL
-        if (window.location.search.includes('admin=true')) {
-            document.getElementById('admin').style.display = 'block';
-        }
-        
-        // Load initial data dan inisialisasi map
-        window.addEventListener('load', () => {
-            // Inisialisasi map setelah halaman selesai dimuat
-            setTimeout(() => {
-                initMap();
-            }, 100); // Sedikit delay untuk memastikan container map sudah siap
-            
-            loadRsvpData();
+        // Overlay
+        const overlayDiv=document.getElementById('fixedOverlay');
+        document.getElementById('closeOverlay')?.addEventListener('click',()=>{ overlayDiv.style.display='none'; localStorage.setItem('mapOverlayClosed','true'); });
+        if(localStorage.getItem('mapOverlayClosed')==='true') overlayDiv.style.display='none';
+
+        // RSVP localStorage
+        const form = document.getElementById('rsvpForm');
+        const successDiv = document.getElementById('successMessage');
+        form?.addEventListener('submit',(e)=>{
+            e.preventDefault();
+            const newRsvp = {
+                id:Date.now(), name:document.getElementById('name').value, company:document.getElementById('company').value,
+                phone:document.getElementById('phone').value, attendance:document.querySelector('input[name="attendance"]:checked').value,
+                guestCount:document.getElementById('guestCount').value, timestamp:new Date().toLocaleString('id-ID')
+            };
+            let rsvps = JSON.parse(localStorage.getItem('rsvps')||'[]');
+            rsvps.push(newRsvp);
+            localStorage.setItem('rsvps',JSON.stringify(rsvps));
+            successDiv.style.display='block';
+            form.reset();
+            setTimeout(()=>successDiv.style.display='none',4000);
+            if(document.getElementById('admin').style.display==='block') loadRsvpData();
         });
 
-        // Fallback jika map gagal dimuat - coba lagi setelah 1 detik
-        setTimeout(() => {
-            if (!document.querySelector('#map .leaflet-container')) {
-                console.log('Mencoba inisialisasi ulang map...');
-                initMap();
+        function loadRsvpData(){
+            const rsvps = JSON.parse(localStorage.getItem('rsvps')||'[]');
+            const tbody = document.getElementById('rsvpTableBody');
+            if(!tbody) return;
+            if(rsvps.length===0){ tbody.innerHTML='<tr><td colspan="7" class="empty-data">Belum ada data</td></tr>'; return; }
+            let html='';
+            rsvps.sort((a,b)=>b.id-a.id).forEach((r,i)=>{
+                const badgeClass = r.attendance==='Hadir'?'badge-hadir':(r.attendance==='Tidak Hadir'?'badge-tidak':'badge-ragu');
+                html+=`<tr><td>${i+1}</td><td>${r.name}</td><td>${r.company}</td><td><span class="attendance-badge ${badgeClass}">${r.attendance}</span></td><td>${r.guestCount}</td><td><button class="delete-btn" onclick="deleteRsvp(${r.id})"><i class="fas fa-trash"></i></button></td></tr>`;
+            });
+            tbody.innerHTML=html;
+            document.getElementById('totalRsvp').innerText=rsvps.length;
+            document.getElementById('totalHadir').innerText=rsvps.filter(r=>r.attendance==='Hadir').length;
+        }
+        window.deleteRsvp = (id)=>{
+            if(confirm('Hapus konfirmasi ini?')){
+                let rsvps = JSON.parse(localStorage.getItem('rsvps')||'[]');
+                rsvps = rsvps.filter(r=>r.id!==id);
+                localStorage.setItem('rsvps',JSON.stringify(rsvps));
+                loadRsvpData();
             }
-        }, 1000);
+        };
+        document.getElementById('refreshData')?.addEventListener('click',loadRsvpData);
+        document.getElementById('exportData')?.addEventListener('click',()=>{
+            let data = JSON.parse(localStorage.getItem('rsvps')||'[]');
+            if(!data.length) return alert('Tidak ada data');
+            let csv = "Nama,Perusahaan,Telepon,Kehadiran,Jumlah,Waktu\n"+data.map(r=>`"${r.name}","${r.company}","${r.phone}","${r.attendance}","${r.guestCount}","${r.timestamp}"`).join("\n");
+            let blob = new Blob([csv],{type:'text/csv'}); let a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='rsvp_data.csv'; a.click(); URL.revokeObjectURL(a.href);
+        });
+        document.getElementById('clearAllData')?.addEventListener('click',()=>{ if(confirm('Hapus SEMUA data RSVP? Tindakan permanen.')){ localStorage.removeItem('rsvps'); loadRsvpData(); } });
+        if(window.location.search.includes('admin=true')) document.getElementById('admin').style.display='block';
+        loadRsvpData();
     </script>
+    <style>
+        .admin-section .admin-btn { padding: 10px 18px; border-radius: 40px; margin-right: 12px; background:#e67e22; color:white; border:none; cursor:pointer; }
+        .admin-btn.secondary { background:#2c3e50; }
+        .admin-btn.danger { background:#c0392b; }
+        .delete-btn { background:none; border:none; color:#e74c3c; font-size:1.2rem; cursor:pointer; }
+        .attendance-badge { padding:4px 12px; border-radius:40px; font-size:0.8rem; font-weight:600; }
+        .badge-hadir { background:#d4edda; color:#155724; }
+        .badge-tidak { background:#f8d7da; color:#721c24; }
+        .badge-ragu { background:#fff3cd; color:#856404; }
+        .form-group { margin-bottom: 20px; text-align:left; }
+        .form-group input, .form-group select { width:100%; padding:12px 16px; border-radius:28px; border:1px solid #ddd; }
+        .radio-group { display:flex; gap:20px; }
+    </style>
 </body>
 </html>
