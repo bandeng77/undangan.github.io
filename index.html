@@ -489,7 +489,7 @@
             width: 100%;
         }
         
-        /* DOORPRIZE OVERLAY - ELEGAN & MEWAH */
+        /* DOORPRIZE OVERLAY - ELEGAN & MEWAH (UPDATED) */
         .doorprize-overlay {
             position: fixed;
             bottom: 28px;
@@ -499,7 +499,7 @@
             padding: 24px 22px;
             border-radius: 36px;
             box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(230,126,34,0.2);
-            max-width: 340px;
+            max-width: 360px;
             border-right: 4px solid #e67e22;
             border-bottom: 4px solid #f1c40f;
             z-index: 9999;
@@ -590,7 +590,7 @@
             box-shadow: 0 8px 18px rgba(230,126,34,0.4);
         }
         
-        /* MODAL POPUP DOORPRIZE ELEGAN */
+        /* MODAL POPUP DOORPRIZE ELEGAN - UKURAN DIPERBAHARUI, LEBIH MENARIK */
         .modal-prize {
             display: none;
             position: fixed;
@@ -598,29 +598,29 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.75);
-            backdrop-filter: blur(8px);
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(12px);
             z-index: 20000;
             justify-content: center;
             align-items: center;
-            animation: fadeIn 0.2s ease;
+            animation: fadeIn 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: scale(0.96);}
+            to { opacity: 1; transform: scale(1);}
         }
         
         .modal-content-prize {
-            background: linear-gradient(145deg, #ffffff, #fffbf5);
-            max-width: 500px;
+            background: linear-gradient(145deg, #ffffff, #fffaf3);
+            max-width: 620px;
             width: 90%;
-            border-radius: 64px;
-            padding: 28px 28px 38px;
+            border-radius: 68px;
+            padding: 32px 32px 42px;
             text-align: center;
-            box-shadow: 0 40px 70px rgba(0,0,0,0.4);
-            border: 1px solid rgba(230,126,34,0.4);
+            box-shadow: 0 50px 80px rgba(0,0,0,0.35), 0 0 0 2px rgba(230,126,34,0.3);
             position: relative;
+            transition: transform 0.2s;
         }
         
         .prize-header-modal {
@@ -628,79 +628,111 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 2px solid #ffd966;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
+            padding-bottom: 18px;
+            margin-bottom: 28px;
         }
         
         .prize-header-modal h2 {
-            font-size: 1.9rem;
+            font-size: 2rem;
             color: #e67e22;
-            font-weight: 700;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .prize-header-modal h2 i {
+            background: #fff1e0;
+            padding: 8px;
+            border-radius: 60px;
+            font-size: 1.6rem;
         }
         
         .close-modal {
             background: none;
             border: none;
-            font-size: 2rem;
+            font-size: 2.4rem;
             cursor: pointer;
-            color: #7f8c8d;
-            transition: 0.2s;
+            color: #9aa9b4;
+            transition: 0.25s;
+            width: 44px;
+            height: 44px;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .close-modal:hover {
             color: #e67e22;
+            background: #fef2e6;
             transform: rotate(90deg);
         }
         
         .prize-list {
-            margin: 25px 0 20px;
+            margin: 20px 0 20px;
             text-align: left;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 14px;
         }
         
         .prize-item {
             display: flex;
             align-items: center;
             gap: 18px;
-            padding: 14px 18px;
-            background: #fef6ed;
-            margin-bottom: 14px;
-            border-radius: 50px;
-            transition: all 0.2s;
-            border-left: 5px solid #e67e22;
+            padding: 12px 18px;
+            background: #ffffff;
+            margin-bottom: 0px;
+            border-radius: 60px;
+            transition: all 0.25s ease;
+            border-left: 6px solid #e67e22;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.02);
+            backdrop-filter: blur(2px);
         }
         
         .prize-item:hover {
-            background: #fff1e2;
-            transform: translateX(5px);
+            background: #fff8ef;
+            transform: translateX(8px);
+            box-shadow: 0 8px 18px rgba(230,126,34,0.12);
         }
         
         .prize-icon {
-            font-size: 2rem;
-            color: #f1c40f;
+            font-size: 2.2rem;
+            min-width: 48px;
+            text-align: center;
+            color: #f39c12;
         }
         
         .prize-detail h4 {
             font-weight: 800;
             font-size: 1.2rem;
             color: #2c3e50;
+            margin-bottom: 4px;
         }
         
         .prize-detail p {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #e67e22;
             font-weight: 500;
+            letter-spacing: 0.3px;
         }
         
         .prize-note {
-            background: #fcf3e0;
-            border-radius: 60px;
-            padding: 12px;
-            font-size: 0.8rem;
-            margin-top: 20px;
-            color: #7f5e3a;
+            background: linear-gradient(120deg, #fcf3e0, #fff7ed);
+            border-radius: 50px;
+            padding: 14px 18px;
+            font-size: 0.85rem;
+            margin-top: 28px;
+            color: #a4662c;
+            font-weight: 500;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            border: 1px solid #ffddb0;
         }
         
-        /* other styles keep intact */
+        /* scroll top */
         .scroll-top {
             position: fixed;
             bottom: 28px;
@@ -717,6 +749,7 @@
             z-index: 9998;
             opacity: 0;
             visibility: hidden;
+            transition: all 0.2s;
         }
         
         .scroll-top.show {
@@ -735,7 +768,9 @@
             .timeline-content { width: calc(100% - 60px); margin-left: 60px; text-align: left !important; }
             .timeline-dot { left: 20px; }
             .header h1 { font-size: 2.5rem; }
-            .doorprize-overlay { max-width: 280px; padding: 18px; bottom: 16px; right: 16px; }
+            .doorprize-overlay { max-width: 300px; padding: 18px; bottom: 16px; right: 16px; }
+            .modal-content-prize { padding: 24px 20px 32px; }
+            .prize-list { grid-template-columns: 1fr; }
         }
         
         @media (max-width: 560px) {
@@ -752,6 +787,23 @@
             from { opacity: 0; transform: translateY(20px);}
             to { opacity: 1; transform: translateY(0);}
         }
+        
+        /* tambahan style RSVP */
+        .admin-section .admin-btn { padding: 10px 18px; border-radius: 40px; margin-right: 12px; background:#e67e22; color:white; border:none; cursor:pointer; }
+        .admin-btn.secondary { background:#2c3e50; }
+        .admin-btn.danger { background:#c0392b; }
+        .delete-btn { background:none; border:none; color:#e74c3c; font-size:1.2rem; cursor:pointer; }
+        .attendance-badge { padding:4px 12px; border-radius:40px; font-size:0.8rem; font-weight:600; }
+        .badge-hadir { background:#d4edda; color:#155724; }
+        .badge-tidak { background:#f8d7da; color:#721c24; }
+        .badge-ragu { background:#fff3cd; color:#856404; }
+        .form-group { margin-bottom: 20px; text-align:left; }
+        .form-group input, .form-group select { width:100%; padding:12px 16px; border-radius:28px; border:1px solid #ddd; }
+        .radio-group { display:flex; gap:20px; }
+        .btn-submit { background: #e67e22; color:white; border:none; padding: 16px 28px; font-weight: 700; border-radius: 60px; transition: 0.2s; cursor: pointer; width:100%; margin-top:10px; }
+        .btn-submit:hover { background:#d35400; }
+        .rsvp-section { width: 100%; max-width: 1150px; background: white; border-radius: 48px; padding: 48px 40px; margin: 28px auto; box-shadow: 0 20px 35px -12px rgba(0,0,0,0.05); }
+        .footer { text-align: center; padding: 32px 20px; color: #6c757d; width: 100%; }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -766,17 +818,19 @@
         <button class="left-nav-item" data-target="rsvp" data-tooltip="RSVP"><i class="fas fa-envelope"></i></button>
     </div>
 
-    <!-- DOORPRIZE OVERLAY - MODERN DAN MENARIK (Pengganti fixed map overlay) -->
+    <!-- DOORPRIZE OVERLAY - DENGAN INFORMASI BARANG SESUAI SPESIFIKASI (brand dan barang lebih premium) -->
     <div class="doorprize-overlay" id="doorprizeOverlay">
         <div class="doorprize-header">
             <i class="fas fa-gift"></i>
-            <h3>Lucky Draw!</h3>
+            <h3>Lucky Draw Exclusive!</h3>
         </div>
         <div class="doorprize-badge">
             <span><i class="fas fa-ticket-alt"></i> Grand Doorprize Spesial</span>
         </div>
+        <div class="doorprize-list-preview">
+        </div>
         <button class="btn-doorprize" id="showPrizeModalBtn">
-            <i class="fas fa-gem"></i> Lihat Daftar Doorprize <i class="fas fa-chevron-right"></i>
+            <i class="fas fa-gem"></i> Lihat Semua Doorprize <i class="fas fa-chevron-right"></i>
         </button>
     </div>
 
@@ -910,33 +964,26 @@
             </div>
         </section>
 
-        <!-- Admin Panel (hidden by default) -->
-        <section class="admin-section" id="admin" style="display:none; width:100%; max-width:1150px; background:white; border-radius:48px; padding:40px; margin:30px auto;">
-            <h2><i class="fas fa-users-cog"></i> Admin RSVP</h2>
-            <div class="admin-actions"><button class="admin-btn primary" id="refreshData">Refresh</button><button class="admin-btn secondary" id="exportData">Export CSV</button><button class="admin-btn danger" id="clearAllData">Hapus Semua</button></div>
-            <div class="table-container">\n<table><thead><tr><th>No</th><th>Nama</th><th>Perusahaan</th><th>Kehadiran</th><th>Jumlah</th><th>Aksi</th></tr></thead><tbody id="rsvpTableBody"></tbody></table>\n</div>
-        </section>
-
         <footer class="footer"><p>Informasi: bintang@genetek.co.id | +62 896-2195-8846</p><p>&copy; 2026 PT Effrensindo Kencana. All Rights Reserved.</p></footer>
     </div>
 
-    <!-- MODAL POPUP UNTUK DAFTAR DOORPRIZE LENGKAP -->
+    <!-- MODAL POPUP DAFTAR DOORPRIZE LENGKAP - LEBIH BESAR & VISUAL MENARIK -->
     <div id="prizeModal" class="modal-prize">
         <div class="modal-content-prize">
             <div class="prize-header-modal">
-                <h2><i class="fas fa-gift"></i> Daftar Doorprize</h2>
+                <h2><i class="fas fa-trophy"></i> Grand Doorprize List</h2>
                 <button class="close-modal" id="closePrizeModalBtn">&times;</button>
             </div>
             <div class="prize-list">
-                <div class="prize-item"><div class="prize-icon"><i class="fas fa-tv"></i></div><div class="prize-detail"><h4>TV TCL-43"</h4></div></div>
-                <div class="prize-item"><div class="prize-icon"><i class="fab fa-watch"></i></div><div class="prize-detail"><h4>Smartwatch Xiaomi</h4></div></div>
-                <div class="prize-item"><div class="prize-icon"><i class="fas fa-shopping-bag"></i></div><div class="prize-detail"><h4>Voucher MAP</h4></div></div>
-                <div class="prize-item"><div class="prize-icon"><i class="fas fa-handphones"></i></div><div class="prize-detail"><h4>Handphone</h4></div></div>
-                 <div class="prize-item"><div class="prize-icon"><i class="fas fa-headphones"></i></div><div class="prize-detail"><h4>TWS- Basesus</h4></div></div>
-                <div class="prize-item"><div class="prize-icon"><i class="fas fa-speaker"></i></div><div class="prize-detail"><h4>Speaker-Marshal</h4></div></div>
+                <div class="prize-item"><div class="prize-icon"><i class="fas fa-gift"></i></div><div class="prize-detail"><h4>TV TCL 43"</h4></div></div>
+                <div class="prize-item"><div class="prize-icon"><i class="fas fa-gift"></i></div><div class="prize-detail"><h4>Handphone</h4></div></div>
+                <div class="prize-item"><div class="prize-icon"><i class="fas fa-gift"></i></div><div class="prize-detail"><h4>Smartwatch Xiaomi</h4></div></div>
+                <div class="prize-item"><div class="prize-icon"><i class="fas fa-gift"></i></div><div class="prize-detail"><h4>TWS Baseus</h4></div></div>
+                <div class="prize-item"><div class="prize-icon"><i class="fas fa-gift"></i></div><div class="prize-detail"><h4>Voucher MAP</h4></div></div>
+                <div class="prize-item"><div class="prize-icon"><i class="fas fa-gift"></i></div><div class="prize-detail"><h4>Speaker Marshall</h4></div></div>
             </div>
             <div class="prize-note">
-                <i class="fas fa-ticket-alt"></i> * Doorprize akan diundi pada pukul (16:00 WIB) <br> Hadir & dapatkan kesempatan memenangkan hadiah menarik!
+                <i class="fas fa-hourglass-half"></i> Undian dilaksanakan pukul 16:00 WIB (sesuai agenda) · Wajib hadir untuk klaim hadiah
             </div>
         </div>
     </div>
@@ -980,7 +1027,7 @@
         }
         setTimeout(initMap,200);
         
-        // DOORPRIZE MODAL HANDLER
+        // DOORPRIZE MODAL HANDLER (dengan tampilan baru)
         const modal = document.getElementById('prizeModal');
         const showBtn = document.getElementById('showPrizeModalBtn');
         const closeModalBtn = document.getElementById('closePrizeModalBtn');
@@ -996,9 +1043,8 @@
                 if(e.target === modal) modal.style.display = 'none';
             });
         }
-        // optional close overlay via close icon, no longer map overlay but doorprize fresh
 
-        // RSVP localStorage sama persis dengan fungsi sebelumnya
+        // RSVP localStorage (fungsi asli)
         const form = document.getElementById('rsvpForm');
         const successDiv = document.getElementById('successMessage');
         form?.addEventListener('submit',(e)=>{
@@ -1014,7 +1060,7 @@
             successDiv.style.display='block';
             form.reset();
             setTimeout(()=>successDiv.style.display='none',4000);
-            if(document.getElementById('admin').style.display==='block') loadRsvpData();
+            if(document.getElementById('admin') && document.getElementById('admin').style.display==='block') loadRsvpData();
         });
 
         function loadRsvpData(){
@@ -1037,31 +1083,26 @@
                 loadRsvpData();
             }
         };
-        document.getElementById('refreshData')?.addEventListener('click',loadRsvpData);
-        document.getElementById('exportData')?.addEventListener('click',()=>{
-            let data = JSON.parse(localStorage.getItem('rsvps')||'[]');
-            if(!data.length) return alert('Tidak ada data');
-            let csv = "Nama,Perusahaan,Telepon,Kehadiran,Jumlah,Waktu\n"+data.map(r=>`"${r.name}","${r.company}","${r.phone}","${r.attendance}","${r.guestCount}","${r.timestamp}"`).join("\n");
-            let blob = new Blob([csv],{type:'text/csv'}); let a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='rsvp_data.csv'; a.click(); URL.revokeObjectURL(a.href);
-        });
-        document.getElementById('clearAllData')?.addEventListener('click',()=>{ if(confirm('Hapus SEMUA data RSVP? Tindakan permanen.')){ localStorage.removeItem('rsvps'); loadRsvpData(); } });
-        if(window.location.search.includes('admin=true')) document.getElementById('admin').style.display='block';
-        loadRsvpData();
+        // optional admin panel jika perlu (tetap ada tetapi hidden by default)
+        if(window.location.search.includes('admin=true')){
+            let adminDiv = document.createElement('section');
+            adminDiv.className = 'admin-section';
+            adminDiv.id='admin';
+            adminDiv.innerHTML = `<h2><i class="fas fa-users-cog"></i> Admin RSVP</h2>
+            <div class="admin-actions"><button class="admin-btn primary" id="refreshData">Refresh</button><button class="admin-btn secondary" id="exportData">Export CSV</button><button class="admin-btn danger" id="clearAllData">Hapus Semua</button></div>
+            <div class="table-container"><table><thead><tr><th>No</th><th>Nama</th><th>Perusahaan</th><th>Kehadiran</th><th>Jumlah</th><th>Aksi</th></tr></thead><tbody id="rsvpTableBody"></tbody></table></div>`;
+            document.querySelector('.main-content').appendChild(adminDiv);
+            adminDiv.style.display='block';
+            document.getElementById('refreshData')?.addEventListener('click',loadRsvpData);
+            document.getElementById('exportData')?.addEventListener('click',()=>{
+                let data = JSON.parse(localStorage.getItem('rsvps')||'[]');
+                if(!data.length) return alert('Tidak ada data');
+                let csv = "Nama,Perusahaan,Telepon,Kehadiran,Jumlah,Waktu\n"+data.map(r=>`"${r.name}","${r.company}","${r.phone}","${r.attendance}","${r.guestCount}","${r.timestamp}"`).join("\n");
+                let blob = new Blob([csv],{type:'text/csv'}); let a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='rsvp_data.csv'; a.click(); URL.revokeObjectURL(a.href);
+            });
+            document.getElementById('clearAllData')?.addEventListener('click',()=>{ if(confirm('Hapus SEMUA data RSVP? Tindakan permanen.')){ localStorage.removeItem('rsvps'); loadRsvpData(); } });
+            loadRsvpData();
+        }
     </script>
-    <style>
-        .admin-section .admin-btn { padding: 10px 18px; border-radius: 40px; margin-right: 12px; background:#e67e22; color:white; border:none; cursor:pointer; }
-        .admin-btn.secondary { background:#2c3e50; }
-        .admin-btn.danger { background:#c0392b; }
-        .delete-btn { background:none; border:none; color:#e74c3c; font-size:1.2rem; cursor:pointer; }
-        .attendance-badge { padding:4px 12px; border-radius:40px; font-size:0.8rem; font-weight:600; }
-        .badge-hadir { background:#d4edda; color:#155724; }
-        .badge-tidak { background:#f8d7da; color:#721c24; }
-        .badge-ragu { background:#fff3cd; color:#856404; }
-        .form-group { margin-bottom: 20px; text-align:left; }
-        .form-group input, .form-group select { width:100%; padding:12px 16px; border-radius:28px; border:1px solid #ddd; }
-        .radio-group { display:flex; gap:20px; }
-        .btn-submit { background: #e67e22; color:white; border:none; padding: 16px 28px; font-weight: 700; border-radius: 60px; transition: 0.2s; cursor: pointer; width:100%; margin-top:10px; }
-        .btn-submit:hover { background:#d35400; }
-    </style>
 </body>
 </html>
