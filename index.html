@@ -489,59 +489,218 @@
             width: 100%;
         }
         
-        /* Fixed overlay */
-        .fixed-map-overlay {
+        /* DOORPRIZE OVERLAY - ELEGAN & MEWAH */
+        .doorprize-overlay {
             position: fixed;
             bottom: 28px;
             right: 28px;
-            background: rgba(255,255,255,0.98);
-            backdrop-filter: blur(8px);
-            padding: 20px;
-            border-radius: 28px;
-            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
-            max-width: 320px;
-            border-left: 5px solid #e67e22;
+            background: linear-gradient(135deg, #fff9f0 0%, #ffffff 100%);
+            backdrop-filter: blur(12px);
+            padding: 24px 22px;
+            border-radius: 36px;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(230,126,34,0.2);
+            max-width: 340px;
+            border-right: 4px solid #e67e22;
+            border-bottom: 4px solid #f1c40f;
             z-index: 9999;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
         
-        /* RSVP */
-        .rsvp-section {
-            width: 100%;
-            max-width: 1150px;
-            padding: 56px 40px;
-            background: linear-gradient(125deg, #f8f5f2, #fff6ed);
-            border-radius: 48px;
+        .doorprize-overlay:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 50px rgba(0,0,0,0.25);
         }
         
-        .rsvp-container {
-            max-width: 700px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 40px;
-            padding: 48px;
-            box-shadow: 0 20px 35px rgba(0,0,0,0.04);
+        .doorprize-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
         }
         
-        .btn-submit {
-            background: #e67e22;
+        .doorprize-header i {
+            font-size: 2.2rem;
+            color: #f1c40f;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.08); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.9; }
+        }
+        
+        .doorprize-header h3 {
+            font-size: 1.65rem;
+            font-weight: 700;
+            background: linear-gradient(115deg, #e67e22, #f39c12);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+        
+        .doorprize-badge {
+            background: #fef5e7;
+            border-radius: 60px;
+            padding: 8px 14px;
+            margin: 12px 0;
+            text-align: center;
+            border: 1px dashed #e67e22;
+        }
+        
+        .doorprize-badge span {
+            font-weight: 800;
+            color: #e67e22;
+            font-size: 1.1rem;
+        }
+        
+        .doorprize-list-preview {
+            font-size: 0.85rem;
+            color: #2c3e50;
+            margin: 12px 0;
+            line-height: 1.5;
+            border-top: 1px solid #ffecd6;
+            padding-top: 12px;
+        }
+        
+        .btn-doorprize {
+            background: linear-gradient(95deg, #e67e22, #f39c12);
             color: white;
             border: none;
-            padding: 16px 28px;
+            padding: 12px 18px;
+            border-radius: 50px;
             font-weight: 700;
-            border-radius: 60px;
+            width: 100%;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 6px 14px rgba(230,126,34,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .btn-doorprize:hover {
+            background: linear-gradient(95deg, #d35400, #e67e22);
+            transform: scale(1.02);
+            box-shadow: 0 8px 18px rgba(230,126,34,0.4);
+        }
+        
+        /* MODAL POPUP DOORPRIZE ELEGAN */
+        .modal-prize {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(8px);
+            z-index: 20000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.2s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content-prize {
+            background: linear-gradient(145deg, #ffffff, #fffbf5);
+            max-width: 500px;
+            width: 90%;
+            border-radius: 64px;
+            padding: 28px 28px 38px;
+            text-align: center;
+            box-shadow: 0 40px 70px rgba(0,0,0,0.4);
+            border: 1px solid rgba(230,126,34,0.4);
+            position: relative;
+        }
+        
+        .prize-header-modal {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ffd966;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .prize-header-modal h2 {
+            font-size: 1.9rem;
+            color: #e67e22;
+            font-weight: 700;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #7f8c8d;
             transition: 0.2s;
         }
         
-        /* Admin & footer */
-        .footer {
-            background: #1e2a36;
-            border-radius: 48px 48px 0 0;
-            width: 100%;
-            padding: 48px 28px;
-            text-align: center;
-            color: #ddd;
+        .close-modal:hover {
+            color: #e67e22;
+            transform: rotate(90deg);
         }
         
+        .prize-list {
+            margin: 25px 0 20px;
+            text-align: left;
+        }
+        
+        .prize-item {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 14px 18px;
+            background: #fef6ed;
+            margin-bottom: 14px;
+            border-radius: 50px;
+            transition: all 0.2s;
+            border-left: 5px solid #e67e22;
+        }
+        
+        .prize-item:hover {
+            background: #fff1e2;
+            transform: translateX(5px);
+        }
+        
+        .prize-icon {
+            font-size: 2rem;
+            color: #f1c40f;
+        }
+        
+        .prize-detail h4 {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #2c3e50;
+        }
+        
+        .prize-detail p {
+            font-size: 0.8rem;
+            color: #e67e22;
+            font-weight: 500;
+        }
+        
+        .prize-note {
+            background: #fcf3e0;
+            border-radius: 60px;
+            padding: 12px;
+            font-size: 0.8rem;
+            margin-top: 20px;
+            color: #7f5e3a;
+        }
+        
+        /* other styles keep intact */
         .scroll-top {
             position: fixed;
             bottom: 28px;
@@ -576,6 +735,7 @@
             .timeline-content { width: calc(100% - 60px); margin-left: 60px; text-align: left !important; }
             .timeline-dot { left: 20px; }
             .header h1 { font-size: 2.5rem; }
+            .doorprize-overlay { max-width: 280px; padding: 18px; bottom: 16px; right: 16px; }
         }
         
         @media (max-width: 560px) {
@@ -606,20 +766,26 @@
         <button class="left-nav-item" data-target="rsvp" data-tooltip="RSVP"><i class="fas fa-envelope"></i></button>
     </div>
 
-    <div class="fixed-map-overlay" id="fixedOverlay">
-        <button class="close-overlay" id="closeOverlay" style="position:absolute; top:10px; right:14px; background:none; border:none; font-size:20px; cursor:pointer;">×</button>
-        <h3><i class="fas fa-hotel"></i> Hotel Mulia Jakarta</h3>
-        <p><i class="fas fa-map-pin"></i> Jl. Asia Afrika No.10, Jakarta</p>
-        <p><i class="fas fa-building"></i> Ballroom Lantai 3</p>
-        <a href="https://maps.app.goo.gl/CHTgjiTKyjpTojFA8" target="_blank" class="map-link" style="display:flex; align-items:center; justify-content:center; gap:8px; background:#e67e22; color:white; padding:10px; border-radius:40px; margin-top:12px; text-decoration:none;">Buka di Google Maps <i class="fas fa-external-link-alt"></i></a>
+    <!-- DOORPRIZE OVERLAY - MODERN DAN MENARIK (Pengganti fixed map overlay) -->
+    <div class="doorprize-overlay" id="doorprizeOverlay">
+        <div class="doorprize-header">
+            <i class="fas fa-gift"></i>
+            <h3>Lucky Draw!</h3>
+        </div>
+        <div class="doorprize-badge">
+            <span><i class="fas fa-ticket-alt"></i> Grand Doorprize Spesial</span>
+        </div>
+        <button class="btn-doorprize" id="showPrizeModalBtn">
+            <i class="fas fa-gem"></i> Lihat Daftar Doorprize <i class="fas fa-chevron-right"></i>
+        </button>
     </div>
+
     <button class="scroll-top" id="scrollTop"><i class="fas fa-arrow-up"></i></button>
 
     <div class="company-header">
         <div class="container">
             <div class="company-logo">
                 <img src="https://i.imgur.com/XjT4AO0.png" alt="Company Logo">
-                <span class="company-name">PT Effrensindo Kencana</span>
             </div>
             <div class="company-info">
                 <div class="info-item"><i class="fas fa-calendar-alt"></i><span>14 April 2026</span></div>
@@ -644,7 +810,7 @@
     </header>
 
     <div class="main-content">
-        <!-- SECTION BRAND LOGOS - 3 LOGO DENGAN LAYOUT RAPIH DAN ELEGAN -->
+        <!-- BRAND SHOWCASE -->
         <div class="brand-showaway" style="width:100%; max-width:1150px; margin:0 auto 24px;">
             <div class="brand-showcase">
                 <div class="brand-header">
@@ -652,21 +818,18 @@
                     <p>Didukung oleh brand terkemuka di industri keselamatan & inovasi</p>
                 </div>
                 <div class="brand-grid">
-                    <!-- Logo 1 : Brand A (Hochiki / Simbol Fire) -->
                     <div class="brand-card">
                         <div class="brand-logo-wrapper">
                             <img src="https://i.imgur.com/r2Okp8C.png" alt="SIMPLEX" style="max-width:90px;">
                         </div>
                         <h4>SIMPLEX</h4>
                     </div>
-                    <!-- Logo 2 : Brand B (Notifier / Honeywell style) -->
                     <div class="brand-card">
                         <div class="brand-logo-wrapper">
                             <img src="https://i.imgur.com/V9wcOgx.png" alt="LPG">
                         </div>
                         <h4>LPG</h4>
                     </div>
-                    <!-- Logo 3 : Brand C (Siemens / Technology) -->
                     <div class="brand-card">
                         <div class="brand-logo-wrapper">
                             <img src="https://i.imgur.com/pREPbxc.png" alt="TYCO">
@@ -751,10 +914,31 @@
         <section class="admin-section" id="admin" style="display:none; width:100%; max-width:1150px; background:white; border-radius:48px; padding:40px; margin:30px auto;">
             <h2><i class="fas fa-users-cog"></i> Admin RSVP</h2>
             <div class="admin-actions"><button class="admin-btn primary" id="refreshData">Refresh</button><button class="admin-btn secondary" id="exportData">Export CSV</button><button class="admin-btn danger" id="clearAllData">Hapus Semua</button></div>
-            <div class="table-container"><table><thead><tr><th>No</th><th>Nama</th><th>Perusahaan</th><th>Kehadiran</th><th>Jumlah</th><th>Aksi</th></tr></thead><tbody id="rsvpTableBody"></tbody></table></div>
+            <div class="table-container">\n<table><thead><tr><th>No</th><th>Nama</th><th>Perusahaan</th><th>Kehadiran</th><th>Jumlah</th><th>Aksi</th></tr></thead><tbody id="rsvpTableBody"></tbody></table>\n</div>
         </section>
 
         <footer class="footer"><p>Informasi: bintang@genetek.co.id | +62 896-2195-8846</p><p>&copy; 2026 PT Effrensindo Kencana. All Rights Reserved.</p></footer>
+    </div>
+
+    <!-- MODAL POPUP UNTUK DAFTAR DOORPRIZE LENGKAP -->
+    <div id="prizeModal" class="modal-prize">
+        <div class="modal-content-prize">
+            <div class="prize-header-modal">
+                <h2><i class="fas fa-gift"></i> Daftar Doorprize</h2>
+                <button class="close-modal" id="closePrizeModalBtn">&times;</button>
+            </div>
+            <div class="prize-list">
+                <div class="prize-item"><div class="prize-icon"><i class="fas fa-tv"></i></div><div class="prize-detail"><h4>TV TCL-43"</h4></div></div>
+                <div class="prize-item"><div class="prize-icon"><i class="fab fa-watch"></i></div><div class="prize-detail"><h4>Smartwatch Xiaomi</h4></div></div>
+                <div class="prize-item"><div class="prize-icon"><i class="fas fa-shopping-bag"></i></div><div class="prize-detail"><h4>Voucher MAP</h4></div></div>
+                <div class="prize-item"><div class="prize-icon"><i class="fas fa-handphones"></i></div><div class="prize-detail"><h4>Handphone</h4></div></div>
+                 <div class="prize-item"><div class="prize-icon"><i class="fas fa-headphones"></i></div><div class="prize-detail"><h4>TWS- Basesus</h4></div></div>
+                <div class="prize-item"><div class="prize-icon"><i class="fas fa-speaker"></i></div><div class="prize-detail"><h4>Speaker-Marshal</h4></div></div>
+            </div>
+            <div class="prize-note">
+                <i class="fas fa-ticket-alt"></i> * Doorprize akan diundi pada pukul (16:00 WIB) <br> Hadir & dapatkan kesempatan memenangkan hadiah menarik!
+            </div>
+        </div>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -796,12 +980,25 @@
         }
         setTimeout(initMap,200);
         
-        // Overlay
-        const overlayDiv=document.getElementById('fixedOverlay');
-        document.getElementById('closeOverlay')?.addEventListener('click',()=>{ overlayDiv.style.display='none'; localStorage.setItem('mapOverlayClosed','true'); });
-        if(localStorage.getItem('mapOverlayClosed')==='true') overlayDiv.style.display='none';
+        // DOORPRIZE MODAL HANDLER
+        const modal = document.getElementById('prizeModal');
+        const showBtn = document.getElementById('showPrizeModalBtn');
+        const closeModalBtn = document.getElementById('closePrizeModalBtn');
+        if(showBtn && modal){
+            showBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                modal.style.display = 'flex';
+            });
+            closeModalBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+            window.addEventListener('click', (e) => {
+                if(e.target === modal) modal.style.display = 'none';
+            });
+        }
+        // optional close overlay via close icon, no longer map overlay but doorprize fresh
 
-        // RSVP localStorage
+        // RSVP localStorage sama persis dengan fungsi sebelumnya
         const form = document.getElementById('rsvpForm');
         const successDiv = document.getElementById('successMessage');
         form?.addEventListener('submit',(e)=>{
@@ -831,8 +1028,6 @@
                 html+=`<tr><td>${i+1}</td><td>${r.name}</td><td>${r.company}</td><td><span class="attendance-badge ${badgeClass}">${r.attendance}</span></td><td>${r.guestCount}</td><td><button class="delete-btn" onclick="deleteRsvp(${r.id})"><i class="fas fa-trash"></i></button></td></tr>`;
             });
             tbody.innerHTML=html;
-            document.getElementById('totalRsvp').innerText=rsvps.length;
-            document.getElementById('totalHadir').innerText=rsvps.filter(r=>r.attendance==='Hadir').length;
         }
         window.deleteRsvp = (id)=>{
             if(confirm('Hapus konfirmasi ini?')){
@@ -865,6 +1060,8 @@
         .form-group { margin-bottom: 20px; text-align:left; }
         .form-group input, .form-group select { width:100%; padding:12px 16px; border-radius:28px; border:1px solid #ddd; }
         .radio-group { display:flex; gap:20px; }
+        .btn-submit { background: #e67e22; color:white; border:none; padding: 16px 28px; font-weight: 700; border-radius: 60px; transition: 0.2s; cursor: pointer; width:100%; margin-top:10px; }
+        .btn-submit:hover { background:#d35400; }
     </style>
 </body>
 </html>
