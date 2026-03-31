@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Undangan Acara - Hotel Mulia Jakarta | Event Launch Product</title>
+    <title>Johnson Controls Webinar: Building & Life Safety – Codes & Standards</title>
     <style>
-        /* Reset dan Base Styles */
+        /* Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -277,7 +277,7 @@
             border-radius: 4px;
         }
         
-        /* BRAND LOGOS SECTION - AREA BARU ELEGAN */
+        /* BRAND LOGOS SECTION */
         .brand-showcase {
             background: #ffffff;
             border-radius: 48px;
@@ -489,7 +489,7 @@
             width: 100%;
         }
         
-        /* DOORPRIZE OVERLAY - ELEGAN & MEWAH (UPDATED) */
+        /* DOORPRIZE OVERLAY */
         .doorprize-overlay {
             position: fixed;
             bottom: 28px;
@@ -510,6 +510,30 @@
         .doorprize-overlay:hover {
             transform: translateY(-5px);
             box-shadow: 0 30px 50px rgba(0,0,0,0.25);
+        }
+        
+        .doorprize-close-btn {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            background: rgba(0,0,0,0.05);
+            border: none;
+            font-size: 1.2rem;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #7f8c8d;
+            transition: all 0.2s;
+            z-index: 10001;
+        }
+        
+        .doorprize-close-btn:hover {
+            background: rgba(230,126,34,0.15);
+            color: #e67e22;
         }
         
         .doorprize-header {
@@ -590,7 +614,7 @@
             box-shadow: 0 8px 18px rgba(230,126,34,0.4);
         }
         
-        /* MODAL POPUP DOORPRIZE ELEGAN - UKURAN DIPERBAHARUI, LEBIH MENARIK */
+        /* MODAL POPUP DOORPRIZE */
         .modal-prize {
             display: none;
             position: fixed;
@@ -758,7 +782,14 @@
         }
         
         @media (max-width: 860px) {
-            .sticky-left-nav { left: 12px; padding: 10px 6px; }
+            .sticky-left-nav { left: 12px; padding: 10px 6px; gap: 8px; }
+            .left-nav-item { width: 38px; height: 38px; }
+            .left-nav-item i { font-size: 1.1rem; }
+            .doorprize-overlay { max-width: 280px; padding: 16px 16px; bottom: 20px; right: 20px; }
+            .doorprize-header i { font-size: 1.6rem; }
+            .doorprize-header h3 { font-size: 1.2rem; }
+            .doorprize-badge span { font-size: 0.85rem; }
+            .btn-doorprize { padding: 8px 12px; font-size: 0.8rem; }
             .brand-grid { gap: 28px; }
             .brand-card { flex-basis: 140px; }
             .brand-logo-wrapper { width: 95px; height: 95px; }
@@ -768,12 +799,16 @@
             .timeline-content { width: calc(100% - 60px); margin-left: 60px; text-align: left !important; }
             .timeline-dot { left: 20px; }
             .header h1 { font-size: 2.5rem; }
-            .doorprize-overlay { max-width: 300px; padding: 18px; bottom: 16px; right: 16px; }
-            .modal-content-prize { padding: 24px 20px 32px; }
-            .prize-list { grid-template-columns: 1fr; }
         }
         
         @media (max-width: 560px) {
+            .sticky-left-nav { left: 8px; padding: 8px 4px; gap: 6px; }
+            .left-nav-item { width: 34px; height: 34px; }
+            .left-nav-item i { font-size: 1rem; }
+            .doorprize-overlay { max-width: 260px; padding: 12px 14px; bottom: 16px; right: 16px; }
+            .doorprize-header h3 { font-size: 1rem; }
+            .doorprize-header i { font-size: 1.3rem; }
+            .btn-doorprize { font-size: 0.7rem; padding: 6px 10px; }
             .brand-grid { gap: 16px; }
             .brand-card { flex-basis: 120px; }
             .brand-logo-wrapper img { max-width: 70px; }
@@ -788,7 +823,6 @@
             to { opacity: 1; transform: translateY(0);}
         }
         
-        /* tambahan style RSVP */
         .admin-section .admin-btn { padding: 10px 18px; border-radius: 40px; margin-right: 12px; background:#e67e22; color:white; border:none; cursor:pointer; }
         .admin-btn.secondary { background:#2c3e50; }
         .admin-btn.danger { background:#c0392b; }
@@ -811,26 +845,27 @@
 <body>
     <div class="sticky-left-nav">
         <button class="left-nav-item active" data-target="home" data-tooltip="Home"><i class="fas fa-home"></i></button>
-        <button class="left-nav-item" data-target="tentang" data-tooltip="Tentang Acara"><i class="fas fa-info-circle"></i></button>
-        <button class="left-nav-item" data-target="detail" data-tooltip="Detail Acara"><i class="fas fa-calendar-alt"></i></button>
+        <button class="left-nav-item" data-target="tentang" data-tooltip="About Event"><i class="fas fa-info-circle"></i></button>
+        <button class="left-nav-item" data-target="detail" data-tooltip="Event Details"><i class="fas fa-calendar-alt"></i></button>
         <button class="left-nav-item" data-target="agenda" data-tooltip="Agenda"><i class="fas fa-clock"></i></button>
-        <button class="left-nav-item" data-target="lokasi" data-tooltip="Lokasi"><i class="fas fa-map-marker-alt"></i></button>
+        <button class="left-nav-item" data-target="lokasi" data-tooltip="Location"><i class="fas fa-map-marker-alt"></i></button>
         <button class="left-nav-item" data-target="rsvp" data-tooltip="RSVP"><i class="fas fa-envelope"></i></button>
     </div>
 
-    <!-- DOORPRIZE OVERLAY - DENGAN INFORMASI BARANG SESUAI SPESIFIKASI (brand dan barang lebih premium) -->
     <div class="doorprize-overlay" id="doorprizeOverlay">
+        <button class="doorprize-close-btn" id="closeDoorprizeBtn" aria-label="Close"><i class="fas fa-times"></i></button>
         <div class="doorprize-header">
             <i class="fas fa-gift"></i>
-            <h3>Lucky Draw Exclusive!</h3>
+            <h3>Exclusive Lucky Draw!</h3>
         </div>
         <div class="doorprize-badge">
-            <span><i class="fas fa-ticket-alt"></i> Grand Doorprize Spesial</span>
+            <span><i class="fas fa-ticket-alt"></i> Grand Doorprize Special</span>
         </div>
         <div class="doorprize-list-preview">
+            🎁 TV, Smartphone, Smartwatch, Speakers & More
         </div>
         <button class="btn-doorprize" id="showPrizeModalBtn">
-            <i class="fas fa-gem"></i> Lihat Semua Doorprize <i class="fas fa-chevron-right"></i>
+            <i class="fas fa-gem"></i> View All Prizes <i class="fas fa-chevron-right"></i>
         </button>
     </div>
 
@@ -842,7 +877,7 @@
                 <img src="https://i.imgur.com/XjT4AO0.png" alt="Company Logo">
             </div>
             <div class="company-info">
-                <div class="info-item"><i class="fas fa-calendar-alt"></i><span>14 April 2026</span></div>
+                <div class="info-item"><i class="fas fa-calendar-alt"></i><span>April 14, 2026</span></div>
                 <div class="info-item"><i class="fas fa-clock"></i><span>09:00 WIB</span></div>
                 <div class="info-item"><i class="fas fa-map-marker-alt"></i><span>Hotel Mulia Jakarta</span></div>
             </div>
@@ -850,26 +885,25 @@
     </div>
 
     <header class="header" id="home">
-        <h1>Undangan Khusus</h1>
-        <p>Pengenalan Produk: Total New Concept of Small Voice Evac - 4017ES</p>
+        <h1>Johnson Controls Webinar</h1>
+        <p>Building & Life Safety – Codes & Standards</p>
         <div class="countdown fade-in">
-            <h2 style="color:white; margin-bottom:16px;">Acara Dimulai Dalam:</h2>
+            <h2 style="color:white; margin-bottom:16px;">Event Starts In:</h2>
             <div class="timer">
-                <div><span id="days">00</span><p>Hari</p></div>
-                <div><span id="hours">00</span><p>Jam</p></div>
-                <div><span id="minutes">00</span><p>Menit</p></div>
-                <div><span id="seconds">00</span><p>Detik</p></div>
+                <div><span id="days">00</span><p>Days</p></div>
+                <div><span id="hours">00</span><p>Hours</p></div>
+                <div><span id="minutes">00</span><p>Minutes</p></div>
+                <div><span id="seconds">00</span><p>Seconds</p></div>
             </div>
         </div>
     </header>
 
     <div class="main-content">
-        <!-- BRAND SHOWCASE -->
         <div class="brand-showaway" style="width:100%; max-width:1150px; margin:0 auto 24px;">
             <div class="brand-showcase">
                 <div class="brand-header">
                     <h3><i class="fas fa-certificate" style="color:#e67e22;"></i> Official Technology Partners</h3>
-                    <p>Didukung oleh brand terkemuka di industri keselamatan & inovasi</p>
+                    <p>Powered by industry-leading safety & innovation brands</p>
                 </div>
                 <div class="brand-grid">
                     <div class="brand-card">
@@ -880,61 +914,58 @@
                     </div>
                     <div class="brand-card">
                         <div class="brand-logo-wrapper">
-                            <img src="https://i.imgur.com/V9wcOgx.png" alt="LPG">
+                            <img src="https://i.imgur.com/3WCoPWl.png" alt="LPG">
                         </div>
-                        <h4>LPG</h4>
+                        <h4>JOHNSON CONTROLS</h4>
                     </div>
                     <div class="brand-card">
                         <div class="brand-logo-wrapper">
-                            <img src="https://i.imgur.com/pREPbxc.png" alt="TYCO">
+                            <img src="https://i.imgur.com/zgJNw4b.png" alt="TYCO">
                         </div>
-                        <h4>TYCO</h4>
+                        <h4>WAGNER</h4>
                     </div>
                 </div>
                 <div style="text-align: center; margin-top: 28px; font-size:0.85rem; color:#7f8c8d;">
-                    <i class="fas fa-handshake"></i> Kolaborasi teknologi mutakhir untuk keamanan bangunan
+                    <i class="fas fa-handshake"></i> Cutting-edge technology collaboration for building safety
                 </div>
             </div>
         </div>
 
-        <!-- Tentang Acara -->
         <section class="section" id="tentang">
-            <h2 class="section-title">Tentang Acara</h2>
+            <h2 class="section-title">About The Event</h2>
             <div class="about-content" style="display:flex; flex-wrap:wrap; gap:40px; align-items:center;">
                 <div class="about-text" style="flex:1; min-width:260px;">
-                    <p style="margin-bottom:16px;">Pada kesempatan ini akan diselenggarakan acara pengenalan produk <strong>Total New Concept of Small Voice Evac - 4017ES</strong>. Kegiatan ini menjadi momen strategis untuk memperkenalkan inovasi terbaru serta memperkuat sinergi dengan mitra dan pelanggan.</p>
-                    <p>Acara diisi presentasi khusus, demo langsung, sesi networking, dan jamuan eksklusif. Kehadiran Anda sangat berarti.</p>
+                    <p style="margin-bottom:16px;">Join us for an exclusive product launch of the <strong>Total New Concept of Small Voice Evac - 4017ES</strong>. This strategic event showcases latest innovations while strengthening synergy with partners and customers.</p>
+                    <p>Featuring expert presentations, live demos, networking sessions, and an exclusive luncheon. Your presence is highly valued.</p>
                     <p><strong><i class="fas fa-tshirt" style="color:#e67e22;"></i> Dress code:</strong> Formal / Business Attire</p>
                 </div>
                 <div class="about-image" style="flex:1; min-width:260px;">
-                    <img src="https://i.imgur.com/EjcttpQ.png" alt="Interior Hotel Mulia Jakarta" style="width:100%; border-radius:32px; box-shadow:0 12px 24px rgba(0,0,0,0.1);">
+                    <img src="https://i.imgur.com/EjcttpQ.png" alt="Hotel Mulia Jakarta Interior" style="width:100%; border-radius:32px; box-shadow:0 12px 24px rgba(0,0,0,0.1);">
                 </div>
             </div>
         </section>
 
-        <!-- Detail Acara -->
         <section class="section details" id="detail">
-            <h2 class="section-title">Detail Acara</h2>
+            <h2 class="section-title">Event Details</h2>
             <div class="details-grid">
-                <div class="detail-card"><i class="fas fa-calendar-alt"></i><h3>Tanggal & Waktu</h3><p>Selasa, 14 April 2026<br>09:00 - 17:00 WIB</p></div>
-                <div class="detail-card"><i class="fas fa-map-marker-alt"></i><h3>Lokasi</h3><p>Hotel Mulia Jakarta<br>Ballroom Lantai 3<br>Jl. Asia Afrika No.10</p></div>
-                <div class="detail-card"><i class="fas fa-info-circle"></i><h3>Informasi</h3><p>Undangan terbatas<br>Konfirmasi sebelum 10 April 2026</p></div>
+                <div class="detail-card"><i class="fas fa-calendar-alt"></i><h3>Date & Time</h3><p>Tuesday, April 14, 2026<br>09:00 - 17:00 WIB</p></div>
+                <div class="detail-card"><i class="fas fa-map-marker-alt"></i><h3>Venue</h3><p>Hotel Mulia Jakarta<br>Ballroom Level 3<br>Jl. Asia Afrika No.10</p></div>
+                <div class="detail-card"><i class="fas fa-info-circle"></i><h3>Information</h3><p>Invitation only<br>Confirm before April 10, 2026</p></div>
             </div>
         </section>
 
-        <!-- Agenda Acara -->
         <section class="section agenda" id="agenda">
-            <h2 class="section-title">Agenda Acara</h2>
+            <h2 class="section-title">Event Agenda</h2>
             <div class="timeline">
-                <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">09:00 - 09:30</div><h3>Opening and Welcome. To PT Effrensindo</h3></div><div class="timeline-dot"></div></div>
+                <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">09:00 - 09:30</div><h3>Opening and Welcome Speech JCI & EFK</h3></div><div class="timeline-dot"></div></div>
                 <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">09:30 - 10:30</div><h3>NFPA72 Updates – CO Detection, High Rise Voice Notification & others – Special Guest Dr. Rodger Reiswig</h3></div><div class="timeline-dot"></div></div>
                 <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">10:30 - 10:45</div><h3>Coffee Break</h3></div><div class="timeline-dot"></div></div>
-                <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">10:40 - 11:30</div><h3>Total New Concept of Small Voice Evac – 4017ES</h3></div><div class="timeline-dot"></div></div>
+                <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">10:45 - 11:30</div><h3>Total New Concept of Small Voice Evac – 4017ES</h3></div><div class="timeline-dot"></div></div>
                 <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">11:30 - 12:00</div><h3>Fire Annunciators without Barrier – Multi Color LED</h3></div><div class="timeline-dot"></div></div>
                 <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">12:00 - 12:15</div><h3>Quiz-time – Only 3 Questions</h3></div><div class="timeline-dot"></div></div>
-                <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">12:10 - 13:15</div><h3>Lunch</h3></div><div class="timeline-dot"></div></div>
-                <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">13:15 - 14:00</div><h3>Live Demo – Innovative Pre-Commission Tools, Simplified System Maintainance and Remote Cloud Management</h3></div><div class="timeline-dot"></div></div>
-                <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">14:00 - 15:15</div><h3>Practical UL/FM Listed ASD Solution (Solusi ASD Praktis UL/FM) for Datacentre, Special Models for Cold Storage and Harsh Environment</h3></div><div class="timeline-dot"></div></div>
+                <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">12:15 - 13:15</div><h3>Lunch</h3></div><div class="timeline-dot"></div></div>
+                <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">13:15 - 14:00</div><h3>Live Demo – Innovative Pre-Commission Tools, Simplified System Maintenance and Remote Cloud Management</h3></div><div class="timeline-dot"></div></div>
+                <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">14:00 - 15:15</div><h3>Practical UL/FM Listed ASD Solution for Datacenter, Special Models for Cold Storage and Harsh Environment</h3></div><div class="timeline-dot"></div></div>
                 <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">15:15 - 15:30</div><h3>Quiz-time – Only 3 Questions</h3></div><div class="timeline-dot"></div></div>
                 <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">15:30 - 15:45</div><h3>Coffee Break</h3></div><div class="timeline-dot"></div></div>
                 <div class="timeline-item"><div class="timeline-content"><div class="timeline-time">16:15 - 16:30</div><h3>Questions & Answers & LUCKY DRAW</h3></div><div class="timeline-dot"></div></div>
@@ -942,33 +973,30 @@
             </div>
         </section>
 
-        <!-- Lokasi -->
         <section class="map-section" id="lokasi">
-            <h2 class="section-title">Lokasi Acara</h2>
-            <p style="text-align:center; margin-bottom:20px;">Hotel Mulia Jakarta - Ballroom Lantai 3, pusat bisnis & kemewahan</p>
+            <h2 class="section-title">Event Location</h2>
+            <p style="text-align:center; margin-bottom:20px;">Hotel Mulia Jakarta - Level 3 Ballroom, central business & luxury</p>
             <div class="map-container"><div id="map"></div></div>
         </section>
 
-        <!-- RSVP Section -->
         <section class="rsvp-section" id="rsvp">
             <div class="rsvp-container">
-                <h2 class="section-title" style="margin-bottom:30px;">Konfirmasi Kehadiran</h2>
-                <div class="success-message" id="successMessage" style="display:none; background:#d4edda; padding:12px; border-radius:30px; margin-bottom:20px; text-align:center; color:#155724;"><i class="fas fa-check-circle"></i> Terima kasih! Konfirmasi kehadiran Anda telah diterima.</div>
+                <h2 class="section-title" style="margin-bottom:30px;">Confirm Your Attendance</h2>
+                <div class="success-message" id="successMessage" style="display:none; background:#d4edda; padding:12px; border-radius:30px; margin-bottom:20px; text-align:center; color:#155724;"><i class="fas fa-check-circle"></i> Thank you! Your RSVP has been received.</div>
                 <form id="rsvpForm">
-                    <div class="form-group"><label>Nama Lengkap *</label><input type="text" id="name" required placeholder="Nama lengkap Anda"></div>
-                    <div class="form-group"><label>Nama Perusahaan *</label><input type="text" id="company" required placeholder="Perusahaan / Instansi"></div>
-                    <div class="form-group"><label>Nomor Telepon *</label><input type="tel" id="phone" required placeholder="08xxxxxxxxxx"></div>
-                    <div class="form-group"><label>Kehadiran *</label><div class="radio-group"><label><input type="radio" name="attendance" value="Hadir" required> Hadir</label><label><input type="radio" name="attendance" value="Tidak Hadir"> Tidak Hadir</label><label><input type="radio" name="attendance" value="Ragu"> Ragu</label></div></div>
-                    <div class="form-group"><label>Jumlah Tamu</label><select id="guestCount"><option value="1">1 orang</option><option value="2">2 orang</option><option value="3">3 orang</option><option value="4">4 orang</option><option value="5">5 orang</option></select></div>
-                    <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Kirim Konfirmasi</button>
+                    <div class="form-group"><label>Full Name *</label><input type="text" id="name" required placeholder="Your full name"></div>
+                    <div class="form-group"><label>Company Name *</label><input type="text" id="company" required placeholder="Company / Institution"></div>
+                    <div class="form-group"><label>Phone Number *</label><input type="tel" id="phone" required placeholder="08xxxxxxxxxx"></div>
+                    <div class="form-group"><label>Attendance *</label><div class="radio-group"><label><input type="radio" name="attendance" value="Attending" required> Attending</label><label><input type="radio" name="attendance" value="Not Attending"> Not Attending</label><label><input type="radio" name="attendance" value="Undecided"> Undecided</label></div></div>
+                    <div class="form-group"><label>Number of Guests</label><select id="guestCount"><option value="1">1 person</option><option value="2">2 persons</option><option value="3">3 persons</option><option value="4">4 persons</option><option value="5">5 persons</option></select></div>
+                    <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Send Confirmation</button>
                 </form>
             </div>
         </section>
 
-        <footer class="footer"><p>Informasi: bintang@genetek.co.id | +62 896-2195-8846</p><p>&copy; 2026 PT Effrensindo Kencana. All Rights Reserved.</p></footer>
+        <footer class="footer"><p>Contact: bintang@genetek.co.id | +62 896-2195-8846</p><p>&copy; 2026 PT Effrensindo Kencana. All Rights Reserved.</p></footer>
     </div>
 
-    <!-- MODAL POPUP DAFTAR DOORPRIZE LENGKAP - LEBIH BESAR & VISUAL MENARIK -->
     <div id="prizeModal" class="modal-prize">
         <div class="modal-content-prize">
             <div class="prize-header-modal">
@@ -976,15 +1004,15 @@
                 <button class="close-modal" id="closePrizeModalBtn">&times;</button>
             </div>
             <div class="prize-list">
-                <div class="prize-item"><div class="prize-icon"><i class="fas fa-gift"></i></div><div class="prize-detail"><h4>TV TCL 43"</h4></div></div>
-                <div class="prize-item"><div class="prize-icon"><i class="fas fa-gift"></i></div><div class="prize-detail"><h4>Handphone</h4></div></div>
-                <div class="prize-item"><div class="prize-icon"><i class="fas fa-gift"></i></div><div class="prize-detail"><h4>Smartwatch Xiaomi</h4></div></div>
-                <div class="prize-item"><div class="prize-icon"><i class="fas fa-gift"></i></div><div class="prize-detail"><h4>TWS Baseus</h4></div></div>
-                <div class="prize-item"><div class="prize-icon"><i class="fas fa-gift"></i></div><div class="prize-detail"><h4>Voucher MAP</h4></div></div>
-                <div class="prize-item"><div class="prize-icon"><i class="fas fa-gift"></i></div><div class="prize-detail"><h4>Speaker Marshall</h4></div></div>
+                <div class="prize-item"><div class="prize-icon"><i class="fas fa-tv"></i></div><div class="prize-detail"><h4>TCL 43" TV</h4></div></div>
+                <div class="prize-item"><div class="prize-icon"><i class="fas fa-mobile-alt"></i></div><div class="prize-detail"><h4>Smartphone</h4></div></div>
+                <div class="prize-item"><div class="prize-icon"><i class="fas fa-clock"></i></div><div class="prize-detail"><h4>Xiaomi Smartwatch</h4></div></div>
+                <div class="prize-item"><div class="prize-icon"><i class="fas fa-headphones"></i></div><div class="prize-detail"><h4>Baseus TWS</h4></div></div>
+                <div class="prize-item"><div class="prize-icon"><i class="fas fa-gift-card"></i></div><div class="prize-detail"><h4>MAP Voucher</h4></div></div>
+                <div class="prize-item"><div class="prize-icon"><i class="fas fa-music"></i></div><div class="prize-detail"><h4>Marshall Speaker</h4></div></div>
             </div>
             <div class="prize-note">
-                <i class="fas fa-hourglass-half"></i> Undian dilaksanakan pukul 16:15 WIB (sesuai agenda) · Wajib hadir untuk klaim hadiah
+                <i class="fas fa-hourglass-half"></i> Draw takes place at 16:15 WIB (see agenda) · Must be present to claim prizes
             </div>
         </div>
     </div>
@@ -1005,7 +1033,7 @@
         }
         setInterval(updateCountdown,1000); updateCountdown();
 
-        // NAVIGATION
+        // Navigation
         const navBtns = document.querySelectorAll('.left-nav-item');
         const sections = document.querySelectorAll('section, header');
         window.addEventListener('scroll',()=>{
@@ -1017,21 +1045,24 @@
         navBtns.forEach(btn=>{ btn.addEventListener('click',()=>{ const target=btn.getAttribute('data-target'); if(target) document.getElementById(target)?.scrollIntoView({behavior:'smooth'}); }); });
         document.getElementById('scrollTop').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 
-        // Map Init
+        // Map
         function initMap(){
             if(!document.getElementById('map')) return;
             const hotel = [-6.2151049382316215, 106.79707712883562];
             const map = L.map('map').setView(hotel, 17);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap'}).addTo(map);
             const icon = L.divIcon({html:'<i class="fas fa-map-marker-alt" style="font-size:2.5rem; color:#e67e22; filter:drop-shadow(0 3px 6px black);"></i>', iconSize:[30,42], iconAnchor:[15,42]});
-            L.marker(hotel,{icon}).addTo(map).bindPopup('<b>Hotel Mulia Jakarta</b><br>Ballroom Lantai 3').openPopup();
+            L.marker(hotel,{icon}).addTo(map).bindPopup('<b>Hotel Mulia Jakarta</b><br>Ballroom Level 3').openPopup();
         }
         setTimeout(initMap,200);
         
-        // DOORPRIZE MODAL HANDLER (dengan tampilan baru)
+        // Doorprize modal + close overlay
         const modal = document.getElementById('prizeModal');
         const showBtn = document.getElementById('showPrizeModalBtn');
         const closeModalBtn = document.getElementById('closePrizeModalBtn');
+        const doorprizeCard = document.getElementById('doorprizeOverlay');
+        const closeDoorprize = document.getElementById('closeDoorprizeBtn');
+        
         if(showBtn && modal){
             showBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -1044,8 +1075,15 @@
                 if(e.target === modal) modal.style.display = 'none';
             });
         }
+        
+        if(closeDoorprize && doorprizeCard) {
+            closeDoorprize.addEventListener('click', function(e) {
+                e.stopPropagation();
+                doorprizeCard.style.display = 'none';
+            });
+        }
 
-        // RSVP localStorage (fungsi asli)
+        // RSVP localStorage
         const form = document.getElementById('rsvpForm');
         const successDiv = document.getElementById('successMessage');
         form?.addEventListener('submit',(e)=>{
@@ -1053,7 +1091,7 @@
             const newRsvp = {
                 id:Date.now(), name:document.getElementById('name').value, company:document.getElementById('company').value,
                 phone:document.getElementById('phone').value, attendance:document.querySelector('input[name="attendance"]:checked').value,
-                guestCount:document.getElementById('guestCount').value, timestamp:new Date().toLocaleString('id-ID')
+                guestCount:document.getElementById('guestCount').value, timestamp:new Date().toLocaleString('en-ID')
             };
             let rsvps = JSON.parse(localStorage.getItem('rsvps')||'[]');
             rsvps.push(newRsvp);
@@ -1068,40 +1106,40 @@
             const rsvps = JSON.parse(localStorage.getItem('rsvps')||'[]');
             const tbody = document.getElementById('rsvpTableBody');
             if(!tbody) return;
-            if(rsvps.length===0){ tbody.innerHTML='<tr><td colspan="7" class="empty-data">Belum ada data</td></tr>'; return; }
+            if(rsvps.length===0){ tbody.innerHTML='<tr><td colspan="7" class="empty-data">No data available</td></tr>'; return; }
             let html='';
             rsvps.sort((a,b)=>b.id-a.id).forEach((r,i)=>{
-                const badgeClass = r.attendance==='Hadir'?'badge-hadir':(r.attendance==='Tidak Hadir'?'badge-tidak':'badge-ragu');
+                const badgeClass = r.attendance==='Attending'?'badge-hadir':(r.attendance==='Not Attending'?'badge-tidak':'badge-ragu');
                 html+=`<tr><td>${i+1}</td><td>${r.name}</td><td>${r.company}</td><td><span class="attendance-badge ${badgeClass}">${r.attendance}</span></td><td>${r.guestCount}</td><td><button class="delete-btn" onclick="deleteRsvp(${r.id})"><i class="fas fa-trash"></i></button></td></tr>`;
             });
             tbody.innerHTML=html;
         }
         window.deleteRsvp = (id)=>{
-            if(confirm('Hapus konfirmasi ini?')){
+            if(confirm('Delete this RSVP confirmation?')){
                 let rsvps = JSON.parse(localStorage.getItem('rsvps')||'[]');
                 rsvps = rsvps.filter(r=>r.id!==id);
                 localStorage.setItem('rsvps',JSON.stringify(rsvps));
                 loadRsvpData();
             }
         };
-        // optional admin panel jika perlu (tetap ada tetapi hidden by default)
+        
         if(window.location.search.includes('admin=true')){
             let adminDiv = document.createElement('section');
             adminDiv.className = 'admin-section';
             adminDiv.id='admin';
             adminDiv.innerHTML = `<h2><i class="fas fa-users-cog"></i> Admin RSVP</h2>
-            <div class="admin-actions"><button class="admin-btn primary" id="refreshData">Refresh</button><button class="admin-btn secondary" id="exportData">Export CSV</button><button class="admin-btn danger" id="clearAllData">Hapus Semua</button></div>
-            <div class="table-container"><table><thead><tr><th>No</th><th>Nama</th><th>Perusahaan</th><th>Kehadiran</th><th>Jumlah</th><th>Aksi</th></tr></thead><tbody id="rsvpTableBody"></tbody></table></div>`;
+            <div class="admin-actions"><button class="admin-btn primary" id="refreshData">Refresh</button><button class="admin-btn secondary" id="exportData">Export CSV</button><button class="admin-btn danger" id="clearAllData">Delete All</button></div>
+            <div class="table-container"><table><thead><tr><th>No</th><th>Name</th><th>Company</th><th>Attendance</th><th>Guests</th><th>Action</th></tr></thead><tbody id="rsvpTableBody"></tbody></table></div>`;
             document.querySelector('.main-content').appendChild(adminDiv);
             adminDiv.style.display='block';
             document.getElementById('refreshData')?.addEventListener('click',loadRsvpData);
             document.getElementById('exportData')?.addEventListener('click',()=>{
                 let data = JSON.parse(localStorage.getItem('rsvps')||'[]');
-                if(!data.length) return alert('Tidak ada data');
-                let csv = "Nama,Perusahaan,Telepon,Kehadiran,Jumlah,Waktu\n"+data.map(r=>`"${r.name}","${r.company}","${r.phone}","${r.attendance}","${r.guestCount}","${r.timestamp}"`).join("\n");
+                if(!data.length) return alert('No data');
+                let csv = "Name,Company,Phone,Attendance,Guests,Timestamp\n"+data.map(r=>`"${r.name}","${r.company}","${r.phone}","${r.attendance}","${r.guestCount}","${r.timestamp}"`).join("\n");
                 let blob = new Blob([csv],{type:'text/csv'}); let a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='rsvp_data.csv'; a.click(); URL.revokeObjectURL(a.href);
             });
-            document.getElementById('clearAllData')?.addEventListener('click',()=>{ if(confirm('Hapus SEMUA data RSVP? Tindakan permanen.')){ localStorage.removeItem('rsvps'); loadRsvpData(); } });
+            document.getElementById('clearAllData')?.addEventListener('click',()=>{ if(confirm('Delete ALL RSVP data? Permanent action.')){ localStorage.removeItem('rsvps'); loadRsvpData(); } });
             loadRsvpData();
         }
     </script>
