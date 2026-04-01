@@ -107,7 +107,7 @@
             left: 68px;
         }
         
-        /* COMPANY HEADER */
+        /* COMPANY HEADER - UPDATED with double logo */
         .company-header {
             background: linear-gradient(115deg, #1e2a36 0%, #0f1a24 100%);
             color: white;
@@ -133,6 +133,28 @@
             display: flex;
             align-items: center;
             gap: 18px;
+        }
+        
+        /* Additional logo container - placed left of existing logo group */
+        .additional-logo {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            border-right: 1px solid rgba(230,126,34,0.4);
+            padding-right: 20px;
+            margin-right: 6px;
+        }
+        
+        .additional-logo img {
+            height: 68px;
+            width: auto;
+            border-radius: 12px;
+            transition: transform 0.25s;
+            padding: 6px;
+        }
+        
+        .additional-logo img:hover {
+            transform: scale(1.02);
         }
         
         .company-logo img {
@@ -805,6 +827,10 @@
             .timeline-content { width: calc(100% - 60px); margin-left: 60px; text-align: left !important; }
             .timeline-dot { left: 20px; }
             .header h1 { font-size: 2.5rem; }
+            /* Responsive logo group */
+            .additional-logo img { height: 70px; }
+            .company-logo img { height: 70px; }
+            .company-logo { flex-wrap: wrap; justify-content: center; }
         }
         
         @media (max-width: 560px) {
@@ -827,6 +853,9 @@
             .brand-grid { gap: 16px; }
             .brand-card { flex-basis: 120px; }
             .brand-logo-wrapper img { max-width: 70px; }
+            .additional-logo img { height: 55px; }
+            .company-logo img { height: 55px; }
+            .additional-logo { padding-right: 12px; gap: 12px; }
         }
         
         .fade-in {
@@ -890,6 +919,10 @@
     <div class="company-header">
         <div class="container">
             <div class="company-logo">
+                <!-- Additional logo placed on the left side of the existing logo group -->
+                <div class="additional-logo">
+                    <img src="https://i.imgur.com/XjT4AO0.png" alt="Additional Company Logo">
+                </div>
                 <img src="https://i.imgur.com/6OjVuYd.png" alt="Company Logo">
             </div>
             <div class="company-info">
