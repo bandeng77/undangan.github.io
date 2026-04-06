@@ -20,7 +20,7 @@
             overflow-x: hidden;
         }
         
-        /* Sticky Left Navigation - MODERN & SMOOTH */
+        /* Sticky Left Navigation */
         .sticky-left-nav {
             position: fixed;
             left: 24px;
@@ -32,7 +32,6 @@
             gap: 12px;
             background: rgba(255, 255, 255, 0.96);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             padding: 16px 10px;
             border-radius: 60px;
             box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
@@ -80,7 +79,6 @@
             color: white;
         }
         
-        /* Tooltip modern */
         .left-nav-item::after {
             content: attr(data-tooltip);
             position: absolute;
@@ -98,7 +96,6 @@
             pointer-events: none;
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
             z-index: 10001;
-            letter-spacing: 0.3px;
         }
         
         .left-nav-item:hover::after {
@@ -107,7 +104,7 @@
             left: 68px;
         }
         
-        /* COMPANY HEADER - UPDATED with double logo */
+        /* COMPANY HEADER */
         .company-header {
             background: linear-gradient(115deg, #1e2a36 0%, #0f1a24 100%);
             color: white;
@@ -135,7 +132,6 @@
             gap: 18px;
         }
         
-        /* Additional logo container - placed left of existing logo group */
         .additional-logo {
             display: flex;
             align-items: center;
@@ -278,7 +274,6 @@
             border-radius: 48px;
             box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08);
             scroll-margin-top: 28px;
-            transition: all 0.2s;
         }
         
         .section-title {
@@ -309,7 +304,6 @@
             max-width: 1150px;
             box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05);
             border: 1px solid rgba(230,126,34,0.12);
-            transition: all 0.25s;
         }
         
         .brand-header {
@@ -321,13 +315,6 @@
             font-size: 1.9rem;
             font-weight: 500;
             color: #2c3e50;
-            letter-spacing: -0.2px;
-        }
-        
-        .brand-header p {
-            color: #5a6e7c;
-            margin-top: 8px;
-            font-size: 1rem;
         }
         
         .brand-grid {
@@ -346,7 +333,6 @@
             background: #fefaf5;
             padding: 20px 12px;
             border-radius: 42px;
-            backdrop-filter: blur(2px);
             border: 1px solid #f0e5db;
         }
         
@@ -368,14 +354,12 @@
             border-radius: 60px;
             padding: 12px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-            transition: all 0.2s;
         }
         
         .brand-logo-wrapper img {
             max-width: 95px;
             max-height: 90px;
             object-fit: contain;
-            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.05));
             transition: transform 0.2s;
         }
         
@@ -390,14 +374,7 @@
             margin-top: 8px;
         }
         
-        .brand-card p {
-            font-size: 0.8rem;
-            color: #e67e22;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-        
-        /* Details & Grid */
+        /* Details Grid */
         .details-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -467,7 +444,6 @@
             padding: 20px 24px;
             border-radius: 28px;
             width: 45%;
-            transition: 0.2s;
         }
         
         .timeline-time {
@@ -511,17 +487,17 @@
             width: 100%;
         }
         
-        /* DOORPRIZE OVERLAY - LEBIH KECIL & ELEGAN (UKURAN DIPERKECIL) */
+        /* DOORPRIZE OVERLAY */
         .doorprize-overlay {
             position: fixed;
             bottom: 20px;
             right: 20px;
             background: linear-gradient(135deg, #fff9f0 0%, #ffffff 100%);
             backdrop-filter: blur(12px);
-            padding: 14px 16px; /* padding lebih kecil */
-            border-radius: 28px; /* radius lebih kecil */
+            padding: 14px 16px;
+            border-radius: 28px;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(230,126,34,0.2);
-            max-width: 260px; /* max width lebih kecil */
+            max-width: 260px;
             border-right: 3px solid #e67e22;
             border-bottom: 3px solid #f1c40f;
             z-index: 9999;
@@ -534,7 +510,6 @@
             box-shadow: 0 20px 35px rgba(0,0,0,0.2);
         }
         
-        /* Tombol close di pojok kanan doorprize - lebih kecil */
         .doorprize-close-btn {
             position: absolute;
             top: 6px;
@@ -567,9 +542,8 @@
         }
         
         .doorprize-header i {
-            font-size: 1.4rem; /* icon lebih kecil */
+            font-size: 1.4rem;
             color: #f1c40f;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.1);
             animation: pulse 1.5s infinite;
         }
         
@@ -580,13 +554,12 @@
         }
         
         .doorprize-header h3 {
-            font-size: 1.1rem; /* font lebih kecil */
+            font-size: 1.1rem;
             font-weight: 700;
             background: linear-gradient(115deg, #e67e22, #f39c12);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: -0.2px;
             margin: 0;
         }
         
@@ -635,10 +608,9 @@
         .btn-doorprize:hover {
             background: linear-gradient(95deg, #d35400, #e67e22);
             transform: scale(1.02);
-            box-shadow: 0 5px 12px rgba(230,126,34,0.4);
         }
         
-        /* MODAL POPUP DOORPRIZE (tetap menarik) */
+        /* MODAL POPUP DOORPRIZE */
         .modal-prize {
             display: none;
             position: fixed;
@@ -688,13 +660,6 @@
             gap: 8px;
         }
         
-        .prize-header-modal h2 i {
-            background: #fff1e0;
-            padding: 6px;
-            border-radius: 50px;
-            font-size: 1.3rem;
-        }
-        
         .close-modal {
             background: none;
             border: none;
@@ -739,7 +704,6 @@
         .prize-item:hover {
             background: #fff8ef;
             transform: translateX(5px);
-            box-shadow: 0 5px 12px rgba(230,126,34,0.1);
         }
         
         .prize-icon {
@@ -756,12 +720,6 @@
             margin-bottom: 2px;
         }
         
-        .prize-detail p {
-            font-size: 0.7rem;
-            color: #e67e22;
-            font-weight: 500;
-        }
-        
         .prize-note {
             background: linear-gradient(120deg, #fcf3e0, #fff7ed);
             border-radius: 40px;
@@ -776,7 +734,104 @@
             border: 1px solid #ffddb0;
         }
         
-        /* scroll top */
+        /* RSVP Section */
+        .rsvp-section {
+            width: 100%;
+            max-width: 1150px;
+            background: white;
+            border-radius: 48px;
+            padding: 48px 40px;
+            margin: 28px auto;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 28px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #e67e22;
+            box-shadow: 0 0 0 3px rgba(230,126,34,0.1);
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: normal;
+            cursor: pointer;
+        }
+        
+        .btn-submit {
+            background: #e67e22;
+            color: white;
+            border: none;
+            padding: 16px 28px;
+            font-weight: 700;
+            border-radius: 60px;
+            transition: 0.2s;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            font-size: 1rem;
+        }
+        
+        .btn-submit:hover {
+            background: #d35400;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(230,126,34,0.3);
+        }
+        
+        .btn-submit:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            padding: 12px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #155724;
+            display: none;
+        }
+        
+        .error-message {
+            background: #f8d7da;
+            padding: 12px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #721c24;
+            display: none;
+        }
+        
         .scroll-top {
             position: fixed;
             bottom: 28px;
@@ -794,6 +849,8 @@
             opacity: 0;
             visibility: hidden;
             transition: all 0.2s;
+            border: none;
+            color: white;
         }
         
         .scroll-top.show {
@@ -801,23 +858,36 @@
             visibility: visible;
         }
         
-        /* RESPONSIVE: menyesuaikan doorprize lebih kecil di mobile */
+        .footer {
+            text-align: center;
+            padding: 32px 20px;
+            color: #6c757d;
+            width: 100%;
+        }
+        
+        /* Loading Spinner */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #e67e22;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Responsive */
         @media (max-width: 860px) {
             .sticky-left-nav { left: 12px; padding: 10px 6px; gap: 8px; }
             .left-nav-item { width: 38px; height: 38px; }
             .left-nav-item i { font-size: 1.1rem; }
-            .doorprize-overlay { 
-                max-width: 230px; 
-                padding: 10px 12px;
-                bottom: 16px;
-                right: 16px;
-                border-radius: 24px;
-            }
-            .doorprize-header i { font-size: 1.2rem; }
-            .doorprize-header h3 { font-size: 0.95rem; }
-            .doorprize-badge span { font-size: 0.65rem; }
-            .btn-doorprize { padding: 5px 10px; font-size: 0.65rem; }
-            .doorprize-list-preview { font-size: 0.6rem; }
+            .doorprize-overlay { max-width: 230px; padding: 10px 12px; bottom: 16px; right: 16px; border-radius: 24px; }
             .brand-grid { gap: 28px; }
             .brand-card { flex-basis: 140px; }
             .brand-logo-wrapper { width: 95px; height: 95px; }
@@ -827,7 +897,6 @@
             .timeline-content { width: calc(100% - 60px); margin-left: 60px; text-align: left !important; }
             .timeline-dot { left: 20px; }
             .header h1 { font-size: 2.5rem; }
-            /* Responsive logo group */
             .additional-logo img { height: 70px; }
             .company-logo img { height: 70px; }
             .company-logo { flex-wrap: wrap; justify-content: center; }
@@ -837,25 +906,16 @@
             .sticky-left-nav { left: 8px; padding: 8px 4px; gap: 6px; }
             .left-nav-item { width: 34px; height: 34px; }
             .left-nav-item i { font-size: 1rem; }
-            .doorprize-overlay {
-                max-width: 200px;
-                padding: 8px 10px;
-                bottom: 12px;
-                right: 12px;
-                border-radius: 20px;
-            }
-            .doorprize-header i { font-size: 1rem; }
-            .doorprize-header h3 { font-size: 0.85rem; }
-            .doorprize-badge { padding: 3px 6px; }
-            .doorprize-badge span { font-size: 0.6rem; }
-            .btn-doorprize { font-size: 0.6rem; padding: 4px 8px; }
-            .doorprize-list-preview { font-size: 0.55rem; }
+            .doorprize-overlay { max-width: 200px; padding: 8px 10px; bottom: 12px; right: 12px; border-radius: 20px; }
             .brand-grid { gap: 16px; }
             .brand-card { flex-basis: 120px; }
             .brand-logo-wrapper img { max-width: 70px; }
             .additional-logo img { height: 55px; }
             .company-logo img { height: 55px; }
             .additional-logo { padding-right: 12px; gap: 12px; }
+            .header h1 { font-size: 1.8rem; }
+            .timer span { font-size: 1.8rem; min-width: 60px; }
+            .section-title { font-size: 1.8rem; }
         }
         
         .fade-in {
@@ -866,22 +926,6 @@
             from { opacity: 0; transform: translateY(20px);}
             to { opacity: 1; transform: translateY(0);}
         }
-        
-        .admin-section .admin-btn { padding: 10px 18px; border-radius: 40px; margin-right: 12px; background:#e67e22; color:white; border:none; cursor:pointer; }
-        .admin-btn.secondary { background:#2c3e50; }
-        .admin-btn.danger { background:#c0392b; }
-        .delete-btn { background:none; border:none; color:#e74c3c; font-size:1.2rem; cursor:pointer; }
-        .attendance-badge { padding:4px 12px; border-radius:40px; font-size:0.8rem; font-weight:600; }
-        .badge-hadir { background:#d4edda; color:#155724; }
-        .badge-tidak { background:#f8d7da; color:#721c24; }
-        .badge-ragu { background:#fff3cd; color:#856404; }
-        .form-group { margin-bottom: 20px; text-align:left; }
-        .form-group input, .form-group select { width:100%; padding:12px 16px; border-radius:28px; border:1px solid #ddd; }
-        .radio-group { display:flex; gap:20px; }
-        .btn-submit { background: #e67e22; color:white; border:none; padding: 16px 28px; font-weight: 700; border-radius: 60px; transition: 0.2s; cursor: pointer; width:100%; margin-top:10px; }
-        .btn-submit:hover { background:#d35400; }
-        .rsvp-section { width: 100%; max-width: 1150px; background: white; border-radius: 48px; padding: 48px 40px; margin: 28px auto; box-shadow: 0 20px 35px -12px rgba(0,0,0,0.05); }
-        .footer { text-align: center; padding: 32px 20px; color: #6c757d; width: 100%; }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -894,9 +938,10 @@
         <button class="left-nav-item" data-target="agenda" data-tooltip="Agenda"><i class="fas fa-clock"></i></button>
         <button class="left-nav-item" data-target="lokasi" data-tooltip="Location"><i class="fas fa-map-marker-alt"></i></button>
         <button class="left-nav-item" data-target="rsvp" data-tooltip="RSVP"><i class="fas fa-envelope"></i></button>
+        <a href="admin.html?access=admin2026" class="left-nav-item" data-tooltip="Admin Panel"><i class="fas fa-lock"></i></a>
     </div>
 
-    <!-- DOORPRIZE OVERLAY - UKURAN LEBIH KECIL -->
+    <!-- DOORPRIZE OVERLAY -->
     <div class="doorprize-overlay" id="doorprizeOverlay">
         <button class="doorprize-close-btn" id="closeDoorprizeBtn" aria-label="Close"><i class="fas fa-times"></i></button>
         <div class="doorprize-header">
@@ -919,7 +964,6 @@
     <div class="company-header">
         <div class="container">
             <div class="company-logo">
-                <!-- Additional logo placed on the left side of the existing logo group -->
                 <div class="additional-logo">
                     <img src="https://i.imgur.com/XjT4AO0.png" alt="Additional Company Logo">
                 </div>
@@ -948,35 +992,33 @@
     </header>
 
     <div class="main-content">
-        <div class="brand-showaway" style="width:100%; max-width:1150px; margin:0 auto 24px;">
-            <div class="brand-showcase">
-                <div class="brand-header">
-                    <h3><i class="fas fa-certificate" style="color:#e67e22;"></i> Official Technology Partners</h3>
-                    <p>Powered by industry-leading safety & innovation brands</p>
-                </div>
-                <div class="brand-grid">
-                    <div class="brand-card">
-                        <div class="brand-logo-wrapper">
-                            <img src="https://i.imgur.com/r2Okp8C.png" alt="SIMPLEX" style="max-width:90px;">
-                        </div>
-                        <h4>SIMPLEX</h4>
+        <div class="brand-showcase">
+            <div class="brand-header">
+                <h3><i class="fas fa-certificate" style="color:#e67e22;"></i> Official Technology Partners</h3>
+                <p>Powered by industry-leading safety & innovation brands</p>
+            </div>
+            <div class="brand-grid">
+                <div class="brand-card">
+                    <div class="brand-logo-wrapper">
+                        <img src="https://i.imgur.com/r2Okp8C.png" alt="SIMPLEX" style="max-width:90px;">
                     </div>
-                    <div class="brand-card">
-                        <div class="brand-logo-wrapper">
-                            <img src="https://i.imgur.com/3WCoPWl.png" alt="LPG">
-                        </div>
-                        <h4>JOHNSON CONTROLS</h4>
-                    </div>
-                    <div class="brand-card">
-                        <div class="brand-logo-wrapper">
-                            <img src="https://i.imgur.com/zgJNw4b.png" alt="TYCO">
-                        </div>
-                        <h4>WAGNER</h4>
-                    </div>
+                    <h4>SIMPLEX</h4>
                 </div>
-                <div style="text-align: center; margin-top: 28px; font-size:0.85rem; color:#7f8c8d;">
-                    <i class="fas fa-handshake"></i> Cutting-edge technology collaboration for building safety
+                <div class="brand-card">
+                    <div class="brand-logo-wrapper">
+                        <img src="https://i.imgur.com/3WCoPWl.png" alt="LPG">
+                    </div>
+                    <h4>JOHNSON CONTROLS</h4>
                 </div>
+                <div class="brand-card">
+                    <div class="brand-logo-wrapper">
+                        <img src="https://i.imgur.com/zgJNw4b.png" alt="TYCO">
+                    </div>
+                    <h4>WAGNER</h4>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 28px; font-size:0.85rem; color:#7f8c8d;">
+                <i class="fas fa-handshake"></i> Cutting-edge technology collaboration for building safety
             </div>
         </div>
 
@@ -1031,19 +1073,58 @@
         <section class="rsvp-section" id="rsvp">
             <div class="rsvp-container">
                 <h2 class="section-title" style="margin-bottom:30px;">Confirm Your Attendance</h2>
-                <div class="success-message" id="successMessage" style="display:none; background:#d4edda; padding:12px; border-radius:30px; margin-bottom:20px; text-align:center; color:#155724;"><i class="fas fa-check-circle"></i> Thank you! Your RSVP has been received.</div>
+                <div class="success-message" id="successMessage">
+                    <i class="fas fa-check-circle"></i> Thank you! Your RSVP has been received.
+                </div>
+                <div class="error-message" id="errorMessage">
+                    <i class="fas fa-exclamation-triangle"></i> Failed to submit. Please check your connection and try again.
+                </div>
                 <form id="rsvpForm">
-                    <div class="form-group"><label>Full Name *</label><input type="text" id="name" required placeholder="Your full name"></div>
-                    <div class="form-group"><label>Company Name *</label><input type="text" id="company" required placeholder="Company / Institution"></div>
-                    <div class="form-group"><label>Phone Number *</label><input type="tel" id="phone" required placeholder="08xxxxxxxxxx"></div>
-                    <div class="form-group"><label>Attendance *</label><div class="radio-group"><label><input type="radio" name="attendance" value="Attending" required> Attending</label><label><input type="radio" name="attendance" value="Not Attending"> Not Attending</label><label><input type="radio" name="attendance" value="Undecided"> Undecided</label></div></div>
-                    <div class="form-group"><label>Number of Guests</label><select id="guestCount"><option value="1">1 person</option><option value="2">2 persons</option><option value="3">3 persons</option><option value="4">4 persons</option><option value="5">5 persons</option></select></div>
-                    <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Send Confirmation</button>
+                    <div class="form-group">
+                        <label>Full Name *</label>
+                        <input type="text" id="name" required placeholder="Your full name">
+                    </div>
+                    <div class="form-group">
+                        <label>Company Name *</label>
+                        <input type="text" id="company" required placeholder="Company / Institution">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number *</label>
+                        <input type="tel" id="phone" required placeholder="08xxxxxxxxxx">
+                    </div>
+                    <div class="form-group">
+                        <label>Attendance *</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="attendance" value="Hadir" required> Hadir (Attending)</label>
+                            <label><input type="radio" name="attendance" value="Tidak Hadir"> Tidak Hadir (Not Attending)</label>
+                            <label><input type="radio" name="attendance" value="Ragu"> Ragu (Undecided)</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Number of Guests</label>
+                        <select id="guestCount">
+                            <option value="1">1 person</option>
+                            <option value="2">2 persons</option>
+                            <option value="3">3 persons</option>
+                            <option value="4">4 persons</option>
+                            <option value="5">5 persons</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Message / Questions (Optional)</label>
+                        <textarea id="message" rows="3" placeholder="Any message or questions..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit" id="submitBtn">
+                        <i class="fas fa-paper-plane"></i> Send Confirmation
+                    </button>
                 </form>
             </div>
         </section>
 
-        <footer class="footer"><p>Contact: bintang@genetek.co.id | +62 896-2195-8846</p><p>&copy; 2026 PT Effrensindo Kencana. All Rights Reserved.</p></footer>
+        <footer class="footer">
+            <p>Contact: bintang@genetek.co.id | +62 896-2195-8846</p>
+            <p>&copy; 2026 PT Effrensindo Kencana. All Rights Reserved.</p>
+        </footer>
     </div>
 
     <div id="prizeModal" class="modal-prize">
@@ -1066,9 +1147,29 @@
         </div>
     </div>
 
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
     <script>
-        // Countdown
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyC8LlcI_ccRGieFNjlVFLfEr2c4PBg6J70",
+            authDomain: "logbook-e6ab3.firebaseapp.com",
+            databaseURL: "https://logbook-e6ab3-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "logbook-e6ab3",
+            storageBucket: "logbook-e6ab3.firebasestorage.app",
+            messagingSenderId: "484546392348",
+            appId: "1:484546392348:web:861616b680427c158ecad9"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        const rsvpRef = database.ref('rsvps');
+
+        // Countdown Timer
         function updateCountdown() {
             const eventDate = new Date('April 14, 2026 09:00:00').getTime();
             const now = new Date().getTime();
@@ -1080,19 +1181,36 @@
                 document.getElementById('seconds').textContent = Math.floor((d%(1000*60))/1000).toString().padStart(2,'0');
             }
         }
-        setInterval(updateCountdown,1000); updateCountdown();
+        setInterval(updateCountdown,1000); 
+        updateCountdown();
 
         // Navigation
         const navBtns = document.querySelectorAll('.left-nav-item');
         const sections = document.querySelectorAll('section, header');
-        window.addEventListener('scroll',()=>{
-            let current='';
-            sections.forEach(sec=>{ const top = sec.offsetTop-140, bottom=top+sec.offsetHeight; if(window.scrollY>=top && window.scrollY<bottom) current=sec.getAttribute('id')||'home'; });
-            navBtns.forEach(btn=>{ btn.classList.remove('active'); if(btn.getAttribute('data-target')===current) btn.classList.add('active'); });
-            document.getElementById('scrollTop').classList.toggle('show', window.scrollY>500);
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(sec => { 
+                const top = sec.offsetTop - 140, bottom = top + sec.offsetHeight; 
+                if(window.scrollY >= top && window.scrollY < bottom) current = sec.getAttribute('id') || 'home'; 
+            });
+            navBtns.forEach(btn => { 
+                btn.classList.remove('active'); 
+                if(btn.getAttribute('data-target') === current) btn.classList.add('active'); 
+            });
+            document.getElementById('scrollTop').classList.toggle('show', window.scrollY > 500);
         });
-        navBtns.forEach(btn=>{ btn.addEventListener('click',()=>{ const target=btn.getAttribute('data-target'); if(target) document.getElementById(target)?.scrollIntoView({behavior:'smooth'}); }); });
-        document.getElementById('scrollTop').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+        
+        navBtns.forEach(btn => { 
+            btn.addEventListener('click', () => { 
+                const target = btn.getAttribute('data-target'); 
+                if(target && target !== 'admin.html') {
+                    document.getElementById(target)?.scrollIntoView({behavior:'smooth'});
+                }
+            }); 
+        });
+        
+        document.getElementById('scrollTop').addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
 
         // Map
         function initMap(){
@@ -1105,7 +1223,7 @@
         }
         setTimeout(initMap,200);
         
-        // Doorprize modal + close overlay
+        // Doorprize modal
         const modal = document.getElementById('prizeModal');
         const showBtn = document.getElementById('showPrizeModalBtn');
         const closeModalBtn = document.getElementById('closePrizeModalBtn');
@@ -1132,65 +1250,73 @@
             });
         }
 
-        // RSVP localStorage
+        // RSVP Form Submission to Firebase
         const form = document.getElementById('rsvpForm');
         const successDiv = document.getElementById('successMessage');
-        form?.addEventListener('submit',(e)=>{
-            e.preventDefault();
-            const newRsvp = {
-                id:Date.now(), name:document.getElementById('name').value, company:document.getElementById('company').value,
-                phone:document.getElementById('phone').value, attendance:document.querySelector('input[name="attendance"]:checked').value,
-                guestCount:document.getElementById('guestCount').value, timestamp:new Date().toLocaleString('en-ID')
-            };
-            let rsvps = JSON.parse(localStorage.getItem('rsvps')||'[]');
-            rsvps.push(newRsvp);
-            localStorage.setItem('rsvps',JSON.stringify(rsvps));
-            successDiv.style.display='block';
-            form.reset();
-            setTimeout(()=>successDiv.style.display='none',4000);
-            if(document.getElementById('admin') && document.getElementById('admin').style.display==='block') loadRsvpData();
-        });
+        const errorDiv = document.getElementById('errorMessage');
+        const submitBtn = document.getElementById('submitBtn');
 
-        function loadRsvpData(){
-            const rsvps = JSON.parse(localStorage.getItem('rsvps')||'[]');
-            const tbody = document.getElementById('rsvpTableBody');
-            if(!tbody) return;
-            if(rsvps.length===0){ tbody.innerHTML='<tr><td colspan="7" class="empty-data">No data available</td></tr>'; return; }
-            let html='';
-            rsvps.sort((a,b)=>b.id-a.id).forEach((r,i)=>{
-                const badgeClass = r.attendance==='Attending'?'badge-hadir':(r.attendance==='Not Attending'?'badge-tidak':'badge-ragu');
-                html+=`<tr><td>${i+1}</td><td>${r.name}</td><td>${r.company}</td><td><span class="attendance-badge ${badgeClass}">${r.attendance}</span></td><td>${r.guestCount}</td><td><button class="delete-btn" onclick="deleteRsvp(${r.id})"><i class="fas fa-trash"></i></button></td></tr>`;
-            });
-            tbody.innerHTML=html;
+        function showSuccess(message) {
+            successDiv.style.display = 'block';
+            errorDiv.style.display = 'none';
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 5000);
         }
-        window.deleteRsvp = (id)=>{
-            if(confirm('Delete this RSVP confirmation?')){
-                let rsvps = JSON.parse(localStorage.getItem('rsvps')||'[]');
-                rsvps = rsvps.filter(r=>r.id!==id);
-                localStorage.setItem('rsvps',JSON.stringify(rsvps));
-                loadRsvpData();
+
+        function showError(message) {
+            errorDiv.textContent = message || 'Failed to submit. Please check your connection and try again.';
+            errorDiv.style.display = 'block';
+            successDiv.style.display = 'none';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        form?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value.trim();
+            const company = document.getElementById('company').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const attendanceRadio = document.querySelector('input[name="attendance"]:checked');
+            const guestCount = document.getElementById('guestCount').value;
+            const message = document.getElementById('message').value.trim();
+            
+            if (!name || !company || !phone || !attendanceRadio) {
+                showError('Please fill in all required fields.');
+                return;
             }
-        };
-        
-        if(window.location.search.includes('admin=true')){
-            let adminDiv = document.createElement('section');
-            adminDiv.className = 'admin-section';
-            adminDiv.id='admin';
-            adminDiv.innerHTML = `<h2><i class="fas fa-users-cog"></i> Admin RSVP</h2>
-            <div class="admin-actions"><button class="admin-btn primary" id="refreshData">Refresh</button><button class="admin-btn secondary" id="exportData">Export CSV</button><button class="admin-btn danger" id="clearAllData">Delete All</button></div>
-            <div class="table-container"><table><thead><tr><th>No</th><th>Name</th><th>Company</th><th>Attendance</th><th>Guests</th><th>Action</th></tr></thead><tbody id="rsvpTableBody"></tbody></table></div>`;
-            document.querySelector('.main-content').appendChild(adminDiv);
-            adminDiv.style.display='block';
-            document.getElementById('refreshData')?.addEventListener('click',loadRsvpData);
-            document.getElementById('exportData')?.addEventListener('click',()=>{
-                let data = JSON.parse(localStorage.getItem('rsvps')||'[]');
-                if(!data.length) return alert('No data');
-                let csv = "Name,Company,Phone,Attendance,Guests,Timestamp\n"+data.map(r=>`"${r.name}","${r.company}","${r.phone}","${r.attendance}","${r.guestCount}","${r.timestamp}"`).join("\n");
-                let blob = new Blob([csv],{type:'text/csv'}); let a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='rsvp_data.csv'; a.click(); URL.revokeObjectURL(a.href);
-            });
-            document.getElementById('clearAllData')?.addEventListener('click',()=>{ if(confirm('Delete ALL RSVP data? Permanent action.')){ localStorage.removeItem('rsvps'); loadRsvpData(); } });
-            loadRsvpData();
-        }
+            
+            const newRsvp = {
+                name: name,
+                company: company,
+                phone: phone,
+                attendance: attendanceRadio.value,
+                guestCount: parseInt(guestCount),
+                message: message || '',
+                timestamp: new Date().toISOString()
+            };
+            
+            // Disable button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="loading-spinner"></span> Submitting...';
+            
+            // Save to Firebase
+            rsvpRef.push(newRsvp)
+                .then(() => {
+                    showSuccess('Thank you! Your RSVP has been received.');
+                    form.reset();
+                })
+                .catch((error) => {
+                    console.error('Error saving RSVP:', error);
+                    showError('Failed to submit. Please check your connection and try again.');
+                })
+                .finally(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Confirmation';
+                });
+        });
     </script>
 </body>
 </html>
