@@ -372,6 +372,37 @@
             gap: 10px;
         }
 
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loading-overlay.show {
+            display: flex;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #e67e22;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .navbar {
@@ -491,17 +522,67 @@
         </div>
     </div>
 
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
     <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyC8LlcI_ccRGieFNjlVFLfEr2c4PBg6J70",
+            authDomain: "logbook-e6ab3.firebaseapp.com",
+            databaseURL: "https://logbook-e6ab3-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "logbook-e6ab3",
+            storageBucket: "logbook-e6ab3.firebasestorage.app",
+            messagingSenderId: "484546392348",
+            appId: "1:484546392348:web:861616b680427c158ecad9"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        const rsvpRef = database.ref('rsvps');
+
         let currentData = [];
         let currentFilter = 'all';
         let currentSearch = '';
 
-        // Load data from localStorage
+        // Show/hide loading
+        function showLoading(show) {
+            const overlay = document.getElementById('loadingOverlay');
+            if (show) {
+                overlay.classList.add('show');
+            } else {
+                overlay.classList.remove('show');
+            }
+        }
+
+        // Load data from Firebase
         function loadData() {
-            const rsvps = JSON.parse(localStorage.getItem('rsvps') || '[]');
-            currentData = rsvps.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-            updateStats();
-            filterData();
+            showLoading(true);
+            rsvpRef.on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    currentData = Object.keys(data).map(key => ({
+                        id: key,
+                        ...data[key]
+                    })).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                } else {
+                    currentData = [];
+                }
+                updateStats();
+                filterData();
+                showLoading(false);
+            }, (error) => {
+                console.error('Error loading data:', error);
+                showLoading(false);
+                alert('Gagal memuat data. Periksa koneksi internet Anda.');
+            });
         }
 
         // Update statistics
@@ -521,12 +602,10 @@
         function filterData() {
             let filtered = currentData;
 
-            // Apply status filter
             if (currentFilter !== 'all') {
                 filtered = filtered.filter(item => item.attendance === currentFilter);
             }
 
-            // Apply search filter
             if (currentSearch) {
                 const searchLower = currentSearch.toLowerCase();
                 filtered = filtered.filter(item => 
@@ -633,14 +712,14 @@
 
         // View detail
         function viewDetail(id) {
-            const item = currentData.find(d => d.id == id);
+            const item = currentData.find(d => d.id === id);
             if (!item) return;
 
             const modalBody = document.getElementById('modalBody');
-            const date = new Date(item.timestamp).toLocaleString('id-ID', {
+            const date = item.timestamp ? new Date(item.timestamp).toLocaleString('id-ID', {
                 dateStyle: 'full',
                 timeStyle: 'long'
-            });
+            }) : 'Tanggal tidak tersedia';
 
             modalBody.innerHTML = `
                 <div class="detail-item">
@@ -685,21 +764,37 @@
             document.getElementById('detailModal').classList.remove('show');
         }
 
-        // Delete single item
+        // Delete single item from Firebase
         function deleteItem(id) {
             if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
-                let rsvps = JSON.parse(localStorage.getItem('rsvps') || '[]');
-                rsvps = rsvps.filter(item => item.id != id);
-                localStorage.setItem('rsvps', JSON.stringify(rsvps));
-                loadData();
+                showLoading(true);
+                rsvpRef.child(id).remove()
+                    .then(() => {
+                        showLoading(false);
+                        // Data will refresh automatically via realtime listener
+                    })
+                    .catch((error) => {
+                        showLoading(false);
+                        console.error('Error deleting:', error);
+                        alert('Gagal menghapus data. Silakan coba lagi.');
+                    });
             }
         }
 
-        // Clear all data
+        // Clear all data from Firebase
         function clearAllData() {
             if (confirm('PERINGATAN: Semua data RSVP akan dihapus permanen! Apakah Anda yakin?')) {
-                localStorage.removeItem('rsvps');
-                loadData();
+                showLoading(true);
+                rsvpRef.remove()
+                    .then(() => {
+                        showLoading(false);
+                        // Data will refresh automatically
+                    })
+                    .catch((error) => {
+                        showLoading(false);
+                        console.error('Error clearing data:', error);
+                        alert('Gagal menghapus semua data. Silakan coba lagi.');
+                    });
             }
         }
 
@@ -710,7 +805,6 @@
                 return;
             }
 
-            // Prepare data for export
             const exportData = currentData.map((item, index) => ({
                 'No': index + 1,
                 'Nama Lengkap': item.name || '-',
@@ -722,19 +816,14 @@
                 'Waktu Daftar': item.timestamp || '-'
             }));
 
-            // Create worksheet
             const ws = XLSX.utils.json_to_sheet(exportData);
-
-            // Create workbook
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, ws, 'Data RSVP');
 
-            // Generate filename with current date
             const date = new Date();
             const dateStr = date.toISOString().split('T')[0];
             const filename = `rsvp_data_${dateStr}.xlsx`;
 
-            // Export to XLSX file
             XLSX.writeFile(wb, filename);
         }
 
@@ -747,7 +836,19 @@
         }
 
         // Load data on page load
-        document.addEventListener('DOMContentLoaded', loadData);
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            
+            // Check if user is accessing admin panel directly
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('access') !== 'admin2026') {
+                const password = prompt('Masukkan password admin:');
+                if (password !== 'admin2026') {
+                    alert('Password salah!');
+                    window.location.href = 'index.html';
+                }
+            }
+        });
     </script>
 </body>
 </html>
