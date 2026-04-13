@@ -590,7 +590,7 @@
             </div>
             <div class="filter-buttons">
                 <button class="filter-btn active" data-filter="all">Semua (<span id="filterAll">0</span>)</button>
-                <button class="filter-btn" data-filter="Hadir">✅ Hadir (<span id="filterHadir">0</span>)</button>
+                <button class="filter-btn" data-filter="Hadir">✅ RSVP Hadir (<span id="filterHadir">0</span>)</button>
                 <button class="filter-btn" data-filter="Belum Checkin">🟡 Belum Check-in (<span id="filterBelum">0</span>)</button>
                 <button class="filter-btn" data-filter="Tidak Hadir">❌ Tidak Hadir (<span id="filterTidak">0</span>)</button>
                 <button class="refresh-btn" id="refreshBtn"><i class="fas fa-sync-alt"></i> Refresh</button>
@@ -603,8 +603,8 @@
         <div class="stat-card">
             <div class="stat-icon"><i class="fas fa-users"></i></div>
             <div class="stat-info">
-                <h4>TOTAL RSVP</h4>
-                <div class="value" id="totalRsvp">0</div>
+                <h4>TOTAL UNDANGAN</h4>
+                <div class="value" id="totalUndangan">0</div>
             </div>
         </div>
         <div class="stat-card">
@@ -622,7 +622,7 @@
             </div>
         </div>
         <div class="stat-card">
-            <div class="stat-icon"><i class="fas fa-users"></i></div>
+            <div class="stat-icon"><i class="fas fa-user-check"></i></div>
             <div class="stat-info">
                 <h4>TOTAL HADIR</h4>
                 <div class="value" id="totalAttendedCount">0</div>
@@ -634,7 +634,7 @@
     <div class="guest-table-wrapper">
         <div class="table-header">
             <h3><i class="fas fa-clipboard-list"></i> Daftar Tamu & Registrasi Kehadiran</h3>
-            <span><i class="fas fa-user-plus"></i> Data tamu pendamping wajib diisi lengkap</span>
+            <span><i class="fas fa-user-plus"></i> Centang checkbox untuk mencatat kehadiran per individu</span>
         </div>
         <div class="table-container">
             <table id="guestTable">
@@ -658,7 +658,7 @@
     </div>
 </div>
 
-<!-- Modal Check-in dengan Input Nama, Telepon, Email per Tamu -->
+<!-- Modal Check-in -->
 <div class="modal" id="checkinModal">
     <div class="modal-content">
         <div class="modal-header">
@@ -672,14 +672,12 @@
                 <p><strong><i class="fas fa-phone"></i> Telepon:</strong> <span id="modalGuestPhone">-</span></p>
             </div>
 
-            <!-- Input untuk Tamu Utama -->
             <div class="email-input-group">
                 <label><i class="fas fa-envelope"></i> Email Peserta Utama *</label>
                 <input type="email" id="primaryEmail" placeholder="contoh: nama@perusahaan.com">
                 <div class="email-hint">Email akan digunakan untuk mengirim sertifikat dan informasi follow-up</div>
             </div>
 
-            <!-- Bagian untuk tamu pendamping (jika jumlah tamu > 1) -->
             <div id="additionalGuestsSection" style="display: none;">
                 <div class="guest-list-title">
                     <i class="fas fa-user-friends"></i> Daftar Tamu Pendamping
@@ -730,7 +728,6 @@
     let currentSearch = '';
     let currentGuestData = null;
 
-    // Helper Functions
     function showToast(message, type = 'success') {
         const toast = document.getElementById('toastNotif');
         const msgSpan = document.getElementById('toastMsg');
@@ -755,6 +752,40 @@
     function isValidPhone(phone) {
         const phoneRegex = /^[0-9+\-\s()]{8,15}$/;
         return phoneRegex.test(phone);
+    }
+
+    // ==================== FUNGSI MENGHITUNG STATISTIK BERDASARKAN TOTAL INDIVIDU ====================
+    function calculateIndividualStats() {
+        let totalUndangan = 0;      // Total individu yang diundang (berdasarkan guestCount)
+        let totalCheckedIn = 0;     // Total individu yang sudah check-in
+        let totalAttended = 0;      // Total individu yang hadir (sama dengan checked-in)
+        
+        allGuests.forEach(guest => {
+            if (guest.attendance === 'Hadir') {
+                // Tamu utama + tamu pendamping = total undangan untuk rombongan ini
+                const totalInvitedThisGroup = 1 + (guest.guestCount - 1);
+                totalUndangan += totalInvitedThisGroup;
+                
+                if (guest.checkedIn === true) {
+                    // Hitung berapa individu dari rombongan ini yang sudah check-in
+                    let checkedInThisGroup = 1; // tamu utama
+                    if (guest.additionalGuests && guest.additionalGuests.length) {
+                        checkedInThisGroup += guest.additionalGuests.filter(ag => ag.checkedIn === true).length;
+                    }
+                    totalCheckedIn += checkedInThisGroup;
+                    totalAttended += checkedInThisGroup;
+                }
+            }
+        });
+        
+        const belumCheckIn = totalUndangan - totalCheckedIn;
+        
+        return {
+            totalUndangan: totalUndangan,
+            totalCheckedIn: totalCheckedIn,
+            belumCheckIn: belumCheckIn,
+            totalAttended: totalAttended
+        };
     }
 
     // Load data from Firebase
@@ -790,37 +821,25 @@
         });
     }
 
-    // Update statistics
     function updateStatsAndRender() {
-        const total = allGuests.length;
-        const checkedIn = allGuests.filter(g => g.checkedIn === true).length;
-        const notChecked = allGuests.filter(g => g.attendance === 'Hadir' && g.checkedIn !== true).length;
-        const tidakHadir = allGuests.filter(g => g.attendance !== 'Hadir').length;
+        // Hitung statistik berdasarkan individu
+        const stats = calculateIndividualStats();
         
-        // Hitung total individu yang hadir (termasuk pendamping)
-        let totalAttended = 0;
-        allGuests.forEach(g => {
-            if (g.checkedIn === true) {
-                totalAttended += 1; // tamu utama
-                if (g.additionalGuests && g.additionalGuests.length) {
-                    totalAttended += g.additionalGuests.filter(ag => ag.checkedIn === true).length;
-                }
-            }
-        });
+        document.getElementById('totalUndangan').innerText = stats.totalUndangan;
+        document.getElementById('checkedInCount').innerText = stats.totalCheckedIn;
+        document.getElementById('notCheckedCount').innerText = stats.belumCheckIn;
+        document.getElementById('totalAttendedCount').innerText = stats.totalAttended;
         
-        document.getElementById('totalRsvp').innerText = total;
-        document.getElementById('checkedInCount').innerText = checkedIn;
-        document.getElementById('notCheckedCount').innerText = notChecked;
-        document.getElementById('totalAttendedCount').innerText = totalAttended;
+        // Hitung untuk filter tabs (berdasarkan jumlah rombongan)
+        const totalRombongan = allGuests.length;
+        const hadirRombongan = allGuests.filter(g => g.attendance === 'Hadir').length;
+        const belumRombongan = allGuests.filter(g => g.attendance === 'Hadir' && !g.checkedIn).length;
+        const tidakRombongan = allGuests.filter(g => g.attendance !== 'Hadir').length;
         
-        const hadirCount = allGuests.filter(g => g.attendance === 'Hadir').length;
-        const belumCount = allGuests.filter(g => g.attendance === 'Hadir' && !g.checkedIn).length;
-        const tidakHadirCount = allGuests.filter(g => g.attendance !== 'Hadir').length;
-        
-        document.getElementById('filterAll').innerText = total;
-        document.getElementById('filterHadir').innerText = hadirCount;
-        document.getElementById('filterBelum').innerText = belumCount;
-        document.getElementById('filterTidak').innerText = tidakHadirCount;
+        document.getElementById('filterAll').innerText = totalRombongan;
+        document.getElementById('filterHadir').innerText = hadirRombongan;
+        document.getElementById('filterBelum').innerText = belumRombongan;
+        document.getElementById('filterTidak').innerText = tidakRombongan;
         
         applyFilters();
     }
@@ -868,14 +887,12 @@
                 checkinBadge = '<span class="badge-status badge-tidak"><i class="fas fa-ban"></i> Tidak hadir</span>';
                 actionButton = `<button class="checkin-btn" disabled style="background:#bdc3c7;"><i class="fas fa-times"></i> Tidak Hadir</button>`;
             } else if (guest.checkedIn) {
-                const checkTime = guest.checkedInTime ? formatTime(guest.checkedInTime) : '';
                 const attendedCount = 1 + (guest.additionalGuests?.filter(ag => ag.checkedIn === true).length || 0);
                 const totalCount = guest.guestCount;
-                let statusText = `${attendedCount}/${totalCount} hadir`;
                 if (attendedCount < totalCount) {
-                    checkinBadge = `<span class="badge-status badge-partial"><i class="fas fa-user-check"></i> ${statusText}</span>`;
+                    checkinBadge = `<span class="badge-status badge-partial"><i class="fas fa-user-check"></i> ${attendedCount}/${totalCount} hadir</span>`;
                 } else {
-                    checkinBadge = `<span class="badge-status badge-hadir"><i class="fas fa-stamp"></i> Lengkap (${checkTime})</span>`;
+                    checkinBadge = `<span class="badge-status badge-hadir"><i class="fas fa-stamp"></i> Lengkap (${formatTime(guest.checkedInTime)})</span>`;
                 }
                 actionButton = `<button class="checkin-btn undo-btn" data-id="${guest.id}" data-action="undo"><i class="fas fa-undo-alt"></i> Batalkan</button>`;
             } else {
@@ -964,8 +981,7 @@
             }
             additionalList.innerHTML = additionalHtml;
             
-            // Event listener untuk checkbox
-            document.querySelectorAll('.guest-checkbox').forEach((checkbox, idx) => {
+            document.querySelectorAll('.guest-checkbox').forEach((checkbox) => {
                 checkbox.addEventListener('change', function() {
                     const guestItem = this.closest('.guest-item');
                     const inputs = guestItem.querySelectorAll('.guest-details input');
@@ -1004,10 +1020,8 @@
             return;
         }
         
-        // Kumpulkan data tamu pendamping
         const additionalGuests = [];
         const additionalItems = document.querySelectorAll('#additionalGuestsList .guest-item');
-        let hasError = false;
         
         for (let i = 0; i < additionalItems.length; i++) {
             const item = additionalItems[i];
@@ -1023,27 +1037,22 @@
                 
                 if (!name) {
                     showToast(`Nama untuk Tamu Pendamping ${i+1} wajib diisi!`, 'error');
-                    hasError = true;
                     return;
                 }
                 if (!phone) {
                     showToast(`Nomor telepon untuk Tamu Pendamping ${i+1} wajib diisi!`, 'error');
-                    hasError = true;
                     return;
                 }
                 if (!email) {
                     showToast(`Email untuk Tamu Pendamping ${i+1} wajib diisi!`, 'error');
-                    hasError = true;
                     return;
                 }
                 if (!isValidEmail(email)) {
                     showToast(`Format email Tamu Pendamping ${i+1} tidak valid!`, 'error');
-                    hasError = true;
                     return;
                 }
                 if (!isValidPhone(phone)) {
                     showToast(`Format nomor telepon Tamu Pendamping ${i+1} tidak valid! (8-15 digit)`, 'error');
-                    hasError = true;
                     return;
                 }
                 
@@ -1065,11 +1074,8 @@
             }
         }
         
-        if (hasError) return;
-        
-        const primaryChecked = true;
         const additionalCheckedCount = additionalGuests.filter(ag => ag.checkedIn).length;
-        const totalChecked = (primaryChecked ? 1 : 0) + additionalCheckedCount;
+        const totalChecked = 1 + additionalCheckedCount;
         
         const updateData = {
             checkedIn: true,
@@ -1093,7 +1099,7 @@
         const guest = allGuests.find(g => g.id === guestId);
         if (!guest) return;
         
-        if (!confirm(`Batalkan check-in untuk ${guest.name}? Semua data kehadiran dan data tamu pendamping akan dihapus.`)) return;
+        if (!confirm(`Batalkan check-in untuk rombongan ${guest.name}? Semua data kehadiran akan dihapus.`)) return;
         
         try {
             await rsvpRef.child(guestId).update({
