@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Registrasi Kehadiran - Check-in Peserta</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #eef2f5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #1e2a3a;
+        }
+
+        .event-header {
+            background: linear-gradient(115deg, #1e2a36 0%, #0f1a24 100%);
+            border-radius: 32px;
+            padding: 20px 28px;
+            margin-bottom: 30px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-area img {
+            height: 55px;
+            background: white;
+            padding: 6px 12px;
+            border-radius: 16px;
+        }
+
+        .event-title h2 {
+            color: white;
+            font-weight: 500;
+            font-size: 1.2rem;
+        }
+
+        .event-title h1 {
+            color: #e67e22;
+            font-size: 1.4rem;
+        }
+
+        .stats-badge {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(8px);
+            padding: 12px 24px;
+            border-radius: 40px;
+            text-align: center;
+        }
+
+        .stats-badge .number {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #e67e22;
+        }
+
+        .checkin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Tab Menu Styles */
+        .tabs-menu {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 28px;
+            background: white;
+            padding: 8px 16px;
+            border-radius: 60px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 28px;
+            border-radius: 40px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            color: #6c757d;
+        }
+
+        .tab-btn i {
+            margin-right: 8px;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #e67e22, #f39c12);
+            color: white;
+            box-shadow: 0 4px 12px rgba(230,126,34,0.3);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: #f8f9fa;
+            color: #e67e22;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .search-panel {
+            background: white;
+            border-radius: 28px;
+            padding: 24px 28px;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+        }
+
+        .search-box {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .search-input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        .search-input-wrapper i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #e67e22;
+        }
+
+        .search-input-wrapper input {
+            width: 100%;
+            padding: 14px 20px 14px 48px;
+            border: 2px solid #e9ecef;
+            border-radius: 50px;
+            font-size: 1rem;
+        }
+
+        .search-input-wrapper input:focus {
+            outline: none;
+            border-color: #e67e22;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border-radius: 40px;
+            border: none;
+            background: #f1f3f5;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active {
+            background: #e67e22;
+            color: white;
+        }
+
+        .refresh-btn {
+            background: #2c3e50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 40px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .export-btn {
+            background: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 40px;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 24px;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-left: 4px solid #e67e22;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            background: #fff3e6;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: #e67e22;
+        }
+
+        .stat-info h4 {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+        .stat-info .value {
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .guest-table-wrapper {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        }
+
+        .table-header {
+            padding: 18px 24px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e67e22;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .table-header h3 {
+            font-weight: 600;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            max-height: 550px;
+            overflow-y: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        th {
+            background: #f1f5f9;
+            padding: 16px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #edf2f7;
+        }
+
+        tr:hover {
+            background: #fef9f0;
+        }
+
+        .badge-status {
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-hadir { background: #d4edda; color: #155724; }
+        .badge-belum { background: #fff3cd; color: #856404; }
+        .badge-tidak { background: #f8d7da; color: #721c24; }
+        .badge-partial { background: #fff3e0; color: #e67e22; }
+        .badge-success { background: #d4edda; color: #155724; }
+
+        .checkin-btn {
+            background: linear-gradient(95deg, #27ae60, #2ecc71);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 30px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .checkin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(39,174,96,0.3);
+        }
+
+        .checkin-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .undo-btn {
+            background: #7f8c8d;
+        }
+
+        .undo-btn:hover {
+            background: #6c7a7e;
+            box-shadow: none;
+        }
+
+        .detail-btn {
+            background: #3498db;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 20px;
+            color: white;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .detail-btn:hover {
+            background: #2980b9;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.show {
+            display: flex;
+            animation: fadeIn 0.2s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.96);}
+            to { opacity: 1; transform: scale(1);}
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 32px;
+            max-width: 700px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 0;
+        }
+
+        .modal-header {
+            border-bottom: 2px solid #e67e22;
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fefaf5;
+            border-radius: 32px 32px 0 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .modal-header h3 {
+            color: #1e2a36;
+            font-size: 1.4rem;
+        }
+
+        .modal-header h3 i {
+            color: #e67e22;
+            margin-right: 8px;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #999;
+            transition: 0.2s;
+        }
+
+        .close-modal:hover {
+            color: #e67e22;
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .guest-info-card {
+            background: #f0f7ff;
+            padding: 16px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .guest-info-card p {
+            margin: 8px 0;
+        }
+
+        .guest-info-card .label {
+            font-weight: 600;
+            color: #2c3e50;
+            width: 100px;
+            display: inline-block;
+        }
+
+        .guest-list-detail {
+            margin-top: 20px;
+        }
+
+        .guest-list-detail h4 {
+            margin-bottom: 12px;
+            color: #e67e22;
+        }
+
+        .detail-guest-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            border-left: 3px solid #27ae60;
+        }
+
+        .detail-guest-item p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        .email-input-group {
+            margin-bottom: 24px;
+        }
+
+        .email-input-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+
+        .email-input-group label i {
+            color: #e67e22;
+            margin-right: 6px;
+        }
+
+        .email-input-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 16px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .email-input-group input:focus {
+            outline: none;
+            border-color: #e67e22;
+            box-shadow: 0 0 0 3px rgba(230,126,34,0.1);
+        }
+
+        .email-hint {
+            font-size: 0.75rem;
+            color: #6c757d;
+            margin-top: 6px;
+        }
+
+        .guest-list-title {
+            font-weight: 600;
+            margin: 20px 0 12px 0;
+            color: #2c3e50;
+            font-size: 1rem;
+        }
+
+        .guest-list {
+            margin: 10px 0 20px 0;
+            border: 1px solid #edf2f7;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .guest-item {
+            padding: 16px;
+            border-bottom: 1px solid #edf2f7;
+            background: #fefefe;
+        }
+
+        .guest-item:last-child {
+            border-bottom: none;
+        }
+
+        .guest-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .guest-header input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            accent-color: #27ae60;
+        }
+
+        .guest-header label {
+            font-weight: 600;
+            cursor: pointer;
+            color: #2c3e50;
+        }
+
+        .guest-details {
+            margin-left: 34px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .guest-details input {
+            flex: 1;
+            min-width: 150px;
+            padding: 10px 14px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .guest-details input:focus {
+            outline: none;
+            border-color: #e67e22;
+        }
+
+        .guest-details input:disabled {
+            background: #f5f5f5;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 40px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .modal-btn.confirm {
+            background: linear-gradient(95deg, #27ae60, #2ecc71);
+            color: white;
+        }
+
+        .modal-btn.confirm:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39,174,96,0.3);
+        }
+
+        .modal-btn.cancel {
+            background: #e9ecef;
+            color: #555;
+        }
+
+        .modal-btn.cancel:hover {
+            background: #dee2e6;
+        }
+
+        /* Toast Notification */
+        .toast-notif {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #2c3e50;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 11000;
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .toast-notif.show {
+            transform: translateX(0);
+        }
+
+        .toast-notif.success { background: #27ae60; }
+        .toast-notif.error { background: #e74c3c; }
+        .toast-notif.info { background: #3498db; }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #adb5bd;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 12px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .event-header { flex-direction: column; text-align: center; }
+            .logo-area { justify-content: center; }
+            .guest-details { flex-direction: column; margin-left: 0; }
+            .guest-header { margin-bottom: 8px; }
+            .tabs-menu { justify-content: center; }
+            .export-btn { margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="checkin-container">
+    <!-- Header Event -->
+    <div class="event-header">
+        <div class="logo-area">
+            <img src="https://i.imgur.com/6OjVuYd.png" alt="Logo" style="background:white; padding:8px 12px;">
+            <div class="event-title">
+                <h2>Fire Safety & Innovation Summit</h2>
+                <h1><i class="fas fa-fire-extinguisher"></i> The Future of Fire Safety is Here!</h1>
+            </div>
+        </div>
+        <div class="stats-badge">
+            <div class="label"><i class="fas fa-calendar-check"></i> 14 April 2026</div>
+            <div class="number">Hotel Mulia Jakarta</div>
+        </div>
+    </div>
+
+    <!-- Tab Menu -->
+    <div class="tabs-menu">
+        <button class="tab-btn active" data-tab="checkin-tab">
+            <i class="fas fa-clipboard-list"></i> Check-in Peserta
+        </button>
+        <button class="tab-btn" data-tab="guests-tab">
+            <i class="fas fa-user-friends"></i> Data Tamu Pendamping
+            <span id="guestCountBadge" style="background:#e67e22; color:white; border-radius:20px; padding:2px 8px; margin-left:6px; font-size:11px;">0</span>
+        </button>
+    </div>
+
+    <!-- Tab Check-in -->
+    <div id="checkin-tab" class="tab-content active">
+        <!-- Search Panel -->
+        <div class="search-panel">
+            <div class="search-box">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Cari nama, perusahaan, atau nomor telepon...">
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">Semua (<span id="filterAll">0</span>)</button>
+                    <button class="filter-btn" data-filter="Hadir">✅ RSVP Hadir (<span id="filterHadir">0</span>)</button>
+                    <button class="filter-btn" data-filter="Belum Checkin">🟡 Belum Check-in (<span id="filterBelum">0</span>)</button>
+                    <button class="filter-btn" data-filter="Tidak Hadir">❌ Tidak Hadir (<span id="filterTidak">0</span>)</button>
+                    <button class="refresh-btn" id="refreshBtn"><i class="fas fa-sync-alt"></i> Refresh</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-users"></i></div>
+                <div class="stat-info">
+                    <h4>TOTAL UNDANGAN</h4>
+                    <div class="value" id="totalUndangan">0</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                <div class="stat-info">
+                    <h4>SUDAH CHECK-IN</h4>
+                    <div class="value" id="checkedInCount">0</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-hourglass-half"></i></div>
+                <div class="stat-info">
+                    <h4>BELUM CHECK-IN</h4>
+                    <div class="value" id="notCheckedCount">0</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-user-check"></i></div>
+                <div class="stat-info">
+                    <h4>TOTAL HADIR</h4>
+                    <div class="value" id="totalAttendedCount">0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Guest Table -->
+        <div class="guest-table-wrapper">
+            <div class="table-header">
+                <h3><i class="fas fa-clipboard-list"></i> Daftar Tamu & Registrasi Kehadiran</h3>
+                <span><i class="fas fa-user-plus"></i> Centang checkbox untuk mencatat kehadiran per individu</span>
+            </div>
+            <div class="table-container">
+                <table id="guestTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nama Lengkap</th>
+                            <th>Perusahaan</th>
+                            <th>Telepon</th>
+                            <th>Status RSVP</th>
+                            <th>Jml Tamu</th>
+                            <th>Check-in Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <tr><td colspan="8" class="empty-state"><i class="fas fa-spinner fa-pulse"></i> Memuat data...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab Data Tamu Pendamping (Hasil Pengisian) -->
+    <div id="guests-tab" class="tab-content">
+        <div class="search-panel">
+            <div class="search-box">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="guestSearchInput" placeholder="Cari nama tamu pendamping, email, atau nama peserta utama...">
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-guest-filter="all">Semua Tamu</button>
+                    <button class="export-btn" id="exportGuestsBtn">
+                        <i class="fas fa-download"></i> Export CSV
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="guest-table-wrapper">
+            <div class="table-header">
+                <h3><i class="fas fa-user-friends"></i> Data Tamu Pendamping Yang Sudah Diisi Saat Check-in</h3>
+                <span><i class="fas fa-info-circle"></i> Data ini diisi oleh peserta utama saat proses check-in</span>
+            </div>
+            <div class="table-container">
+                <table id="guestsTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nama Tamu Pendamping</th>
+                            <th>Nomor Telepon</th>
+                            <th>Email</th>
+                            <th>Diundang Oleh</th>
+                            <th>Perusahaan</th>
+                            <th>Waktu Check-in</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="guestsTableBody">
+                        <tr><td colspan="8" class="empty-state"><i class="fas fa-spinner fa-pulse"></i> Memuat data...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Detail Tamu Pendamping -->
+<div class="modal" id="detailGuestModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-user-friends"></i> Detail Tamu Pendamping</h3>
+            <button class="close-modal" id="closeDetailModalBtn">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="guest-info-card">
+                <p><span class="label"><i class="fas fa-user"></i> Nama:</span> <span id="detailGuestName">-</span></p>
+                <p><span class="label"><i class="fas fa-phone"></i> Telepon:</span> <span id="detailGuestPhone">-</span></p>
+                <p><span class="label"><i class="fas fa-envelope"></i> Email:</span> <span id="detailGuestEmail">-</span></p>
+                <p><span class="label"><i class="fas fa-calendar"></i> Check-in:</span> <span id="detailGuestTime">-</span></p>
+            </div>
+            <div class="guest-list-detail">
+                <h4><i class="fas fa-user-tie"></i> Diundang Oleh:</h4>
+                <div class="detail-guest-item">
+                    <p><strong>Nama Peserta Utama:</strong> <span id="detailMainGuestName">-</span></p>
+                    <p><strong>Perusahaan:</strong> <span id="detailMainGuestCompany">-</span></p>
+                    <p><strong>Telepon Peserta Utama:</strong> <span id="detailMainGuestPhone">-</span></p>
+                    <p><strong>Email Peserta Utama:</strong> <span id="detailMainGuestEmail">-</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Check-in (existing) -->
+<div class="modal" id="checkinModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-door-open"></i> Registrasi Kehadiran & Data Peserta</h3>
+            <button class="close-modal" id="closeModalBtn">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="guest-info-card">
+                <p><strong><i class="fas fa-user"></i> Nama Utama:</strong> <span id="modalGuestName">-</span></p>
+                <p><strong><i class="fas fa-building"></i> Perusahaan:</strong> <span id="modalGuestCompany">-</span></p>
+                <p><strong><i class="fas fa-phone"></i> Telepon:</strong> <span id="modalGuestPhone">-</span></p>
+            </div>
+
+            <div class="email-input-group">
+                <label><i class="fas fa-envelope"></i> Email Peserta Utama *</label>
+                <input type="email" id="primaryEmail" placeholder="contoh: nama@perusahaan.com">
+                <div class="email-hint">Email akan digunakan untuk mengirim sertifikat dan informasi follow-up</div>
+            </div>
+
+            <div id="additionalGuestsSection" style="display: none;">
+                <div class="guest-list-title">
+                    <i class="fas fa-user-friends"></i> Daftar Tamu Pendamping
+                    <small style="font-weight: normal;">(centang jika hadir & isi data lengkap)</small>
+                </div>
+                <div class="guest-list" id="additionalGuestsList"></div>
+            </div>
+
+            <div class="modal-buttons">
+                <button class="modal-btn confirm" id="confirmCheckinBtn">
+                    <i class="fas fa-save"></i> Simpan Kehadiran
+                </button>
+                <button class="modal-btn cancel" id="cancelModalBtn">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast-notif" id="toastNotif">
+    <i class="fas fa-info-circle"></i>
+    <span id="toastMsg">Pesan</span>
+</div>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
+<script>
+    // ==================== FIREBASE CONFIG ====================
+    const firebaseConfig = {
+        apiKey: "AIzaSyC8LlcI_ccRGieFNjlVFLfEr2c4PBg6J70",
+        authDomain: "logbook-e6ab3.firebaseapp.com",
+        databaseURL: "https://logbook-e6ab3-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "logbook-e6ab3",
+        storageBucket: "logbook-e6ab3.firebasestorage.app",
+        messagingSenderId: "484546392348",
+        appId: "1:484546392348:web:861616b680427c158ecad9"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+    const rsvpRef = database.ref('rsvps');
+
+    // ==================== GLOBAL VARIABLES ====================
+    let allGuests = [];
+    let allAdditionalGuests = [];
+    let currentFilter = 'all';
+    let currentSearch = '';
+    let currentGuestData = null;
+    let currentGuestSearch = '';
+
+    function showToast(message, type = 'success') {
+        const toast = document.getElementById('toastNotif');
+        const msgSpan = document.getElementById('toastMsg');
+        msgSpan.innerText = message;
+        toast.className = `toast-notif ${type} show`;
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 2500);
+    }
+
+    function formatTime(timestamp) {
+        if (!timestamp) return '-';
+        const d = new Date(timestamp);
+        return d.toLocaleString('id-ID', { hour: '2-digit', minute: '2-digit', day: 'numeric', month: 'short', year: 'numeric', hour12: false });
+    }
+
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    function isValidPhone(phone) {
+        const phoneRegex = /^[0-9+\-\s()]{8,15}$/;
+        return phoneRegex.test(phone);
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    // ==================== EKSTRAK DATA TAMU PENDAMPING ====================
+    function extractAllAdditionalGuests() {
+        const guests = [];
+        allGuests.forEach(mainGuest => {
+            if (mainGuest.additionalGuests && mainGuest.additionalGuests.length > 0) {
+                mainGuest.additionalGuests.forEach((additionalGuest, index) => {
+                    if (additionalGuest.checkedIn === true && additionalGuest.name && additionalGuest.name.trim() !== '') {
+                        guests.push({
+                            id: `${mainGuest.id}_guest_${index}`,
+                            name: additionalGuest.name,
+                            phone: additionalGuest.phone,
+                            email: additionalGuest.email,
+                            checkedInTime: additionalGuest.checkedInTime || mainGuest.checkedInTime,
+                            mainGuestId: mainGuest.id,
+                            mainGuestName: mainGuest.name,
+                            mainGuestCompany: mainGuest.company,
+                            mainGuestPhone: mainGuest.phone,
+                            mainGuestEmail: mainGuest.email || mainGuest.checkedInEmail || '-'
+                        });
+                    }
+                });
+            }
+        });
+        return guests;
+    }
+
+    function updateGuestCountBadge() {
+        const count = allAdditionalGuests.length;
+        const badge = document.getElementById('guestCountBadge');
+        if (badge) {
+            badge.innerText = count;
+        }
+    }
+
+    // ==================== FUNGSI MENGHITUNG STATISTIK ====================
+    function calculateIndividualStats() {
+        let totalUndangan = 0;
+        let totalCheckedIn = 0;
+        let totalAttended = 0;
+        
+        allGuests.forEach(guest => {
+            if (guest.attendance === 'Hadir') {
+                const totalInvitedThisGroup = 1 + (guest.guestCount - 1);
+                totalUndangan += totalInvitedThisGroup;
+                
+                if (guest.checkedIn === true) {
+                    let checkedInThisGroup = 1;
+                    if (guest.additionalGuests && guest.additionalGuests.length) {
+                        checkedInThisGroup += guest.additionalGuests.filter(ag => ag.checkedIn === true).length;
+                    }
+                    totalCheckedIn += checkedInThisGroup;
+                    totalAttended += checkedInThisGroup;
+                }
+            }
+        });
+        
+        const belumCheckIn = totalUndangan - totalCheckedIn;
+        
+        return {
+            totalUndangan: totalUndangan,
+            totalCheckedIn: totalCheckedIn,
+            belumCheckIn: belumCheckIn,
+            totalAttended: totalAttended
+        };
+    }
+
+    // Load data from Firebase
+    function loadData() {
+        rsvpRef.on('value', (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                allGuests = Object.keys(data).map(key => {
+                    const item = data[key];
+                    return {
+                        id: key,
+                        name: item.name || 'Tidak ada nama',
+                        company: item.company || '-',
+                        phone: item.phone || '-',
+                        email: item.email || '',
+                        attendance: item.attendance || 'Tidak Hadir',
+                        guestCount: item.guestCount ? parseInt(item.guestCount) : 1,
+                        message: item.message || '',
+                        timestamp: item.timestamp || null,
+                        checkedIn: item.checkedIn === true,
+                        checkedInTime: item.checkedInTime || null,
+                        checkedInEmail: item.checkedInEmail || '',
+                        additionalGuests: item.additionalGuests || []
+                    };
+                }).sort((a, b) => a.name.localeCompare(b.name));
+            } else {
+                allGuests = [];
+            }
+            
+            allAdditionalGuests = extractAllAdditionalGuests();
+            updateGuestCountBadge();
+            updateStatsAndRender();
+            renderGuestsTable();
+        }, (error) => {
+            console.error(error);
+            showToast('Gagal memuat data dari server', 'error');
+        });
+    }
+
+    function updateStatsAndRender() {
+        const stats = calculateIndividualStats();
+        
+        document.getElementById('totalUndangan').innerText = stats.totalUndangan;
+        document.getElementById('checkedInCount').innerText = stats.totalCheckedIn;
+        document.getElementById('notCheckedCount').innerText = stats.belumCheckIn;
+        document.getElementById('totalAttendedCount').innerText = stats.totalAttended;
+        
+        const totalRombongan = allGuests.length;
+        const hadirRombongan = allGuests.filter(g => g.attendance === 'Hadir').length;
+        const belumRombongan = allGuests.filter(g => g.attendance === 'Hadir' && !g.checkedIn).length;
+        const tidakRombongan = allGuests.filter(g => g.attendance !== 'Hadir').length;
+        
+        document.getElementById('filterAll').innerText = totalRombongan;
+        document.getElementById('filterHadir').innerText = hadirRombongan;
+        document.getElementById('filterBelum').innerText = belumRombongan;
+        document.getElementById('filterTidak').innerText = tidakRombongan;
+        
+        applyFilters();
+    }
+    
+    function applyFilters() {
+        let filtered = [...allGuests];
+        
+        if (currentFilter === 'Hadir') {
+            filtered = filtered.filter(g => g.attendance === 'Hadir');
+        } else if (currentFilter === 'Belum Checkin') {
+            filtered = filtered.filter(g => g.attendance === 'Hadir' && !g.checkedIn);
+        } else if (currentFilter === 'Tidak Hadir') {
+            filtered = filtered.filter(g => g.attendance !== 'Hadir');
+        }
+        
+        if (currentSearch.trim() !== '') {
+            const searchLower = currentSearch.toLowerCase();
+            filtered = filtered.filter(g => 
+                g.name.toLowerCase().includes(searchLower) ||
+                g.company.toLowerCase().includes(searchLower) ||
+                g.phone.includes(searchLower)
+            );
+        }
+        
+        renderTable(filtered);
+    }
+    
+    function renderTable(guests) {
+        const tbody = document.getElementById('tableBody');
+        if (!guests.length) {
+            tbody.innerHTML = '<tr><td colspan="8" class="empty-state"><i class="fas fa-search"></i> Tidak ada data sesuai filter</td></tr>';
+            return;
+        }
+        
+        tbody.innerHTML = guests.map((guest, idx) => {
+            let rsvpBadge = '';
+            if (guest.attendance === 'Hadir') rsvpBadge = '<span class="badge-status badge-hadir"><i class="fas fa-check-circle"></i> Hadir</span>';
+            else if (guest.attendance === 'Tidak Hadir') rsvpBadge = '<span class="badge-status badge-tidak"><i class="fas fa-times-circle"></i> Tidak Hadir</span>';
+            else rsvpBadge = '<span class="badge-status badge-belum"><i class="fas fa-question-circle"></i> Ragu</span>';
+            
+            let checkinBadge = '';
+            let actionButton = '';
+            
+            if (guest.attendance !== 'Hadir') {
+                checkinBadge = '<span class="badge-status badge-tidak"><i class="fas fa-ban"></i> Tidak hadir</span>';
+                actionButton = `<button class="checkin-btn" disabled style="background:#bdc3c7;"><i class="fas fa-times"></i> Tidak Hadir</button>`;
+            } else if (guest.checkedIn) {
+                const attendedCount = 1 + (guest.additionalGuests?.filter(ag => ag.checkedIn === true).length || 0);
+                const totalCount = guest.guestCount;
+                if (attendedCount < totalCount) {
+                    checkinBadge = `<span class="badge-status badge-partial"><i class="fas fa-user-check"></i> ${attendedCount}/${totalCount} hadir</span>`;
+                } else {
+                    checkinBadge = `<span class="badge-status badge-hadir"><i class="fas fa-stamp"></i> Lengkap (${formatTime(guest.checkedInTime)})</span>`;
+                }
+                actionButton = `<button class="checkin-btn undo-btn" data-id="${guest.id}" data-action="undo"><i class="fas fa-undo-alt"></i> Batalkan</button>`;
+            } else {
+                checkinBadge = '<span class="badge-status badge-belum"><i class="fas fa-clock"></i> Belum Check-in</span>';
+                actionButton = `<button class="checkin-btn" data-id="${guest.id}" data-action="checkin"><i class="fas fa-qrcode"></i> Check-in</button>`;
+            }
+            
+            return `
+                <tr>
+                    <td>${idx + 1}</td>
+                    <td><strong>${escapeHtml(guest.name)}</strong></td>
+                    <td>${escapeHtml(guest.company)}</td>
+                    <td>${escapeHtml(guest.phone)}</td>
+                    <td>${rsvpBadge}</td>
+                    <td><i class="fas fa-user-friends"></i> ${guest.guestCount} orang</td>
+                    <td>${checkinBadge}</td>
+                    <td>${actionButton}</td>
+                </tr>
+            `;
+        }).join('');
+        
+        document.querySelectorAll('.checkin-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const guestId = btn.getAttribute('data-id');
+                const action = btn.getAttribute('data-action');
+                if (action === 'checkin') {
+                    openCheckinModal(guestId);
+                } else if (action === 'undo') {
+                    undoCheckin(guestId);
+                }
+            });
+        });
+    }
+
+    function renderGuestsTable() {
+        let guests = [...allAdditionalGuests];
+        
+        if (currentGuestSearch.trim() !== '') {
+            const searchLower = currentGuestSearch.toLowerCase();
+            guests = guests.filter(g => 
+                g.name.toLowerCase().includes(searchLower) ||
+                g.email.toLowerCase().includes(searchLower) ||
+                g.mainGuestName.toLowerCase().includes(searchLower)
+            );
+        }
+        
+        const tbody = document.getElementById('guestsTableBody');
+        if (!guests.length) {
+            tbody.innerHTML = '<tr><td colspan="8" class="empty-state"><i class="fas fa-users"></i> Belum ada data tamu pendamping yang diisi</td></tr>';
+            return;
+        }
+        
+        tbody.innerHTML = guests.map((guest, idx) => {
+            return `
+                <tr>
+                    <td>${idx + 1}</td>
+                    <td><strong>${escapeHtml(guest.name)}</strong></td>
+                    <td>${escapeHtml(guest.phone)}</td>
+                    <td>${escapeHtml(guest.email)}</td>
+                    <td>${escapeHtml(guest.mainGuestName)}</td>
+                    <td>${escapeHtml(guest.mainGuestCompany)}</td>
+                    <td><span class="badge-status badge-success">${formatTime(guest.checkedInTime)}</span></td>
+                    <td><button class="detail-btn" data-id="${guest.id}" data-main-id="${guest.mainGuestId}" data-guest-idx="${guest.id.split('_').pop()}"><i class="fas fa-eye"></i> Detail</button></td>
+                </tr>
+            `;
+        }).join('');
+        
+        document.querySelectorAll('.detail-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const guestId = btn.getAttribute('data-id');
+                const guest = allAdditionalGuests.find(g => g.id === guestId);
+                if (guest) {
+                    openDetailModal(guest);
+                }
+            });
+        });
+    }
+
+    function openDetailModal(guest) {
+        document.getElementById('detailGuestName').innerText = guest.name;
+        document.getElementById('detailGuestPhone').innerText = guest.phone;
+        document.getElementById('detailGuestEmail').innerText = guest.email;
+        document.getElementById('detailGuestTime').innerText = formatTime(guest.checkedInTime);
+        document.getElementById('detailMainGuestName').innerText = guest.mainGuestName;
+        document.getElementById('detailMainGuestCompany').innerText = guest.mainGuestCompany;
+        document.getElementById('detailMainGuestPhone').innerText = guest.mainGuestPhone;
+        document.getElementById('detailMainGuestEmail').innerText = guest.mainGuestEmail;
+        
+        document.getElementById('detailGuestModal').classList.add('show');
+    }
+
+    function closeDetailModal() {
+        document.getElementById('detailGuestModal').classList.remove('show');
+    }
+
+    function exportGuestsToCSV() {
+        if (allAdditionalGuests.length === 0) {
+            showToast('Tidak ada data tamu pendamping untuk diekspor', 'info');
+            return;
+        }
+        
+        const headers = ['No', 'Nama Tamu Pendamping', 'Nomor Telepon', 'Email', 'Diundang Oleh', 'Perusahaan', 'Telepon Peserta Utama', 'Email Peserta Utama', 'Waktu Check-in'];
+        const rows = allAdditionalGuests.map((guest, idx) => {
+            return [
+                idx + 1,
+                guest.name,
+                guest.phone,
+                guest.email,
+                guest.mainGuestName,
+                guest.mainGuestCompany,
+                guest.mainGuestPhone,
+                guest.mainGuestEmail,
+                formatTime(guest.checkedInTime)
+            ];
+        });
+        
+        const csvContent = [headers, ...rows].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+        const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        link.href = url;
+        link.setAttribute('download', 'data_tamu_pendamping.csv');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        showToast('Export CSV berhasil!', 'success');
+    }
+    
+    // ==================== CHECK-IN MODAL ====================
+    function openCheckinModal(guestId) {
+        const guest = allGuests.find(g => g.id === guestId);
+        if (!guest) return;
+        if (guest.checkedIn) {
+            showToast('Tamu sudah melakukan check-in sebelumnya!', 'error');
+            return;
+        }
+        
+        currentGuestData = { ...guest };
+        
+        document.getElementById('modalGuestName').innerText = guest.name;
+        document.getElementById('modalGuestCompany').innerText = guest.company;
+        document.getElementById('modalGuestPhone').innerText = guest.phone;
+        document.getElementById('primaryEmail').value = guest.email || '';
+        
+        const additionalCount = guest.guestCount - 1;
+        const additionalSection = document.getElementById('additionalGuestsSection');
+        const additionalList = document.getElementById('additionalGuestsList');
+        
+        if (additionalCount > 0) {
+            additionalSection.style.display = 'block';
+            const existingAdditional = guest.additionalGuests || [];
+            let additionalHtml = '';
+            
+            for (let i = 1; i <= additionalCount; i++) {
+                const existing = existingAdditional[i-1] || {};
+                additionalHtml += `
+                    <div class="guest-item" data-index="${i-1}">
+                        <div class="guest-header">
+                            <input type="checkbox" class="guest-checkbox" id="guest_${i}" ${existing.checkedIn === true ? 'checked' : ''}>
+                            <label for="guest_${i}"><strong>Tamu Pendamping ${i}</strong></label>
+                        </div>
+                        <div class="guest-details">
+                            <input type="text" class="guest-name" placeholder="Nama lengkap *" value="${escapeHtml(existing.name || '')}" ${existing.checkedIn !== true ? 'disabled' : ''}>
+                            <input type="tel" class="guest-phone" placeholder="Nomor telepon *" value="${escapeHtml(existing.phone || '')}" ${existing.checkedIn !== true ? 'disabled' : ''}>
+                            <input type="email" class="guest-email" placeholder="Email *" value="${escapeHtml(existing.email || '')}" ${existing.checkedIn !== true ? 'disabled' : ''}>
+                        </div>
+                    </div>
+                `;
+            }
+            additionalList.innerHTML = additionalHtml;
+            
+            document.querySelectorAll('.guest-checkbox').forEach((checkbox) => {
+                checkbox.addEventListener('change', function() {
+                    const guestItem = this.closest('.guest-item');
+                    const inputs = guestItem.querySelectorAll('.guest-details input');
+                    inputs.forEach(input => {
+                        input.disabled = !this.checked;
+                        if (!this.checked) input.value = '';
+                    });
+                });
+            });
+        } else {
+            additionalSection.style.display = 'none';
+            additionalList.innerHTML = '';
+        }
+        
+        document.getElementById('checkinModal').classList.add('show');
+    }
+    
+    function closeModal() {
+        document.getElementById('checkinModal').classList.remove('show');
+        currentGuestData = null;
+        document.getElementById('primaryEmail').value = '';
+    }
+    
+    async function performCheckin() {
+        if (!currentGuestData) return;
+        
+        const primaryEmail = document.getElementById('primaryEmail').value.trim();
+        
+        if (!primaryEmail) {
+            showToast('Email peserta utama wajib diisi!', 'error');
+            return;
+        }
+        
+        if (!isValidEmail(primaryEmail)) {
+            showToast('Format email tidak valid!', 'error');
+            return;
+        }
+        
+        const additionalGuests = [];
+        const additionalItems = document.querySelectorAll('#additionalGuestsList .guest-item');
+        
+        for (let i = 0; i < additionalItems.length; i++) {
+            const item = additionalItems[i];
+            const checkbox = item.querySelector('.guest-checkbox');
+            const nameInput = item.querySelector('.guest-name');
+            const phoneInput = item.querySelector('.guest-phone');
+            const emailInput = item.querySelector('.guest-email');
+            
+            if (checkbox.checked) {
+                const name = nameInput ? nameInput.value.trim() : '';
+                const phone = phoneInput ? phoneInput.value.trim() : '';
+                const email = emailInput ? emailInput.value.trim() : '';
+                
+                if (!name) {
+                    showToast(`Nama untuk Tamu Pendamping ${i+1} wajib diisi!`, 'error');
+                    return;
+                }
+                if (!phone) {
+                    showToast(`Nomor telepon untuk Tamu Pendamping ${i+1} wajib diisi!`, 'error');
+                    return;
+                }
+                if (!email) {
+                    showToast(`Email untuk Tamu Pendamping ${i+1} wajib diisi!`, 'error');
+                    return;
+                }
+                if (!isValidEmail(email)) {
+                    showToast(`Format email Tamu Pendamping ${i+1} tidak valid!`, 'error');
+                    return;
+                }
+                if (!isValidPhone(phone)) {
+                    showToast(`Format nomor telepon Tamu Pendamping ${i+1} tidak valid! (8-15 digit)`, 'error');
+                    return;
+                }
+                
+                additionalGuests.push({
+                    name: name,
+                    phone: phone,
+                    email: email,
+                    checkedIn: true,
+                    checkedInTime: new Date().toISOString()
+                });
+            } else {
+                additionalGuests.push({
+                    name: '',
+                    phone: '',
+                    email: '',
+                    checkedIn: false,
+                    checkedInTime: null
+                });
+            }
+        }
+        
+        const additionalCheckedCount = additionalGuests.filter(ag => ag.checkedIn).length;
+        const totalChecked = 1 + additionalCheckedCount;
+        
+        const updateData = {
+            checkedIn: true,
+            checkedInTime: new Date().toISOString(),
+            checkedInEmail: primaryEmail,
+            email: primaryEmail,
+            additionalGuests: additionalGuests,
+            totalAttended: totalChecked
+        };
+        
+        try {
+            await rsvpRef.child(currentGuestData.id).update(updateData);
+            showToast(`✅ Check-in berhasil! ${totalChecked} dari ${currentGuestData.guestCount} orang hadir`, 'success');
+            closeModal();
+        } catch (err) {
+            console.error(err);
+            showToast('Gagal melakukan check-in', 'error');
+        }
+    }
+    
+    async function undoCheckin(guestId) {
+        const guest = allGuests.find(g => g.id === guestId);
+        if (!guest) return;
+        
+        if (!confirm(`Batalkan check-in untuk rombongan ${guest.name}? Semua data kehadiran akan dihapus.`)) return;
+        
+        try {
+            await rsvpRef.child(guestId).update({
+                checkedIn: false,
+                checkedInTime: null,
+                checkedInEmail: null,
+                additionalGuests: [],
+                totalAttended: null
+            });
+            showToast(`Check-in dibatalkan untuk ${guest.name}`, 'info');
+        } catch (err) {
+            showToast('Gagal membatalkan check-in', 'error');
+        }
+    }
+    
+    // ==================== TAB HANDLING ====================
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        document.getElementById(tabId).classList.add('active');
+        document.querySelector(`.tab-btn[data-tab="${tabId}"]`).classList.add('active');
+        
+        if (tabId === 'guests-tab') {
+            renderGuestsTable();
+        }
+    }
+    
+    // ==================== EVENT LISTENERS ====================
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+        currentSearch = e.target.value;
+        applyFilters();
+    });
+    
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentFilter = btn.getAttribute('data-filter');
+            applyFilters();
+        });
+    });
+    
+    document.getElementById('refreshBtn').addEventListener('click', () => {
+        showToast('Memuat ulang data...', 'info');
+        loadData();
+    });
+    
+    document.getElementById('confirmCheckinBtn').addEventListener('click', performCheckin);
+    document.getElementById('cancelModalBtn').addEventListener('click', closeModal);
+    document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+    
+    document.getElementById('exportGuestsBtn').addEventListener('click', exportGuestsToCSV);
+    document.getElementById('closeDetailModalBtn').addEventListener('click', closeDetailModal);
+    
+    document.getElementById('guestSearchInput').addEventListener('input', (e) => {
+        currentGuestSearch = e.target.value;
+        renderGuestsTable();
+    });
+    
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabId = btn.getAttribute('data-tab');
+            switchTab(tabId);
+        });
+    });
+    
+    window.addEventListener('click', (e) => {
+        const modal = document.getElementById('checkinModal');
+        if (e.target === modal) closeModal();
+        const detailModal = document.getElementById('detailGuestModal');
+        if (e.target === detailModal) closeDetailModal();
+    });
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+        loadData();
+    });
+</script>
+</body>
+</html>
