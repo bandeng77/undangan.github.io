@@ -403,13 +403,15 @@
     const rsvpRef = database.ref('rsvps');
     const winnersRef = database.ref('wheel_winners_v2'); // menyimpan { name, company, prize, timestamp }
 
-    // ---------- DAFTAR HADIAH (dengan stok) ----------
+    // ---------- DAFTAR HADIAH (dengan stok) - DITAMBAHKAN VOUCHER MAP 500rb 5 BUAH ----------
     let prizes = [
         { id: "tv", name: "TV 43 Inch", icon: "📺", stock: 1, initialStock: 1 },
         { id: "smartphone", name: "Smartphone", icon: "📱", stock: 2, initialStock: 2 },
         { id: "speaker", name: "Speaker Portable", icon: "🔊", stock: 1, initialStock: 1 },
         { id: "tws", name: "TWS Earbud", icon: "🎧", stock: 1, initialStock: 1 },
-        { id: "smartwatch", name: "Smartwatch", icon: "⌚", stock: 1, initialStock: 1 }
+        { id: "smartwatch", name: "Smartwatch", icon: "⌚", stock: 1, initialStock: 1 },
+        // TAMBAHAN: Voucher MAP 500rb, stock 5
+        { id: "voucher_map", name: "Voucher MAP 500rb", icon: "🧾", stock: 5, initialStock: 5 }
     ];
 
     let guestsList = [];            // { id, name, company }
@@ -607,7 +609,9 @@
     }
 
     function resetPrizeStockFromHistory() {
+        // Reset stok ke nilai awal
         prizes.forEach(p => p.stock = p.initialStock);
+        // Kurangi berdasarkan history pemenang yang sudah ada
         winnersHistory.forEach(w => {
             const prizeName = w.prize;
             const prizeItem = prizes.find(p => p.name === prizeName);
