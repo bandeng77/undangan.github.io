@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Lucky Draw | Terintegrasi dengan Data Tamu</title>
+    <title>Wheel of Fortune | Lucky Draw Hadiah Spesial</title>
     <style>
         * {
             margin: 0;
@@ -328,16 +328,6 @@
         }
 
         @keyframes spin { 100% { transform: rotate(360deg); } }
-        
-        .sync-status {
-            display: inline-block;
-            margin-left: 15px;
-            font-size: 0.7rem;
-            background: rgba(0,0,0,0.6);
-            padding: 4px 12px;
-            border-radius: 20px;
-            color: #FFD966;
-        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -347,8 +337,7 @@
 
 <div class="wheel-container">
     <div class="event-header">
-        <h1><i class="fas fa-gift"></i> Lucky Draw - Fire Safety Summit</h1>
-        <p><i class="fas fa-users"></i> Data tamu terintegrasi otomatis dari sistem registrasi <span id="syncIndicator" class="sync-status"><i class="fas fa-check-circle"></i> Tersinkron</span></p>
+        <h1><i class="fas fa-gift"></i> Lucky Draw </h1>
     </div>
 
     <div class="main-layout">
@@ -369,10 +358,9 @@
                 <div id="winnerPrizeDisplay" class="winner-prize">—</div>
             </div>
             <div class="guest-stats">
-                <div class="stat-item"><span><i class="fas fa-users"></i> Total Tamu (RSVP Hadir)</span><span id="totalGuests">0</span></div>
+                <div class="stat-item"><span><i class="fas fa-users"></i> Total Tamu</span><span id="totalGuests">0</span></div>
                 <div class="stat-item"><span><i class="fas fa-history"></i> Sudah Menang</span><span id="wonCount">0</span></div>
                 <div class="stat-item"><span><i class="fas fa-undo-alt"></i> Sisa Belum Menang</span><span id="remainingCount">0</span></div>
-                <div class="stat-item"><span><i class="fas fa-check-circle"></i> Tamu Check-in Aktif</span><span id="checkedInCount">0</span></div>
             </div>
         </div>
     </div>
@@ -389,7 +377,7 @@
 <div class="loading-overlay" id="loadingOverlay"><div class="spinner"></div></div>
 
 <script>
-    // ==================== FIREBASE CONFIG (SAMA DENGAN ADMIN CHECKIN) ====================
+    // ---------- FIREBASE (sama dengan admin panel) ----------
     const firebaseConfig = {
         apiKey: "AIzaSyC8LlcI_ccRGieFNjlVFLfEr2c4PBg6J70",
         authDomain: "logbook-e6ab3.firebaseapp.com",
@@ -402,9 +390,9 @@
     firebase.initializeApp(firebaseConfig);
     const database = firebase.database();
     const rsvpRef = database.ref('rsvps');
-    const winnersRef = database.ref('wheel_winners_v2'); 
+    const winnersRef = database.ref('wheel_winners_v2'); // menyimpan { name, company, prize, timestamp }
 
-    // ==================== DAFTAR HADIAH ====================
+    // ---------- DAFTAR HADIAH (dengan stok) ----------
     let prizes = [
         { id: "tv", name: "TV 43 Inch", icon: "📺", stock: 1, initialStock: 1 },
         { id: "smartphone", name: "Smartphone", icon: "📱", stock: 2, initialStock: 2 },
@@ -413,16 +401,17 @@
         { id: "smartwatch", name: "Smartwatch", icon: "⌚", stock: 1, initialStock: 1 }
     ];
 
-    // Data utama
-    let allRegisteredGuests = [];      // SEMUA tamu yang RSVP Hadir (termasuk yang belum check-in)
-    let guestsList = [];               // HANYA yang eligible untuk spin: tamu dengan status RSVP 'Hadir' (bisa di-filter lebih lanjut)
-    let winnersHistory = [];            // { name, company, prize, timestamp }
-    let availableIndices = [];          // index di guestsList yang belum pernah menang
+    let guestsList = [];            // { id, name, company }
+    let winnersHistory = [];        // { name, company, prize, timestamp }
+    let availableIndices = [];      // index di guestsList yang belum pernah menang
     let currentSpinInProgress = false;
+    let animationId = null;
     let currentRotation = 0;
+    let spinStartTime = 0;
+    const SPIN_DURATION = 8000;     // 8 detik penuh
+    let targetSegmentIndex = -1;
     let wheelSegments = [];
-    let selectedPrize = null;
-    let realtimeListenerActive = false;
+    let selectedPrize = null;       // prize object yang dipilih
 
     const canvas = document.getElementById('wheelCanvas');
     const ctx = canvas.getContext('2d');
@@ -443,6 +432,7 @@
         setTimeout(() => toast.style.opacity = '0', 2800);
     }
 
+    // Konfetti sederhana
     function startConfetti() {
         let canvasConf = document.createElement('canvas');
         canvasConf.style.position = 'fixed';
@@ -486,122 +476,48 @@
         requestAnimationFrame(animate);
     }
 
-    // ========== AMBIL DATA TAMU DARI RSVP (OTOMATIS) ==========
-    // Hanya mengambil tamu dengan status attendance === 'Hadir' (RSVP Hadir)
-    async function loadGuestsFromRSVP() {
+    // ---------- LOAD DATA TAMU DARI RSVP ----------
+    async function loadGuests() {
         showLoading(true);
         try {
             const snap = await rsvpRef.once('value');
             const data = snap.val();
             if (data) {
-                allRegisteredGuests = Object.keys(data).map(key => ({
+                guestsList = Object.keys(data).map(key => ({
                     id: key,
                     name: data[key].name || 'Tanpa Nama',
-                    company: data[key].company || '-',
-                    attendance: data[key].attendance || 'Tidak Hadir',
-                    checkedIn: data[key].checkedIn === true,
-                    email: data[key].email || ''
-                }));
+                    company: data[key].company || '-'
+                })).filter(g => g.name && g.name.trim() !== '');
             } else {
-                allRegisteredGuests = [];
+                guestsList = [];
             }
-            
-            // Filter: HANYA yang RSVP 'Hadir' yang eligible untuk Lucky Draw
-            guestsList = allRegisteredGuests.filter(g => g.attendance === 'Hadir');
-            
-            // Update tampilan jumlah tamu check-in aktif (opsional)
-            const checkedInCount = allRegisteredGuests.filter(g => g.checkedIn === true && g.attendance === 'Hadir').length;
-            document.getElementById('checkedInCount').innerText = checkedInCount;
-            
-            // Load history pemenang dari Firebase
             await loadWinnersHistory();
-            
-            // Update daftar eligible (belum menang)
-            updateAvailableIndices();
-            
-            // Render pilihan hadiah & update UI
-            renderPrizeOptions();
-            drawWheel();
-            updateStatsUI();
-            
-            if (guestsList.length === 0) {
-                showToast("Belum ada tamu dengan status RSVP Hadir. Silakan isi form undangan terlebih dahulu.", true);
-            } else {
-                showToast(`Data berhasil disinkron: ${guestsList.length} tamu eligible (RSVP Hadir)`, false);
-            }
-        } catch(e) {
-            console.error(e);
-            showToast("Gagal memuat data tamu dari server", true);
-        } finally {
-            showLoading(false);
-        }
-    }
-    
-    // Setup realtime listener untuk update otomatis ketika ada perubahan data RSVP (check-in baru atau tamu baru)
-    function setupRealtimeSync() {
-        if (realtimeListenerActive) return;
-        realtimeListenerActive = true;
-        rsvpRef.on('value', async (snapshot) => {
-            // Data berubah, refresh data tamu dan history pemenang tanpa reload halaman
-            const data = snapshot.val();
-            if (data) {
-                allRegisteredGuests = Object.keys(data).map(key => ({
-                    id: key,
-                    name: data[key].name || 'Tanpa Nama',
-                    company: data[key].company || '-',
-                    attendance: data[key].attendance || 'Tidak Hadir',
-                    checkedIn: data[key].checkedIn === true,
-                    email: data[key].email || ''
-                }));
-            } else {
-                allRegisteredGuests = [];
-            }
-            
-            guestsList = allRegisteredGuests.filter(g => g.attendance === 'Hadir');
-            const checkedInCount = allRegisteredGuests.filter(g => g.checkedIn === true && g.attendance === 'Hadir').length;
-            document.getElementById('checkedInCount').innerText = checkedInCount;
-            
-            // Reload winners untuk update stok dan history
-            await loadWinnersHistory(false); // false = jangan tampilkan loading lagi
             updateAvailableIndices();
             renderPrizeOptions();
             drawWheel();
             updateStatsUI();
-            
-            const syncIndicator = document.getElementById('syncIndicator');
-            syncIndicator.innerHTML = '<i class="fas fa-sync-alt"></i> Tersinkron';
-            setTimeout(() => {
-                if (syncIndicator) syncIndicator.innerHTML = '<i class="fas fa-check-circle"></i> Tersinkron';
-            }, 1500);
-        });
+            if (guestsList.length === 0) showToast("Belum ada data RSVP, silakan isi form undangan", true);
+        } catch(e) { showToast("Gagal muat data", true); } 
+        finally { showLoading(false); }
     }
 
-    async function loadWinnersHistory(showLoad = true) {
-        if (showLoad) showLoading(true);
-        try {
-            const snap = await winnersRef.once('value');
-            const data = snap.val();
-            if (data) {
-                winnersHistory = Object.keys(data).map(key => ({ id: key, ...data[key] }))
-                    .sort((a,b) => (b.timestamp||0) - (a.timestamp||0));
-            } else {
-                winnersHistory = [];
-            }
-            // Reset stok berdasarkan history
-            resetPrizeStockFromHistory();
-            renderHistory();
-            updateStatsUI();
-        } catch(e) {
-            console.error(e);
-        } finally {
-            if (showLoad) showLoading(false);
-        }
+    async function loadWinnersHistory() {
+        const snap = await winnersRef.once('value');
+        const data = snap.val();
+        if (data) {
+            winnersHistory = Object.keys(data).map(key => ({ id: key, ...data[key] }))
+                .sort((a,b) => (b.timestamp||0) - (a.timestamp||0));
+        } else { winnersHistory = []; }
+        // update stok hadiah berdasarkan history
+        resetPrizeStockFromHistory();
+        renderHistory();
+        updateStatsUI();
     }
 
     function resetPrizeStockFromHistory() {
-        // Reset stok ke awal
+        // reset stok ke awal
         prizes.forEach(p => p.stock = p.initialStock);
-        // Kurangi berdasarkan pemenang yang sudah ada
+        // kurangi berdasarkan pemenang sebelumnya
         winnersHistory.forEach(w => {
             const prizeName = w.prize;
             const prizeItem = prizes.find(p => p.name === prizeName);
@@ -611,18 +527,13 @@
     }
 
     function updateAvailableIndices() {
-        // Hanya tamu yang eligible (RSVP Hadir) dan belum tercatat sebagai pemenang di history
         const winnerNames = new Set(winnersHistory.map(w => w.name));
         availableIndices = [];
         for (let i = 0; i < guestsList.length; i++) {
-            if (!winnerNames.has(guestsList[i].name)) {
-                availableIndices.push(i);
-            }
+            if (!winnerNames.has(guestsList[i].name)) availableIndices.push(i);
         }
         spinBtn.disabled = (availableIndices.length === 0);
-        if (availableIndices.length === 0 && guestsList.length) {
-            showToast("Semua tamu yang hadir sudah pernah menang! Reset history untuk spin lagi", false);
-        }
+        if (availableIndices.length === 0 && guestsList.length) showToast("Semua tamu sudah pernah menang! Reset history untuk spin lagi", false);
         updateStatsUI();
     }
 
@@ -632,9 +543,9 @@
         document.getElementById('remainingCount').innerText = guestsList.length - winnersHistory.length;
     }
 
+    // Render pilihan hadiah
     function renderPrizeOptions() {
         const container = document.getElementById('prizeContainer');
-        if (!container) return;
         container.innerHTML = prizes.map(prize => `
             <div class="prize-card ${selectedPrize?.id === prize.id ? 'selected' : ''} ${prize.stock <= 0 ? 'disabled' : ''}" data-id="${prize.id}">
                 <div class="prize-icon">${prize.icon}</div>
@@ -662,19 +573,18 @@
         });
     }
 
-    // Gambar roda berdasarkan guestsList yang eligible dan belum menang
+    // Gambar roda berdasarkan availableIndices (hanya yg belum pernah menang)
     function drawWheel() {
         if (!guestsList.length || availableIndices.length === 0) {
             ctx.clearRect(0, 0, 500, 500);
             ctx.fillStyle = "#FFD966";
             ctx.font = "bold 16px 'Segoe UI'";
-            ctx.fillText(guestsList.length === 0 ? "Tidak ada tamu" : "Semua sudah menang", 160, 250);
+            ctx.fillText("Tidak ada peserta", 170, 250);
             return;
         }
         const segmentIndices = [...availableIndices];
         wheelSegments = segmentIndices.map(idx => guestsList[idx]);
         const count = wheelSegments.length;
-        if (count === 0) return;
         const angleStep = (Math.PI * 2) / count;
         for (let i = 0; i < count; i++) {
             const start = i * angleStep + currentRotation;
@@ -701,7 +611,7 @@
             ctx.fillText(shortComp, 125, 22);
             ctx.restore();
         }
-        // Pointer
+        // Pointer segitiga
         ctx.beginPath();
         ctx.moveTo(475, 240);
         ctx.lineTo(495, 250);
@@ -713,8 +623,7 @@
         ctx.fillText("⬆️", 478, 245);
     }
 
-    // SPIN dengan animasi
-    const SPIN_DURATION = 8000;
+    // SPIN dengan durasi 8 detik (perlambatan cubic)
     async function spinWheel() {
         if (currentSpinInProgress) { showToast("Spin sedang berjalan...", true); return; }
         if (!guestsList.length) { showToast("Data tamu kosong", true); return; }
@@ -725,32 +634,24 @@
         currentSpinInProgress = true;
         spinBtn.disabled = true;
 
-        // Pilih pemenang secara acak dari availableIndices (hanya yang eligible & belum menang)
+        // pilih pemenang secara acak dari availableIndices
         const randomIdx = Math.floor(Math.random() * availableIndices.length);
         const winnerGlobalIdx = availableIndices[randomIdx];
         const winner = guestsList[winnerGlobalIdx];
-        
-        // Validasi winner tidak undefined
-        if (!winner) {
-            showToast("Error: data pemenang tidak valid", true);
-            currentSpinInProgress = false;
-            spinBtn.disabled = false;
-            return;
-        }
-        
-        // Cari posisi segmen di wheelSegments (berdasarkan nama & perusahaan)
+
+        // Cari posisi segmen di wheelSegments (berdasarkan nama)
         const segmentPos = wheelSegments.findIndex(seg => seg.name === winner.name && seg.company === winner.company);
-        if (segmentPos === -1) {
-            showToast("Error internal, coba lagi", true);
+        if (segmentPos === -1) { // fallback
             currentSpinInProgress = false;
             spinBtn.disabled = false;
+            showToast("Error internal, coba lagi", true);
             return;
         }
-        
         const totalSeg = wheelSegments.length;
         const anglePer = (Math.PI * 2) / totalSeg;
+        // target sudut agar segmen tepat di pointer (pointer di sudut 0 rad)
         let targetRot = (- (segmentPos * anglePer) - (anglePer/2));
-        const extraRounds = (Math.random() * 8 + 10) * 2 * Math.PI;
+        const extraRounds = (Math.random() * 8 + 10) * 2 * Math.PI; // 10-18 putaran
         let finalDelta = targetRot - (currentRotation % (Math.PI*2)) + extraRounds;
         const startRotation = currentRotation;
         const startTime = performance.now();
@@ -758,6 +659,7 @@
         function animateSpin(now) {
             const elapsed = now - startTime;
             let t = Math.min(1, elapsed / SPIN_DURATION);
+            // easing cubic out: semakin lambat di akhir
             const ease = 1 - Math.pow(1 - t, 3);
             const newRotation = startRotation + finalDelta * ease;
             currentRotation = newRotation % (Math.PI * 2);
@@ -765,10 +667,12 @@
             if (t < 1) {
                 requestAnimationFrame(animateSpin);
             } else {
+                // finish: set presisi
                 currentRotation = targetRot;
                 while (currentRotation < 0) currentRotation += Math.PI*2;
                 currentRotation %= Math.PI*2;
                 drawWheel();
+                // simpan pemenang + hadiah
                 saveWinnerWithPrize(winner, selectedPrize.name);
                 currentSpinInProgress = false;
                 spinBtn.disabled = false;
@@ -780,15 +684,17 @@
 
     async function saveWinnerWithPrize(winner, prizeName) {
         try {
+            // cek stok sebelum simpan (validasi double)
             const prizeItem = prizes.find(p => p.name === prizeName);
             if (!prizeItem || prizeItem.stock <= 0) {
                 showToast(`Maaf, stok ${prizeName} sudah habis! Refresh halaman`, true);
                 return;
             }
-            // Kurangi stok lokal
+            // kurangi stok di memori
             prizeItem.stock--;
             renderPrizeOptions();
-            
+
+            // simpan ke firebase
             const newWinner = {
                 name: winner.name,
                 company: winner.company,
@@ -796,19 +702,17 @@
                 timestamp: Date.now()
             };
             await winnersRef.push(newWinner);
-            await loadWinnersHistory(true);
+            // reload history dan update state
+            await loadWinnersHistory();
             updateAvailableIndices();
             drawWheel();
             updateStatsUI();
-            
+            // tampilkan di kartu pemenang
             document.getElementById('winnerName').innerHTML = winner.name;
             document.getElementById('winnerCompany').innerHTML = `<i class="fas fa-building"></i> ${winner.company}`;
             document.getElementById('winnerPrizeDisplay').innerHTML = `<i class="fas fa-gift"></i> ${prizeName}`;
             showToast(`🎉 Selamat! ${winner.name} mendapatkan ${prizeName} 🎉`, false);
-        } catch(e) {
-            console.error(e);
-            showToast("Gagal simpan pemenang", true);
-        }
+        } catch(e) { showToast("Gagal simpan pemenang", true); }
     }
 
     async function resetAllWinners() {
@@ -820,7 +724,7 @@
             prizes.forEach(p => p.stock = p.initialStock);
             selectedPrize = null;
             renderPrizeOptions();
-            await loadWinnersHistory(false);
+            await loadWinnersHistory(); // reload kosong
             updateAvailableIndices();
             drawWheel();
             updateStatsUI();
@@ -828,11 +732,8 @@
             document.getElementById('winnerCompany').innerHTML = "—";
             document.getElementById('winnerPrizeDisplay').innerHTML = "—";
             showToast("Semua data pemenang telah direset!", false);
-        } catch(e) {
-            showToast("Gagal reset", true);
-        } finally {
-            showLoading(false);
-        }
+        } catch(e) { showToast("Gagal reset", true); }
+        finally { showLoading(false); }
     }
 
     function renderHistory() {
@@ -852,23 +753,18 @@
 
     function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
 
-    // Event listeners
-    document.getElementById('spinButton')?.addEventListener('click', spinWheel);
-    document.getElementById('resetAllBtn')?.addEventListener('click', resetAllWinners);
-    
-    // Auth admin sederhana
+    // Event & init
+    document.getElementById('spinButton').addEventListener('click', spinWheel);
+    document.getElementById('resetAllBtn').addEventListener('click', resetAllWinners);
+
+    // auth admin
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('access') !== 'admin2026') {
         const pwd = prompt('🔐 Password Admin Lucky Draw:');
         if (pwd !== 'admin2026') { alert('Akses ditolak!'); window.location.href = 'index.html'; }
     }
 
-    // Inisialisasi: load data dan realtime sync
-    loadGuestsFromRSVP().then(() => {
-        setupRealtimeSync();
-        drawWheel();
-    });
-    
+    loadGuests().then(() => drawWheel());
     window.addEventListener('resize', () => drawWheel());
 </script>
 </body>
