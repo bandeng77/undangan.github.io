@@ -339,6 +339,33 @@
             pointer-events: none;
             z-index: 9999;
         }
+        
+        /* Tombol Try Again kecil di atas konfeti */
+        .tryagain-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid #FFD966;
+            color: #FFD966;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10001;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .tryagain-btn:hover {
+            background: #FFD966;
+            color: #1e1e2a;
+            transform: scale(1.02);
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -403,15 +430,15 @@
     const rsvpRef = database.ref('rsvps');
     const winnersRef = database.ref('wheel_winners_v2'); // menyimpan { name, company, prize, timestamp }
 
-    // ---------- DAFTAR HADIAH (dengan stok) - DITAMBAHKAN VOUCHER MAP 500rb 5 BUAH ----------
+    // ---------- DAFTAR HADIAH (dengan stok) - Voucher MAP 5 -> sisa 3 karena 2 sudah keluar ----------
     let prizes = [
         { id: "tv", name: "TV 43 Inch", icon: "📺", stock: 1, initialStock: 1 },
         { id: "smartphone", name: "Smartphone", icon: "📱", stock: 2, initialStock: 2 },
         { id: "speaker", name: "Speaker Portable", icon: "🔊", stock: 1, initialStock: 1 },
         { id: "tws", name: "TWS Earbud", icon: "🎧", stock: 1, initialStock: 1 },
         { id: "smartwatch", name: "Smartwatch", icon: "⌚", stock: 1, initialStock: 1 },
-        // TAMBAHAN: Voucher MAP 500rb, stock 5
-        { id: "voucher_map", name: "Voucher MAP 500rb", icon: "🧾", stock: 5, initialStock: 5 }
+        // Voucher MAP 500rb, stock awal 5, nanti akan berkurang sesuai history (2 sudah keluar jadi sisa 3)
+        { id: "voucher_map", name: "Voucher MAP 500rb", icon: "🧾", stock: 3, initialStock: 3 }
     ];
 
     let guestsList = [];            // { id, name, company }
@@ -419,9 +446,11 @@
     let availableIndices = [];      // index di guestsList yang belum pernah menang
     let currentSpinInProgress = false;
     let currentRotation = 0;
-    let targetSegmentIndex = -1;
     let wheelSegments = [];
     let selectedPrize = null;       // prize object yang dipilih
+    
+    // Daftar nama yang akan DIHAPUS dari spin (tidak boleh ikut undian)
+    const excludedNames = ["Muhammad Rahmat Hidayat", "Fx Agung Yulyanto"];
 
     const canvas = document.getElementById('wheelCanvas');
     const ctx = canvas.getContext('2d');
@@ -442,12 +471,43 @@
         setTimeout(() => toast.style.opacity = '0', 2800);
     }
 
-    // ========== KONFETI DENGAN NAMA PEMENANG ==========
-    function startWinnerConfetti(winnerName, prizeName) {
-        // Buat canvas konfeti yang menutupi layar
+    // ========== KONFETI DENGAN NAMA PEMENANG + TOMBOL TRY AGAIN ==========
+    let activeTryAgainBtn = null;
+    
+    function startWinnerConfetti(winnerName, prizeName, onTryAgain) {
+        // Hapus tombol try again sebelumnya jika ada
+        if (activeTryAgainBtn && document.body.contains(activeTryAgainBtn)) {
+            activeTryAgainBtn.remove();
+            activeTryAgainBtn = null;
+        }
+        
+        // Buat canvas konfeti
         const confettiCanvas = document.createElement('canvas');
         confettiCanvas.classList.add('confetti-canvas');
         document.body.appendChild(confettiCanvas);
+        
+        // Buat tombol Try Again kecil di pojok kanan bawah (hanya saat konfeti aktif)
+        const tryAgainBtn = document.createElement('button');
+        tryAgainBtn.innerHTML = '<i class="fas fa-redo-alt"></i> Try Again (Tidak Hadir)';
+        tryAgainBtn.className = 'tryagain-btn';
+        tryAgainBtn.style.position = 'fixed';
+        tryAgainBtn.style.bottom = '30px';
+        tryAgainBtn.style.right = '30px';
+        tryAgainBtn.style.zIndex = '10001';
+        document.body.appendChild(tryAgainBtn);
+        activeTryAgainBtn = tryAgainBtn;
+        
+        // Event handler untuk tombol try again
+        const handleTryAgain = () => {
+            if (onTryAgain && typeof onTryAgain === 'function') {
+                onTryAgain();
+            }
+            // Hapus canvas confetti dan tombol
+            if (confettiCanvas && confettiCanvas.parentNode) confettiCanvas.remove();
+            if (tryAgainBtn && tryAgainBtn.parentNode) tryAgainBtn.remove();
+            if (activeTryAgainBtn === tryAgainBtn) activeTryAgainBtn = null;
+        };
+        tryAgainBtn.addEventListener('click', handleTryAgain, { once: true });
         
         let w = window.innerWidth;
         let h = window.innerHeight;
@@ -471,7 +531,7 @@
             });
         }
         
-        // Tambahkan partikel bintang kecil
+        // Bintang
         let stars = [];
         for (let i = 0; i < 60; i++) {
             stars.push({
@@ -479,14 +539,12 @@
                 y: Math.random() * h,
                 size: Math.random() * 4 + 2,
                 alpha: Math.random() * 0.8 + 0.3,
-                fade: Math.random() * 0.05 + 0.02
             });
         }
         
         let startTime = performance.now();
-        let duration = 3500; // 3.5 detik
+        let duration = 4000; // 4 detik, tombol tetap ada sampai konfeti hilang
         
-        // Teks pemenang yang akan muncul dengan gaya besar
         let displayText = `🏆 ${winnerName} 🏆`;
         let subText = `Mendapatkan ${prizeName}! 🎉`;
         
@@ -494,18 +552,20 @@
             const elapsed = now - startTime;
             if (elapsed > duration) {
                 confettiCanvas.remove();
+                // Hapus tombol try again setelah confetti selesai jika belum di-click
+                if (tryAgainBtn && tryAgainBtn.parentNode) {
+                    tryAgainBtn.remove();
+                    if (activeTryAgainBtn === tryAgainBtn) activeTryAgainBtn = null;
+                }
                 return;
             }
             
             ctxc.clearRect(0, 0, w, h);
             
-            // Gambar partikel konfeti
-            let alive = false;
             for (let p of particles) {
                 p.y += p.speedY;
                 p.x += p.speedX;
                 p.rotation += p.rotSpeed;
-                if (p.y < h + 50) alive = true;
                 ctxc.save();
                 ctxc.translate(p.x, p.y);
                 ctxc.rotate(p.rotation);
@@ -514,7 +574,6 @@
                 ctxc.restore();
             }
             
-            // Gambar bintang berkedip
             for (let s of stars) {
                 ctxc.fillStyle = `rgba(255, 215, 0, ${s.alpha + Math.sin(now * 0.008) * 0.2})`;
                 ctxc.beginPath();
@@ -522,11 +581,8 @@
                 ctxc.fill();
             }
             
-            // Efek fade in/out untuk teks
-            const fadeProgress = Math.sin(Math.min(1, elapsed / 500) * Math.PI);
-            const textAlpha = Math.min(1, elapsed / 400) * (1 - Math.max(0, (elapsed - 2000) / 1500));
+            const textAlpha = Math.min(1, elapsed / 400) * (1 - Math.max(0, (elapsed - 2000) / 2000));
             
-            // Teks utama besar dengan bayangan
             ctxc.save();
             ctxc.shadowBlur = 15;
             ctxc.shadowColor = "rgba(0,0,0,0.5)";
@@ -534,7 +590,6 @@
             ctxc.textAlign = "center";
             ctxc.textBaseline = "middle";
             
-            // Gradien teks utama
             const grad = ctxc.createLinearGradient(w/2 - 150, h/2 - 50, w/2 + 150, h/2 + 30);
             grad.addColorStop(0, '#FFD966');
             grad.addColorStop(0.5, '#FFA559');
@@ -543,55 +598,52 @@
             ctxc.globalAlpha = textAlpha;
             ctxc.fillText(displayText, w/2, h/2 - 40);
             
-            // Teks hadiah
             ctxc.font = `bold ${Math.min(32, 26 + Math.sin(now * 0.02) * 3)}px 'Poppins', 'Segoe UI'`;
             ctxc.fillStyle = '#FFE0A3';
             ctxc.fillText(subText, w/2, h/2 + 30);
             
-            // Tambahkan efek kilau di sekitar teks
             ctxc.font = `bold ${Math.min(48, 36)}px 'Poppins', 'Segoe UI'`;
             ctxc.fillStyle = 'rgba(255,215,0,0.2)';
             ctxc.globalAlpha = 0.3 + Math.sin(now * 0.02) * 0.2;
             ctxc.fillText(displayText, w/2 + 3, h/2 - 37);
             ctxc.fillText(displayText, w/2 - 3, h/2 - 43);
-            
             ctxc.restore();
             
-            // Tambahkan partikel tambahan jika masih ada waktu
-            if (elapsed < duration - 500) {
-                requestAnimationFrame(animateConfetti);
-            } else {
-                // Fade out terakhir
-                setTimeout(() => {
-                    if (confettiCanvas.parentNode) confettiCanvas.remove();
-                }, 500);
-            }
+            requestAnimationFrame(animateConfetti);
         }
         
         requestAnimationFrame(animateConfetti);
     }
 
-    // ---------- LOAD DATA TAMU DARI RSVP ----------
+    // ---------- LOAD DATA TAMU DARI RSVP & FILTER NAMA YANG DIEXCLUDE ----------
     async function loadGuests() {
         showLoading(true);
         try {
             const snap = await rsvpRef.once('value');
             const data = snap.val();
+            let rawGuests = [];
             if (data) {
-                guestsList = Object.keys(data).map(key => ({
+                rawGuests = Object.keys(data).map(key => ({
                     id: key,
                     name: data[key].name || 'Tanpa Nama',
                     company: data[key].company || '-'
                 })).filter(g => g.name && g.name.trim() !== '');
-            } else {
-                guestsList = [];
             }
+            // Filter: HAPUS tamu yang namanya ada di excludedNames (case-insensitive, trim)
+            guestsList = rawGuests.filter(guest => {
+                const guestNameTrim = guest.name.trim();
+                return !excludedNames.some(excluded => 
+                    guestNameTrim.toLowerCase() === excluded.toLowerCase()
+                );
+            });
+            
             await loadWinnersHistory();
             updateAvailableIndices();
             renderPrizeOptions();
             drawWheel();
             updateStatsUI();
-            if (guestsList.length === 0) showToast("Belum ada data RSVP, silakan isi form undangan", true);
+            if (guestsList.length === 0) showToast("Tidak ada peserta yang tersedia setelah filter", true);
+            else showToast(`Berhasil memuat ${guestsList.length} peserta (telah exclude nama tertentu)`, false);
         } catch(e) { showToast("Gagal muat data", true); } 
         finally { showLoading(false); }
     }
@@ -609,14 +661,15 @@
     }
 
     function resetPrizeStockFromHistory() {
-        // Reset stok ke nilai awal
+        // Reset semua stok ke nilai awal
         prizes.forEach(p => p.stock = p.initialStock);
-        // Kurangi berdasarkan history pemenang yang sudah ada
+        // Kurangi berdasarkan history pemenang yang sudah tersimpan di Firebase
         winnersHistory.forEach(w => {
             const prizeName = w.prize;
             const prizeItem = prizes.find(p => p.name === prizeName);
             if (prizeItem && prizeItem.stock > 0) prizeItem.stock--;
         });
+        // Pastikan stok voucher MAP tidak negatif (karena mungkin sudah 2 keluar -> stok 3)
         renderPrizeOptions();
     }
 
@@ -695,7 +748,6 @@
             let shortName = wheelSegments[i].name.length > 15 ? wheelSegments[i].name.substring(0,13)+".." : wheelSegments[i].name;
             ctx.font = "bold 13px 'Segoe UI'";
             ctx.fillStyle = "#1a1f2e";
-            ctx.shadowBlur = 0;
             ctx.fillText(shortName, 125, 5);
             ctx.font = "9px 'Segoe UI'";
             ctx.fillStyle = "#2c2e3a";
@@ -712,6 +764,47 @@
         ctx.fillStyle = "#000";
         ctx.font = "bold 18px sans-serif";
         ctx.fillText("⬆️", 478, 245);
+    }
+
+    // Fungsi untuk menghapus pemenang terakhir (Try Again) tanpa mengurangi stok hadiah lagi
+    // Karena hadiah sudah berkurang saat simpan, maka kita perlu mengembalikan stok dan menghapus record
+    async function rollbackLastWinner(winnerData, prizeName) {
+        try {
+            // Cari record terakhir yang namanya sama dengan winnerData.name dan hadiahnya prizeName
+            // Kita ambil dari winnersHistory yang paling baru (asumsi yang terakhir adalah yang baru disimpan)
+            const lastWinnerRecord = winnersHistory.find(w => w.name === winnerData.name && w.prize === prizeName);
+            if (!lastWinnerRecord || !lastWinnerRecord.id) {
+                showToast("Gagal menemukan data pemenang untuk dirollback", true);
+                return false;
+            }
+            // Hapus dari Firebase
+            await winnersRef.child(lastWinnerRecord.id).remove();
+            
+            // Kembalikan stok hadiah
+            const prizeItem = prizes.find(p => p.name === prizeName);
+            if (prizeItem) {
+                prizeItem.stock++;
+                renderPrizeOptions();
+            }
+            // Reload ulang history dan update state
+            await loadWinnersHistory();
+            updateAvailableIndices();
+            drawWheel();
+            updateStatsUI();
+            
+            // Kosongkan tampilan pemenang terbaru jika sesuai
+            const currentWinnerNameElem = document.getElementById('winnerName').innerText;
+            if (currentWinnerNameElem === winnerData.name) {
+                document.getElementById('winnerName').innerHTML = "—";
+                document.getElementById('winnerCompany').innerHTML = "—";
+                document.getElementById('winnerPrizeDisplay').innerHTML = "—";
+            }
+            showToast(`✅ ${winnerData.name} ditandai tidak hadih, hadiah dikembalikan`, false);
+            return true;
+        } catch(e) {
+            showToast("Gagal rollback pemenang", true);
+            return false;
+        }
     }
 
     async function spinWheel() {
@@ -758,7 +851,8 @@
                 while (currentRotation < 0) currentRotation += Math.PI*2;
                 currentRotation %= Math.PI*2;
                 drawWheel();
-                saveWinnerWithPrize(winner, selectedPrize.name);
+                // Simpan pemenang lalu tampilkan konfeti dengan tombol try again
+                saveWinnerWithPrizeAndConfetti(winner, selectedPrize.name);
                 currentSpinInProgress = false;
                 spinBtn.disabled = false;
             }
@@ -766,11 +860,11 @@
         requestAnimationFrame(animateSpin);
     }
 
-    async function saveWinnerWithPrize(winner, prizeName) {
+    async function saveWinnerWithPrizeAndConfetti(winner, prizeName) {
         try {
             const prizeItem = prizes.find(p => p.name === prizeName);
             if (!prizeItem || prizeItem.stock <= 0) {
-                showToast(`Maaf, stok ${prizeName} sudah habis! Refresh halaman`, true);
+                showToast(`Maaf, stok ${prizeName} sudah habis!`, true);
                 return;
             }
             prizeItem.stock--;
@@ -782,8 +876,8 @@
                 prize: prizeName,
                 timestamp: Date.now()
             };
-            await winnersRef.push(newWinner);
-            await loadWinnersHistory();
+            const newRef = await winnersRef.push(newWinner);
+            await loadWinnersHistory(); // reload ulang agar history sinkron
             updateAvailableIndices();
             drawWheel();
             updateStatsUI();
@@ -792,8 +886,13 @@
             document.getElementById('winnerCompany').innerHTML = `<i class="fas fa-building"></i> ${winner.company}`;
             document.getElementById('winnerPrizeDisplay').innerHTML = `<i class="fas fa-gift"></i> ${prizeName}`;
             
-            // TAMPILKAN KONFETI DENGAN NAMA PEMENANG
-            startWinnerConfetti(winner.name, prizeName);
+            // Siapkan fungsi rollback untuk tombol Try Again (menghapus pemenang terakhir)
+            const rollbackHandler = async () => {
+                await rollbackLastWinner(winner, prizeName);
+            };
+            
+            // Tampilkan konfeti dengan tombol try again
+            startWinnerConfetti(winner.name, prizeName, rollbackHandler);
             
             showToast(`🎉 Selamat! ${winner.name} mendapatkan ${prizeName} 🎉`, false);
         } catch(e) { showToast("Gagal simpan pemenang", true); }
